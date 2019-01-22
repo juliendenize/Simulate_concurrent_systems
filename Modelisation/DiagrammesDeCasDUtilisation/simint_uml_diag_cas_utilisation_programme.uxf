@@ -117,10 +117,10 @@ halign=left</panel_attributes>
     <coordinates>
       <x>448</x>
       <y>364</y>
-      <w>574</w>
+      <w>658</w>
       <h>56</h>
     </coordinates>
-    <panel_attributes>Modifier l'ordre des instruction d'un programme</panel_attributes>
+    <panel_attributes>Intervertir l'ordre de deux instructions d'un programme</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
