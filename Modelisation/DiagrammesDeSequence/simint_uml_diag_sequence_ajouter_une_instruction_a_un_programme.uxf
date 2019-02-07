@@ -84,12 +84,12 @@ ajouterUneInstruction(instruction, nom semaphore, nom programme)</panel_attribut
     <coordinates>
       <x>60</x>
       <y>670</y>
-      <w>350</w>
+      <w>140</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 </panel_attributes>
-    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -105,14 +105,14 @@ ajouterUneInstruction(instruction, nom semaphore, nom programme)</panel_attribut
   <element>
     <id>UMLFrame</id>
     <coordinates>
-      <x>390</x>
+      <x>180</x>
       <y>280</y>
-      <w>1120</w>
+      <w>1330</w>
       <h>420</h>
     </coordinates>
     <panel_attributes>opt
 --
-[instruction bien formée (non null et non vide), nom semaphore bien formé (non null et non vide), nom programme bien formée (non et null et non vide)]</panel_attributes>
+[instruction bien formée (non null et non vide) &amp;&amp; type instruction P ou V &amp;&amp; nom semaphore bien formé (non null et non vide) &amp;&amp; nom programme bien formée (non et null et non vide)]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -134,7 +134,8 @@ ajouterUneInstruction(instruction, nom semaphore, nom programme)</panel_attribut
       <w>380</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>prog=chercherProgramme(nom pogramme)</panel_attributes>
+    <panel_attributes>lt=-&gt;&gt;
+prog=chercherProgramme(nom pogramme)</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0;50.0;40.0;10.0;40.0</additional_attributes>
   </element>
   <element>
@@ -146,7 +147,7 @@ ajouterUneInstruction(instruction, nom semaphore, nom programme)</panel_attribut
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-&lt;&lt;ajouterInstruction(instruction)&gt;&gt;</panel_attributes>
+ajouterInstruction(instruction)</panel_attributes>
     <additional_attributes>270.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -204,7 +205,7 @@ ajouterUneInstruction(instruction, nom semaphore, nom programme)</panel_attribut
       <w>180</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:prog:Programme_</panel_attributes>
+    <panel_attributes>_prog:Programme_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -272,7 +273,8 @@ _:Instruction_</panel_attributes>
       <w>340</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>nbInstructions=compterNbInstruction()</panel_attributes>
+    <panel_attributes>lt=-&gt;&gt;
+nbInstructions=compterNbInstruction()</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0;50.0;40.0;10.0;40.0</additional_attributes>
   </element>
   <element>
@@ -295,7 +297,8 @@ _:Instruction_</panel_attributes>
       <w>380</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>sem=chercherSemaphore(nom semaphore)</panel_attributes>
+    <panel_attributes>lt=-&gt;&gt;
+sem=chercherSemaphore(nom semaphore)</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0;50.0;40.0;10.0;40.0</additional_attributes>
   </element>
 </diagram>

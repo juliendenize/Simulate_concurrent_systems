@@ -157,7 +157,7 @@ ajouterSemaphore(sem)</panel_attributes>
     </coordinates>
     <panel_attributes>opt
 --
-[exécution non débutée &amp;&amp; nom non null et non vide &amp;&amp; valeurInitiale non null et supérieure ou égale à 0]</panel_attributes>
+[exécution non débutée &amp;&amp; nom non null et non vide &amp;&amp; valeurInitiale supérieure ou égale à 0]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -179,7 +179,8 @@ ajouterSemaphore(sem)</panel_attributes>
       <w>290</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>sem=chercherSemaphore(nom)</panel_attributes>
+    <panel_attributes>lt=-&gt;&gt;
+sem=chercherSemaphore(nom)</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0;50.0;40.0;10.0;40.0</additional_attributes>
   </element>
   <element>

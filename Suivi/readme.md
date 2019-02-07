@@ -42,19 +42,19 @@ Merci pour votre retour rapide, nous aimerions discuter avec vous lors de la pro
 
 # Suivi du ven. 01 févr. 2019 18:29:06 CET
 Denis Conan
-- [] diagramme de classes
-    - [] merci de le mettre un peu plus gros
-    - [] il manque des multiplicités
-    - [] il manque des noms d'association
-    - [] ne faudrait-il pas une autre association entre SimInt et ÉtatGlobal ?
+- [x] diagramme de classes
+    - [x] merci de le mettre un peu plus gros
+    - [x] il manque des multiplicités
+    - [x] il manque des noms d'association
+    - [x] ne faudrait-il pas une autre association entre SimInt et ÉtatGlobal ?
       	 actuellement, vous n'avez accès qu'au premier état global ; comment
 	 ferez-vous par exemple pour indiquer l'état global à partir duquel vous
 	 avancer ?
 - [] diagrammes de séquence
-    - [] « créer un sémaphore » : comment un entier peut-il être « null » ?
+    - [x] « créer un sémaphore » : comment un entier peut-il être « null » ?
       	 + il manque la flêche de l'appel chercherSémaphore
-    - [] « créer un programme » : ok
-    - [] « ajouter une instruction... » : seul les appels « create », c.-à-d.
+    - [x] « créer un programme » : ok
+    - [x] « ajouter une instruction... » : seul les appels « create », c.-à-d.
       	 les appels des constructeur sont stéréotypés (retirer les chevrons
 	 des autres appels) + il manque des flêches sur des appels + à quoi
 	 sert compterNbInstruction + l'appel compterNbInstruction ne débute
