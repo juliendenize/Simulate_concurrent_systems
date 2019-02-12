@@ -66,3 +66,36 @@ Denis Conan
       	 dans un nouvel état global et on manipule les états des processus et
 	 des sémaphores
 ---
+
+# Suivi du mar. 12 févr. 2019 09:34:11 CET
+Denis Conan
+- [] diagrammes de séquence
+    - [] « ajouter une instruction... » : en programmant, vous devriez vous
+      	 apercevoir qu'il faudra créer des objets de types différents selon
+	 la valeur de instruction
+    - [] « créer un processus » : petite incohérence « nom programme » puis
+         « nomProgramme »
+    - [] « avancer... » : le message récursif chercherÉtatProcessus dans
+      	 ÉtatGlobal peut être ignoré (détail)
+	 + entre le fragment ref « copie... » et le message avancerExecution
+	   l'objet n'est pas activé et il n'y a donc pas de barre d'activation
+	 + de manière générale, les barres d'activation débute à la réception
+	   des messages
+	 + pourquoi chercherÉtatProcessus puis chercherÉtatProcessusCopié ?
+	 + pourquoi chercherÉtatProcessusCopié fait autre chose (chercher
+	   Prochain..., etc.) ?
+	 + je ne pense pas que l'exécution d'une instruction soit effectué
+	   sur le programme ; et d'ailleurs, d'où « prog » ?
+	 + etc.
+    - [] « établir... » : pb notation participant avec deux « : »
+         + pb notation chevrons
+	 + etc.
+- fiche des classes
+    - [] ÉtatProcessus : pb type attribut état (revoir le cours sur les types
+         énuméré ; ce sont des objets)
+- invariant
+    - ÉtatProcessus : idem pb type attribut -> condition sur état à revoir
+- tables de décision des tests unitaires
+    - [] revoir le cours car par exemple le « test » de l'invariant n'est pas
+         dans les préconditions
+---
