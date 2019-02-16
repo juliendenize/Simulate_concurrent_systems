@@ -1,6 +1,7 @@
 package eu.telecomsudparis.csc4102.simint;
 
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
+import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;
 
 /**
  * Cette classe définit le concept de processus.
@@ -17,6 +18,11 @@ public class Processus implements Comparable<Processus> {
 	 * l'identifiant du processus.
 	 */
 	private final String nom;
+	
+	/**
+	 * programme exécuté par le processus.
+	 */
+	private final Programme programme;
 
 	/**
 	 * construit un processus.
@@ -24,11 +30,14 @@ public class Processus implements Comparable<Processus> {
 	 * @param nom le nom du processus.
 	 * @throws ChaineDeCaracteresNullOuVide identifiant null ou vide.
 	 */
-	public Processus(final String nom) throws ChaineDeCaracteresNullOuVide {
+	public Processus(final String nom, final Programme programme) throws ChaineDeCaracteresNullOuVide {
 		if (nom == null || nom.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("identifiant null ou vide non autorisé");
 		}
 		this.nom = nom;
+		this.programme = programme;
+		assert this.nom.equals(nom);
+		assert this.programme.equals(programme);
 		assert invariant();
 	}
 
@@ -48,6 +57,14 @@ public class Processus implements Comparable<Processus> {
 	 */
 	public String getNom() {
 		return nom;
+	}
+	
+	public Programme getProgramme () {
+		return programme;
+	}
+	
+	public Instruction chercherInstruction(int numeroInstruction) throws InstructionNonExistante {
+		return programme.chercherInstruction(numeroInstruction);
 	}
 
 	@Override
@@ -76,10 +93,17 @@ public class Processus implements Comparable<Processus> {
 		}
 		Processus other = (Processus) obj;
 		if (nom == null) {
-			if (other.nom != null) {
+			if (other.getNom() != null) {
 				return false;
 			}
-		} else if (!nom.equals(other.nom)) {
+		} else if (!nom.equals(other.getNom())) {
+			return false;
+		}
+		if (programme == null) {
+			if(other.getProgramme() != null) {
+				return false;
+			}
+		} else if(!programme.equals(other.getProgramme())) {
 			return false;
 		}
 		return true;

@@ -50,7 +50,7 @@ Denis Conan
       	 actuellement, vous n'avez accès qu'au premier état global ; comment
 	 ferez-vous par exemple pour indiquer l'état global à partir duquel vous
 	 avancer ?
-- [] diagrammes de séquence
+- [x] diagrammes de séquence
     - [x] « créer un sémaphore » : comment un entier peut-il être « null » ?
       	 + il manque la flêche de l'appel chercherSémaphore
     - [x] « créer un programme » : ok
@@ -62,7 +62,7 @@ Denis Conan
 	 « : » en trop dans le nom de l'objet de type Programme + il manque
 	 dans la précondition quelque chose contraignant aux valeurs P ou V
 	 pour les types d'instructions, non ?
-    - [] « avancer... » : indice = on « part » d'un état global pour « arriver »
+    - [x] « avancer... » : indice = on « part » d'un état global pour « arriver »
       	 dans un nouvel état global et on manipule les états des processus et
 	 des sémaphores
 ---
@@ -70,12 +70,12 @@ Denis Conan
 # Suivi du mar. 12 févr. 2019 09:34:11 CET
 Denis Conan
 - [] diagrammes de séquence
-    - [] « ajouter une instruction... » : en programmant, vous devriez vous
+    - [x] « ajouter une instruction... » : en programmant, vous devriez vous
       	 apercevoir qu'il faudra créer des objets de types différents selon
 	 la valeur de instruction
-    - [] « créer un processus » : petite incohérence « nom programme » puis
+    - [x] « créer un processus » : petite incohérence « nom programme » puis
          « nomProgramme »
-    - [] « avancer... » : le message récursif chercherÉtatProcessus dans
+    - [x] « avancer... » : le message récursif chercherÉtatProcessus dans
       	 ÉtatGlobal peut être ignoré (détail)
 	 + entre le fragment ref « copie... » et le message avancerExecution
 	   l'objet n'est pas activé et il n'y a donc pas de barre d'activation
@@ -87,11 +87,11 @@ Denis Conan
 	 + je ne pense pas que l'exécution d'une instruction soit effectué
 	   sur le programme ; et d'ailleurs, d'où « prog » ?
 	 + etc.
-    - [] « établir... » : pb notation participant avec deux « : »
+    - [x] « établir... » : pb notation participant avec deux « : »
          + pb notation chevrons
 	 + etc.
 - fiche des classes
-    - [] ÉtatProcessus : pb type attribut état (revoir le cours sur les types
+    - [x] ÉtatProcessus : pb type attribut état (revoir le cours sur les types
          énuméré ; ce sont des objets)
 - invariant
     - ÉtatProcessus : idem pb type attribut -> condition sur état à revoir
@@ -99,3 +99,4 @@ Denis Conan
     - [] revoir le cours car par exemple le « test » de l'invariant n'est pas
          dans les préconditions
 ---
+Pour les invariants et en particuliers les tests unitaires, on aimerait bien en discuter demain afin de mieux comprendre.

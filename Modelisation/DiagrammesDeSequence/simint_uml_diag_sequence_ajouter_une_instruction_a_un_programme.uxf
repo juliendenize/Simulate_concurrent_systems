@@ -51,7 +51,7 @@
       <x>470</x>
       <y>260</y>
       <w>20</w>
-      <h>470</h>
+      <h>500</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -70,14 +70,14 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>20</x>
+      <x>10</x>
       <y>240</y>
-      <w>510</w>
+      <w>530</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-ajouterUneInstruction(instruction, nom semaphore, nom programme)</panel_attributes>
-    <additional_attributes>450.0;20.0;50.0;20.0</additional_attributes>
+ajouterUneInstruction(typeInstruction, nom semaphore, nom programme)</panel_attributes>
+    <additional_attributes>460.0;20.0;60.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -97,10 +97,10 @@ ajouterUneInstruction(instruction, nom semaphore, nom programme)</panel_attribut
       <x>50</x>
       <y>690</y>
       <w>30</w>
-      <h>90</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
   </element>
   <element>
     <id>UMLFrame</id>
@@ -108,7 +108,7 @@ ajouterUneInstruction(instruction, nom semaphore, nom programme)</panel_attribut
       <x>180</x>
       <y>280</y>
       <w>1330</w>
-      <h>420</h>
+      <h>500</h>
     </coordinates>
     <panel_attributes>opt
 --
@@ -119,12 +119,12 @@ ajouterUneInstruction(instruction, nom semaphore, nom programme)</panel_attribut
     <id>Relation</id>
     <coordinates>
       <x>470</x>
-      <y>720</y>
+      <y>750</y>
       <w>30</w>
-      <h>60</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -147,7 +147,7 @@ prog=chercherProgramme(nom pogramme)</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-ajouterInstruction(instruction)</panel_attributes>
+ajouterInstruction(typeInstruction)</panel_attributes>
     <additional_attributes>270.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -156,7 +156,7 @@ ajouterInstruction(instruction)</panel_attributes>
       <x>750</x>
       <y>500</y>
       <w>20</w>
-      <h>150</h>
+      <h>230</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -165,32 +165,32 @@ ajouterInstruction(instruction)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>480</x>
-      <y>620</y>
-      <w>290</w>
+      <y>710</y>
+      <w>300</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 </panel_attributes>
-    <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;280.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>750</x>
-      <y>640</y>
+      <y>730</y>
       <w>30</w>
-      <h>130</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLFrame</id>
     <coordinates>
       <x>430</x>
-      <y>430</y>
-      <w>1000</w>
-      <h>250</h>
+      <y>440</y>
+      <w>990</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>opt
 --
@@ -223,71 +223,47 @@ ajouterInstruction(instruction)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>760</x>
-      <y>610</y>
-      <w>440</w>
+      <y>600</y>
+      <w>400</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 </panel_attributes>
-    <additional_attributes>10.0;20.0;420.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;380.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1180</x>
-      <y>630</y>
+      <x>1140</x>
+      <y>710</y>
       <w>30</w>
-      <h>130</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1180</x>
-      <y>590</y>
+      <x>1140</x>
+      <y>600</y>
       <w>20</w>
-      <h>50</h>
+      <h>30</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>1120</x>
-      <y>540</y>
-      <w>130</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>«new»
-_:Instruction_</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>760</x>
-      <y>500</y>
-      <w>340</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=-&gt;&gt;
-nbInstructions=compterNbInstruction()</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0;50.0;40.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>760</x>
       <y>550</y>
-      <w>380</w>
+      <w>350</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-&lt;&lt;créerInstruction(instruction, nbInstructions)&gt;&gt;</panel_attributes>
-    <additional_attributes>360.0;20.0;10.0;20.0</additional_attributes>
+&lt;&lt;créerInstruction(instruction)&gt;&gt;</panel_attributes>
+    <additional_attributes>330.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -300,5 +276,90 @@ nbInstructions=compterNbInstruction()</panel_attributes>
     <panel_attributes>lt=-&gt;&gt;
 sem=chercherSemaphore(nom semaphore)</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0;50.0;40.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1090</x>
+      <y>560</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>«new»
+_:Instruction_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>700</x>
+      <y>550</y>
+      <w>530</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>opt
+--
+typeInstruction = TypeInstruction.V </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>700</x>
+      <y>640</y>
+      <w>530</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>opt
+--
+typeInstruction = TypeInstruction.P </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1140</x>
+      <y>690</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1090</x>
+      <y>650</y>
+      <w>130</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>«new»
+_:Instruction_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>680</y>
+      <w>400</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;20.0;380.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>640</y>
+      <w>350</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+&lt;&lt;créerInstruction(instruction, nbInstructions)&gt;&gt;</panel_attributes>
+    <additional_attributes>330.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>

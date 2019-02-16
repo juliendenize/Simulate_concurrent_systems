@@ -134,7 +134,7 @@ procs=chercherProcesusEnCoursOuTerminés()</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-&lt;&lt;établirSystemeEnInterbloquage()&gt;&gt;</panel_attributes>
+établirSystemeEnInterbloquage()</panel_attributes>
     <additional_attributes>320.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -215,7 +215,7 @@ procs=chercherProcesusEnCoursOuTerminés()</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-&lt;&lt;chercherProcessusEnCoursOuTerminés()&gt;&gt;</panel_attributes>
+chercherProcessusEnCoursOuTerminés()</panel_attributes>
     <additional_attributes>320.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>

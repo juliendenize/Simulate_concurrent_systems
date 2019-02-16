@@ -87,7 +87,7 @@
       <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-créerProcessus(nom, nom programme)</panel_attributes>
+créerProcessus(nom, nomProgramme)</panel_attributes>
     <additional_attributes>350.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
