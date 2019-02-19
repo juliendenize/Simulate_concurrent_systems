@@ -1,7 +1,5 @@
 package eu.telecomsudparis.csc4102.simint;
 
-import eu.telecomsudparis.csc4102.simint.exception.InstructionVImpossible;
-
 public class Instruction {
 	
 	/**
@@ -17,8 +15,6 @@ public class Instruction {
 	public Instruction(TypeInstruction typeInstruction, Semaphore semaphore) {
 		this.typeInstruction = typeInstruction;
 		this.semaphore = semaphore;
-		assert this.typeInstruction.equals(typeInstruction);
-		assert this.semaphore.equals(semaphore);
 		assert invariant();
 	}
 	

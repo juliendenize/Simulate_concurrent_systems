@@ -43,9 +43,6 @@ public class Semaphore {
 		} else if (!nom.equals(other.getNom())) {
 			return false;
 		}
-		if (valeurInitiale != other.getValeurInitiale()) {
-			return false;
-		}
 		return true;
 	}
 	

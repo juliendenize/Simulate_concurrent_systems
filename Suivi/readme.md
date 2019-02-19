@@ -96,7 +96,7 @@ Denis Conan
 - invariant
     - ÉtatProcessus : idem pb type attribut -> condition sur état à revoir
 - tables de décision des tests unitaires
-    - [] revoir le cours car par exemple le « test » de l'invariant n'est pas
+    - [x] revoir le cours car par exemple le « test » de l'invariant n'est pas
          dans les préconditions
 ---
 
@@ -109,26 +109,26 @@ Denis Conan
 - [] code
     - [] dans la mesure du possible, faites en sorte que le code compile
          toujours en utilisant des commentaires, etc.
-    - [] ÉtatProcessus : je suggère que le commentaire de l'attribut « état »
+    - [x] ÉtatProcessus : je suggère que le commentaire de l'attribut « état »
          soit reformulé pour être compréhensible par rapport au nom de la
 	 classe
     - [] ne mettez des « getters » et des « setters » que lorsqu'ils sont
          nécessaire, c'est-à-dire lorsqu'un cas d'utilisation le demande
-    - [] Instruction : l'utilisation de plusieurs assert est bizarre ; il me
+    - [x] Instruction : l'utilisation de plusieurs assert est bizarre ; il me
          semble que vous confondez un peu les postconditions avec les
 	 préconditions (les assert dans le constructeur sont présents pour
 	 vérifier que la programmation est « correcte » ; ce sont donc des
 	 éléments de la postcondition qui se « testent » avec des
 	 Assert.assertEquals... dans les tests unitaires JUnit ; c'est le
 	 sujet du cours de la séance 6)
-    - [] Processus : je ne crois pas que l'attribut « programme » entre dans
+    - [x] Processus : je ne crois pas que l'attribut « programme » entre dans
       	 le calcul de equals
     - [] SimInt::avancerExecutionProcessus : la programmation est différente
          du diagramme de séquence ; l'alignement vaut le coût pour bien fixé
 	 les correspondances entre les concepts de modélisation et ceux de
 	 programmation et pour bien fixé la méthodologie afin d'être
 	 autonome lors du second sprint
-    - [] ÉtatGlobal::avancerExecutionProcessus : je ne comprends pas les
+    - [x] ÉtatGlobal::avancerExecutionProcessus : je ne comprends pas les
       	 lignes 219—220 avec valeurCompteur ==
 	 instruction.getSemaphore().getValeurInitiale()
 	 car conceptuellement on peut toujours faire un V sur un sémaphore
@@ -141,7 +141,13 @@ Denis Conan
     - [] quel est le participant sur lequel est fait l'appel du fragment
          ref d'exécution de l'instruction ?
 	 c'est la même question qu'au précédent commentaire
-    - [] 
 - j'ai uniquement parcouru un peu votre code ; bonne continuation avec les
   tests qui permettront de valider la solution programmée
 ---
+Dans quel cas le code n'a-t-il pas compilé ? Pour les commentaires, souhaitez-vous qu'on commente toutes les fonctions, cela nous paraissait assez claire au niveau des noms des fonctions et variables.
+
+Pour les getter et setter nous avons programmé ceux dont nous avions besoin durant le développement du coup on ne comprend pas lesquels ne sont pas utiles.
+
+Concernant le diagramme de séquence, faut-il vraiment que dans le code soit écrit exactement la même chose ?par exemple pour chercherProcessus() nous avons dans le code if(!processus.contains(key)) ce qui revient au même.
+
+Pour le fragment et la barre de vie effectivement on en avait discuté en séance et nous n'avions pas dû comprendre à ce moment là.

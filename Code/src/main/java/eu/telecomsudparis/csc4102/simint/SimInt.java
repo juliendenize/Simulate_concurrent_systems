@@ -7,7 +7,6 @@ import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 import eu.telecomsudparis.csc4102.simint.exception.ExecutionADejaDebute;
 import eu.telecomsudparis.csc4102.simint.exception.ExecutionNonDebutee;
 import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;
-import eu.telecomsudparis.csc4102.simint.exception.InstructionVImpossible;
 import eu.telecomsudparis.csc4102.simint.exception.PasDAjoutHorsEtatGlobalInitial;
 import eu.telecomsudparis.csc4102.simint.exception.ProcessusDejaPresent;
 import eu.telecomsudparis.csc4102.simint.exception.ProcessusDejaTermine;
@@ -142,7 +141,7 @@ public class SimInt {
 		etatGlobalInitial.ajouteEtatSemaphore(sem);
 	}
 	
-	public void avancerExecutionProcessus (String nom) throws ExecutionNonDebutee, ChaineDeCaracteresNullOuVide, ProcessusNonExistant, ProcessusDejaTermine, InstructionNonExistante, InstructionVImpossible {
+	public void avancerExecutionProcessus (String nom) throws ExecutionNonDebutee, ChaineDeCaracteresNullOuVide, ProcessusNonExistant, ProcessusDejaTermine, InstructionNonExistante{
 		if(nom == null || nom.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
 		}

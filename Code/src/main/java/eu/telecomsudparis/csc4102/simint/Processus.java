@@ -99,13 +99,6 @@ public class Processus implements Comparable<Processus> {
 		} else if (!nom.equals(other.getNom())) {
 			return false;
 		}
-		if (programme == null) {
-			if(other.getProgramme() != null) {
-				return false;
-			}
-		} else if(!programme.equals(other.getProgramme())) {
-			return false;
-		}
 		return true;
 	}
 

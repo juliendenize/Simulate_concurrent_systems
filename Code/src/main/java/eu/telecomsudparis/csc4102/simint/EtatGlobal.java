@@ -8,7 +8,6 @@ import java.util.TreeSet;
 
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;
-import eu.telecomsudparis.csc4102.simint.exception.InstructionVImpossible;
 import eu.telecomsudparis.csc4102.simint.exception.PasDAjoutHorsEtatGlobalInitial;
 import eu.telecomsudparis.csc4102.simint.exception.ProcessusDejaPresent;
 import eu.telecomsudparis.csc4102.simint.exception.SemaphoreDejaPresent;
@@ -200,7 +199,7 @@ public class EtatGlobal {
 		return etatsProcessus;
 	}
 	
-	public void avancerExecutionProcessus(final String nom) throws InstructionNonExistante, InstructionVImpossible {
+	public void avancerExecutionProcessus(final String nom) throws InstructionNonExistante {
 		EtatProcessus etatProc = chercherUnEtatProcessus(nom);
 		Instruction instruction = etatProc.chercherInstruction();
 		EtatSemaphore etatSem = chercherUnEtatSemaphore(instruction.getSemaphore().getNom());
@@ -216,9 +215,6 @@ public class EtatGlobal {
 				etatProc.setEtat(Etat.bloque);
 			}
 		} else {
-			if (valeurCompteur == instruction.getSemaphore().getValeurInitiale()) {
-				throw new InstructionVImpossible("L'instruction V ne peut pas être exécuté car impossible");
-			}
 			Processus procRetire = etatSem.retirerProcessusEnAttente();
 			etatSem.setValeurCompteur(valeurCompteur + 1);
 			instructionExecutee = true;

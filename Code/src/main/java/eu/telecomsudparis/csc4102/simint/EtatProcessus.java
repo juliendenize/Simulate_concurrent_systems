@@ -16,7 +16,7 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 	private final Processus processus;
 	
 	/**
-	 * etat du processus
+	 * etat courant du processus: vivant, bloqué ou terminé 
 	 */
 	private Etat etat;
 	
