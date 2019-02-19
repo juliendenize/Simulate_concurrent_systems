@@ -99,4 +99,49 @@ Denis Conan
     - [] revoir le cours car par exemple le « test » de l'invariant n'est pas
          dans les préconditions
 ---
+
 Pour les invariants et en particuliers les tests unitaires, on aimerait bien en discuter demain afin de mieux comprendre.
+
+# Suivi du mar. 19 févr. 2019 10:01:03 CET
+Denis Conan
+- ok pour discussion sur les invariants et les tests unitaires ;
+  voir aussi mes commentaires ci-dessous
+- [] code
+    - [] dans la mesure du possible, faites en sorte que le code compile
+         toujours en utilisant des commentaires, etc.
+    - [] ÉtatProcessus : je suggère que le commentaire de l'attribut « état »
+         soit reformulé pour être compréhensible par rapport au nom de la
+	 classe
+    - [] ne mettez des « getters » et des « setters » que lorsqu'ils sont
+         nécessaire, c'est-à-dire lorsqu'un cas d'utilisation le demande
+    - [] Instruction : l'utilisation de plusieurs assert est bizarre ; il me
+         semble que vous confondez un peu les postconditions avec les
+	 préconditions (les assert dans le constructeur sont présents pour
+	 vérifier que la programmation est « correcte » ; ce sont donc des
+	 éléments de la postcondition qui se « testent » avec des
+	 Assert.assertEquals... dans les tests unitaires JUnit ; c'est le
+	 sujet du cours de la séance 6)
+    - [] Processus : je ne crois pas que l'attribut « programme » entre dans
+      	 le calcul de equals
+    - [] SimInt::avancerExecutionProcessus : la programmation est différente
+         du diagramme de séquence ; l'alignement vaut le coût pour bien fixé
+	 les correspondances entre les concepts de modélisation et ceux de
+	 programmation et pour bien fixé la méthodologie afin d'être
+	 autonome lors du second sprint
+    - [] ÉtatGlobal::avancerExecutionProcessus : je ne comprends pas les
+      	 lignes 219—220 avec valeurCompteur ==
+	 instruction.getSemaphore().getValeurInitiale()
+	 car conceptuellement on peut toujours faire un V sur un sémaphore
+- [] diagramme de séquence « avancer... »
+    - [] le début ne correspond pas au code : chercherProcessus, etc.
+    - [] il manque le participant au dessus du fragment ref de copie et de
+         la barre d'activation ; on en discute en séance car si mes souvenirs
+	 sont bons, vous m'avez posé une question en séance et ma réponse
+	 n'était pas pertinente
+    - [] quel est le participant sur lequel est fait l'appel du fragment
+         ref d'exécution de l'instruction ?
+	 c'est la même question qu'au précédent commentaire
+    - [] 
+- j'ai uniquement parcouru un peu votre code ; bonne continuation avec les
+  tests qui permettront de valider la solution programmée
+---
