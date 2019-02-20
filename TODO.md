@@ -1,0 +1,2 @@
+- [x] Ajouter exécution non débutée pour créer sémaphore et créer programme
+- [x] changer attributs etatProcessus en type enumerate

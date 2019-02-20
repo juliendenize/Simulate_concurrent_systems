@@ -2,6 +2,8 @@ package eu.telecomsudparis.csc4102.simint;
 
 import java.util.Objects;
 
+import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;
+
 /**
  * Cette classe définit le concept d'état d'un processus.
  * 
@@ -12,10 +14,23 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 	 * le processus concerné.
 	 */
 	private final Processus processus;
+	
+	/**
+	 * etat courant du processus: vivant, bloqué ou terminé 
+	 */
+	private Etat etat;
+	
+	
+	/**
+	 * Numéro de la dernière instruction qui a été exécutée
+	 */
+	private int instructionCourante;
+	
 	/**
 	 * compteur d'instanciation.
 	 */
 	private static int compteurInstanciation = 0;
+	
 	/**
 	 * compteur d'instance.
 	 */
@@ -29,6 +44,8 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 	public EtatProcessus(final Processus processus) {
 		Objects.requireNonNull(processus, "processus ne peut pas être null");
 		this.processus = processus;
+		this.etat = Etat.vivant;
+		this.instructionCourante = 0;
 		compteurInstanciation++;
 		compteurInstance = compteurInstanciation;
 		assert invariant();
@@ -43,9 +60,15 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 	public EtatProcessus(final EtatProcessus origine) {
 		Objects.requireNonNull(origine, "fournir un état de processus origine");
 		this.processus = origine.processus;
+		this.etat = origine.getEtat();
+		this.instructionCourante = origine.getInstructionCourante();
 		compteurInstanciation++;
 		compteurInstance = compteurInstanciation;
 		assert invariant();
+	}
+
+	private int getInstructionCourante() {
+		return this.instructionCourante;
 	}
 
 	/**
@@ -54,7 +77,8 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 	 * @return true si l'invariant est vérifié.
 	 */
 	public boolean invariant() {
-		return processus != null;
+		return processus != null && etat != null && instructionCourante >= 0 && 
+				compteurInstanciation > 0 && compteurInstance > 0;
 	}
 
 	/**
@@ -64,6 +88,11 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 	 */
 	public Processus getProcessus() {
 		return processus;
+	}
+	
+	public Instruction chercherInstruction() throws InstructionNonExistante {
+		return processus.chercherInstruction(instructionCourante);
+		
 	}
 
 	@Override
@@ -92,10 +121,13 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 		}
 		EtatProcessus other = (EtatProcessus) obj;
 		if (processus == null) {
-			if (other.processus != null) {
+			if (other.getProcessus() != null) {
 				return false;
 			}
-		} else if (!processus.equals(other.processus)) {
+		} else if (!processus.equals(other.getProcessus())) {
+			return false;
+			}
+		if(!etat.equals(other.getEtat())) {
 			return false;
 		}
 		return true;
@@ -103,6 +135,23 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 
 	@Override
 	public String toString() {
-		return "Proc [#=" + compteurInstance + ", nom=" + processus.getNom() + "]";
+		return "EtatProc [#=" + compteurInstance + ", nom=" + processus.getNom() + ", etat=" + etat + ", instruction=" + instructionCourante +"]";
+	}
+	
+	public Etat getEtat() {
+		return this.etat;
+	}
+	
+	public void setEtat(Etat etat) {
+		this.etat = etat;
+	}
+
+	public void avancerInstruction() {
+		if(instructionCourante == processus.getProgramme().getNombreInstructions() - 1) {
+			etat = Etat.termine;
+		} else {
+			instructionCourante++;
+		}
+		assert invariant();
 	}
 }
