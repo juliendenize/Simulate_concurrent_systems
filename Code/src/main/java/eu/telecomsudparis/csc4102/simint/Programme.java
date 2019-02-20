@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 
+import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;
 
 public class Programme {
@@ -18,10 +19,12 @@ public class Programme {
 	 */
 	private List<Instruction> instructions;
 	
-	public Programme(String nom) {
+	public Programme(String nom) throws ChaineDeCaracteresNullOuVide {
+		if (nom == null || nom.equals("")) {
+			throw new ChaineDeCaracteresNullOuVide("identifiant null ou vide non autorisé");
+		}
 		this.nom = nom;
 		this.instructions = new ArrayList<Instruction>();
-		assert this.nom.equals(nom);
 		assert invariant();
 	}
 	
@@ -69,6 +72,10 @@ public class Programme {
 	 */
 	public boolean invariant() {
 		return nom != null && !nom.equals("");
+	}
+
+	public String getNom() {
+		return this.nom;
 	}
 
 }

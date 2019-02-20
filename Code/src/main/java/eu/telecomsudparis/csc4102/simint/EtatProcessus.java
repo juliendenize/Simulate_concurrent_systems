@@ -152,5 +152,6 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 		} else {
 			instructionCourante++;
 		}
+		assert invariant();
 	}
 }

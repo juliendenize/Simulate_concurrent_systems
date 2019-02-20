@@ -106,13 +106,13 @@ Pour les invariants et en particuliers les tests unitaires, on aimerait bien en 
 Denis Conan
 - ok pour discussion sur les invariants et les tests unitaires ;
   voir aussi mes commentaires ci-dessous
-- [] code
-    - [] dans la mesure du possible, faites en sorte que le code compile
+- [x] code
+    - [x] dans la mesure du possible, faites en sorte que le code compile
          toujours en utilisant des commentaires, etc.
     - [x] ÉtatProcessus : je suggère que le commentaire de l'attribut « état »
          soit reformulé pour être compréhensible par rapport au nom de la
 	 classe
-    - [] ne mettez des « getters » et des « setters » que lorsqu'ils sont
+    - [x] ne mettez des « getters » et des « setters » que lorsqu'ils sont
          nécessaire, c'est-à-dire lorsqu'un cas d'utilisation le demande
     - [x] Instruction : l'utilisation de plusieurs assert est bizarre ; il me
          semble que vous confondez un peu les postconditions avec les
@@ -123,7 +123,7 @@ Denis Conan
 	 sujet du cours de la séance 6)
     - [x] Processus : je ne crois pas que l'attribut « programme » entre dans
       	 le calcul de equals
-    - [] SimInt::avancerExecutionProcessus : la programmation est différente
+    - [x] SimInt::avancerExecutionProcessus : la programmation est différente
          du diagramme de séquence ; l'alignement vaut le coût pour bien fixé
 	 les correspondances entre les concepts de modélisation et ceux de
 	 programmation et pour bien fixé la méthodologie afin d'être
@@ -132,13 +132,13 @@ Denis Conan
       	 lignes 219—220 avec valeurCompteur ==
 	 instruction.getSemaphore().getValeurInitiale()
 	 car conceptuellement on peut toujours faire un V sur un sémaphore
-- [] diagramme de séquence « avancer... »
-    - [] le début ne correspond pas au code : chercherProcessus, etc.
-    - [] il manque le participant au dessus du fragment ref de copie et de
+- [x] diagramme de séquence « avancer... »
+    - [x] le début ne correspond pas au code : chercherProcessus, etc.
+    - [x] il manque le participant au dessus du fragment ref de copie et de
          la barre d'activation ; on en discute en séance car si mes souvenirs
 	 sont bons, vous m'avez posé une question en séance et ma réponse
 	 n'était pas pertinente
-    - [] quel est le participant sur lequel est fait l'appel du fragment
+    - [x] quel est le participant sur lequel est fait l'appel du fragment
          ref d'exécution de l'instruction ?
 	 c'est la même question qu'au précédent commentaire
 - j'ai uniquement parcouru un peu votre code ; bonne continuation avec les

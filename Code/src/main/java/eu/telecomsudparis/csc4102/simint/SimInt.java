@@ -15,6 +15,7 @@ import eu.telecomsudparis.csc4102.simint.exception.ProgrammeDejaPresent;
 import eu.telecomsudparis.csc4102.simint.exception.ProgrammeNonExistant;
 import eu.telecomsudparis.csc4102.simint.exception.SemaphoreDejaPresent;
 import eu.telecomsudparis.csc4102.simint.exception.SemaphoreNonExistant;
+import eu.telecomsudparis.csc4102.simint.exception.ValeurInitialeHorsBorne;
 
 /**
  * Cette classe définit la façade du système.
@@ -126,7 +127,7 @@ public class SimInt {
 		programmes.put(nom, prog);
 	}
 	
-	public void creerSemaphore(final String nom, final int valeurInitiale) throws ChaineDeCaracteresNullOuVide, PasDAjoutHorsEtatGlobalInitial, ExecutionADejaDebute, SemaphoreDejaPresent  {
+	public void creerSemaphore(final String nom, final int valeurInitiale) throws ChaineDeCaracteresNullOuVide, PasDAjoutHorsEtatGlobalInitial, ExecutionADejaDebute, SemaphoreDejaPresent, ValeurInitialeHorsBorne  {
 		if(nom == null || nom.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
 		}
@@ -196,5 +197,9 @@ public class SimInt {
 	
 	public void afficherEtatsSemaphores() {
 		this.dernierEtatGlobal.afficherEtatsSemaphores();
+	}
+
+	public Processus chercherProcessus(String nomProc) {
+		return processus.get(nomProc);
 	}
 }

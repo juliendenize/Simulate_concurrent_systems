@@ -215,10 +215,10 @@ public class EtatGlobal {
 				etatProc.setEtat(Etat.bloque);
 			}
 		} else {
-			Processus procRetire = etatSem.retirerProcessusEnAttente();
-			etatSem.setValeurCompteur(valeurCompteur + 1);
+			System.out.println("else");
 			instructionExecutee = true;
-			
+			etatSem.setValeurCompteur(valeurCompteur + 1);
+			Processus procRetire = etatSem.retirerProcessusEnAttente();
 			if(procRetire != null) {
 				this.chercherUnEtatProcessus(procRetire.getNom()).setEtat(Etat.vivant);
 				avancerExecutionProcessus(procRetire.getNom());
@@ -259,6 +259,7 @@ public class EtatGlobal {
 			}
 			this.situationInterbloquage = existeProcBloque;
 		}
+		assert invariant();
 	}
 
 	public boolean getSystemeInterbloquage() {

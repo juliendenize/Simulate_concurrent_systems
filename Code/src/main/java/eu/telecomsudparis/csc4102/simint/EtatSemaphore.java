@@ -63,7 +63,8 @@ public class EtatSemaphore implements Comparable<EtatSemaphore>{
 	 * @return true si l'invariant est vérifié.
 	 */
 	public boolean invariant() {
-		return semaphore != null && valeurCompteur >= 0 && compteurInstanciation > 0 && compteurInstance > 0;
+		return semaphore != null && valeurCompteur >= 0 && 
+				compteurInstanciation > 0 && compteurInstance > 0;
 	}
 	
 	public Semaphore getSemaphore() {
@@ -76,18 +77,22 @@ public class EtatSemaphore implements Comparable<EtatSemaphore>{
 	
 	public void setValeurCompteur(int valeurCompteur) {
 		this.valeurCompteur = valeurCompteur;
+		assert invariant();
 	}
 	
 	public void mettreProcessusEnAttente(Processus proc) {
 		this.fileAttente.add(proc);
+		assert invariant();
 	}
 	
 	public Processus retirerProcessusEnAttente() {
-		if(this.fileAttente.isEmpty()) {
+		Processus proc = null;
+		if(!this.fileAttente.isEmpty()) {
+			proc = this.fileAttente.get(0);
+			this.fileAttente.remove(0);
 			return null;
 		}
-		Processus proc = this.fileAttente.get(0);
-		this.fileAttente.remove(0);
+		assert invariant();
 		return proc;
 	}
 	

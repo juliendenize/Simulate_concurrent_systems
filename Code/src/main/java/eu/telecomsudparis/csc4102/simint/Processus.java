@@ -1,5 +1,7 @@
 package eu.telecomsudparis.csc4102.simint;
 
+import java.util.Objects;
+
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;
 
@@ -34,6 +36,7 @@ public class Processus implements Comparable<Processus> {
 		if (nom == null || nom.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("identifiant null ou vide non autorisé");
 		}
+		Objects.requireNonNull(programme, "fournir un programme à Processus");
 		this.nom = nom;
 		this.programme = programme;
 		assert this.nom.equals(nom);
@@ -105,5 +108,9 @@ public class Processus implements Comparable<Processus> {
 	@Override
 	public String toString() {
 		return "Processus [nom=" + nom + "]";
+		}
+
+	public Programme getProgram() {
+		return this.programme;
 	}
 }

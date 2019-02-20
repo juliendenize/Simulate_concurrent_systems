@@ -1,5 +1,8 @@
 package eu.telecomsudparis.csc4102.simint;
 
+import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
+import eu.telecomsudparis.csc4102.simint.exception.ValeurInitialeHorsBorne;
+
 public class Semaphore {
 	
 	/**
@@ -12,11 +15,15 @@ public class Semaphore {
 	 */
 	private int valeurInitiale;
 	
-	public Semaphore(String nom, int valeurInitiale) {
+	public Semaphore(String nom, int valeurInitiale) throws ChaineDeCaracteresNullOuVide, ValeurInitialeHorsBorne {
+		if (nom == null || nom.equals("")) {
+			throw new ChaineDeCaracteresNullOuVide("identifiant null ou vide non autorisé");
+		}
+		if(valeurInitiale < 0) {
+			throw new ValeurInitialeHorsBorne("La valeur initiale d'un sémaphore doit être supérieure à 0");
+		}
 		this.nom = nom;
 		this.valeurInitiale = valeurInitiale;
-		assert this.nom.equals(nom);
-		assert (this.valeurInitiale == valeurInitiale);
 		assert invariant();
 	}
 	
