@@ -1,8 +1,6 @@
 // CHECKSTYLE:OFF
 package eu.telecomsudparis.csc4102.simint.tests.validation;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

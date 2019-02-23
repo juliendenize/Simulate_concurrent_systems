@@ -144,10 +144,3 @@ Denis Conan
 - j'ai uniquement parcouru un peu votre code ; bonne continuation avec les
   tests qui permettront de valider la solution programmée
 ---
-Dans quel cas le code n'a-t-il pas compilé ? Pour les commentaires, souhaitez-vous qu'on commente toutes les fonctions, cela nous paraissait assez claire au niveau des noms des fonctions et variables.
-
-Pour les getter et setter nous avons programmé ceux dont nous avions besoin durant le développement du coup on ne comprend pas lesquels ne sont pas utiles.
-
-Concernant le diagramme de séquence, faut-il vraiment que dans le code soit écrit exactement la même chose ?par exemple pour chercherProcessus() nous avons dans le code if(!processus.contains(key)) ce qui revient au même.
-
-Pour le fragment et la barre de vie effectivement on en avait discuté en séance et nous n'avions pas dû comprendre à ce moment là.

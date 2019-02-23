@@ -2,8 +2,6 @@ package eu.telecomsudparis.csc4102.simint;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
 
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;

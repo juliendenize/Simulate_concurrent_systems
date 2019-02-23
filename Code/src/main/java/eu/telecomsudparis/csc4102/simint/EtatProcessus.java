@@ -2,6 +2,7 @@ package eu.telecomsudparis.csc4102.simint;
 
 import java.util.Objects;
 
+import eu.telecomsudparis.csc4102.simint.exception.EtatNonVivant;
 import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;
 
 /**
@@ -92,7 +93,6 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 	
 	public Instruction chercherInstruction() throws InstructionNonExistante {
 		return processus.chercherInstruction(instructionCourante);
-		
 	}
 
 	@Override
@@ -146,12 +146,23 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 		this.etat = etat;
 	}
 
-	public void avancerInstruction() {
+	public void avancerExécution() throws EtatNonVivant {
+		if(!etat.equals(Etat.vivant)) {
+			throw new EtatNonVivant("L'état processus " + this + " n'est pas vivant et ne peut donc pas avancer");
+		}
 		if(instructionCourante == processus.getProgramme().getNombreInstructions() - 1) {
 			etat = Etat.termine;
 		} else {
 			instructionCourante++;
 		}
 		assert invariant();
+	}
+
+	public static int getCompteurInstanciation() {
+		return compteurInstanciation;
+	}
+
+	public int getCompteurInstance() {
+		return compteurInstance;
 	}
 }

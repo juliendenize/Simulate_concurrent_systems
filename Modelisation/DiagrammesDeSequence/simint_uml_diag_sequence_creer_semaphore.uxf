@@ -110,7 +110,7 @@ créerSemaphore(nom, valeurInitiale)</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-ajouterSemaphore(sem)</panel_attributes>
+createEtatSemaphore(sem)</panel_attributes>
     <additional_attributes>380.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -131,10 +131,10 @@ ajouterSemaphore(sem)</panel_attributes>
       <x>120</x>
       <y>790</y>
       <w>30</w>
-      <h>120</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -186,19 +186,19 @@ sem=chercherSemaphore(nom)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
+      <x>480</x>
       <y>520</y>
-      <w>240</w>
+      <w>290</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-&lt;&lt;create(nom, valeurInitiale)&gt;&gt;</panel_attributes>
-    <additional_attributes>220.0;20.0;10.0;20.0</additional_attributes>
+&lt;&lt;createSemahore(nom, valeurInitiale)&gt;&gt;</panel_attributes>
+    <additional_attributes>260.0;20.0;20.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>710</x>
+      <x>740</x>
       <y>510</y>
       <w>130</w>
       <h>50</h>
@@ -210,7 +210,7 @@ _:Semaphore_</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>760</x>
+      <x>800</x>
       <y>560</y>
       <w>20</w>
       <h>40</h>
@@ -223,23 +223,23 @@ _:Semaphore_</panel_attributes>
     <coordinates>
       <x>490</x>
       <y>580</y>
-      <w>300</w>
+      <w>340</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 </panel_attributes>
-    <additional_attributes>10.0;20.0;280.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;320.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>760</x>
+      <x>800</x>
       <y>590</y>
       <w>30</w>
-      <h>260</h>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;240.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;250.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -257,7 +257,7 @@ _:Semaphore_</panel_attributes>
     <coordinates>
       <x>440</x>
       <y>450</y>
-      <w>710</w>
+      <w>950</w>
       <h>350</h>
     </coordinates>
     <panel_attributes>opt
@@ -268,7 +268,7 @@ _:Semaphore_</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1010</x>
+      <x>1130</x>
       <y>630</y>
       <w>130</w>
       <h>60</h>
@@ -282,17 +282,17 @@ _:ÉtatSemaphore_</panel_attributes>
     <coordinates>
       <x>880</x>
       <y>640</y>
-      <w>150</w>
+      <w>270</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-&lt;&lt;create(sem)&gt;&gt;</panel_attributes>
-    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+&lt;&lt;createEtatSemaphore(sem)&gt;&gt;</panel_attributes>
+    <additional_attributes>250.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1060</x>
+      <x>1190</x>
       <y>690</y>
       <w>20</w>
       <h>40</h>
@@ -305,23 +305,23 @@ _:ÉtatSemaphore_</panel_attributes>
     <coordinates>
       <x>880</x>
       <y>710</y>
-      <w>210</w>
+      <w>340</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 </panel_attributes>
-    <additional_attributes>10.0;20.0;190.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;320.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1060</x>
+      <x>1190</x>
       <y>720</y>
       <w>30</w>
-      <h>130</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

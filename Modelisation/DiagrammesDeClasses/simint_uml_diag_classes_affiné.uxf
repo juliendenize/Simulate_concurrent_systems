@@ -24,7 +24,7 @@ etat : Etat</panel_attributes>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
-m2=[ordered] *
+m2=*
 m1=*</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0;330.0;80.0</additional_attributes>
   </element>
@@ -101,7 +101,8 @@ m2=*</panel_attributes>
       <h>170</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-m2=*</panel_attributes>
+m2=*
+m1=1</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
   </element>
   <element>
@@ -113,7 +114,7 @@ m2=*</panel_attributes>
       <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
-m1=*
+m1=0..1
 m2=*
 précède</panel_attributes>
     <additional_attributes>10.0;60.0;10.0;20.0;260.0;20.0;260.0;90.0;200.0;90.0</additional_attributes>
@@ -183,35 +184,34 @@ valeurCompteur : int
       <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
-m2=*</panel_attributes>
+m2=*
+m1=1</panel_attributes>
     <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1030</x>
-      <y>220</y>
+      <y>230</y>
       <w>140</w>
-      <h>50</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
 m1=*
-m2=1
-exécute</panel_attributes>
-    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1190</x>
       <y>270</y>
-      <w>90</w>
+      <w>40</w>
       <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
 
-m2=*
-contient</panel_attributes>
+m2=*</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
   </element>
   <element>
@@ -223,7 +223,8 @@ contient</panel_attributes>
       <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
-m2=*</panel_attributes>
+m2=*
+m1=*</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;180.0;370.0;180.0</additional_attributes>
   </element>
   <element>

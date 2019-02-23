@@ -1,14 +1,10 @@
 package eu.telecomsudparis.csc4102.simint.tests.unitaires;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import eu.telecomsudparis.csc4102.simint.Processus;
-import eu.telecomsudparis.csc4102.simint.Programme;
 import eu.telecomsudparis.csc4102.simint.Semaphore;
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 import eu.telecomsudparis.csc4102.simint.exception.ValeurInitialeHorsBorne;

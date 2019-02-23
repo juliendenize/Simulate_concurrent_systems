@@ -7,6 +7,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
+import eu.telecomsudparis.csc4102.simint.exception.EtatNonVivant;
 import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;
 import eu.telecomsudparis.csc4102.simint.exception.PasDAjoutHorsEtatGlobalInitial;
 import eu.telecomsudparis.csc4102.simint.exception.ProcessusDejaPresent;
@@ -92,16 +93,16 @@ public class EtatGlobal {
 		compteurInstance = compteurInstanciation;
 		assert invariant();
 	}
-
-	private SortedSet<EtatSemaphore> getEtatsSemaphores() {
+	
+	public SortedSet<EtatSemaphore> getEtatsSemaphores() {
 		return this.etatsSemaphores;
 	}
 
-	private SortedSet<EtatProcessus> getEtatsProcessus() {
+	public SortedSet<EtatProcessus> getEtatsProcessus() {
 		return this.etatsProcessus;
 	}
 
-	private boolean getSituationInterbloquage() {
+	public boolean getSituationInterbloquage() {
 		return situationInterbloquage;
 	}
 
@@ -113,7 +114,7 @@ public class EtatGlobal {
 	public boolean invariant() {
 		return etatsProcessus != null && etatsSemaphores != null && etatsGlobauxAtteignables != null 
 				&& compteurInstanciation > 0 && compteurInstance > 0;
-	}
+		}
 
 	/**
 	 * ajoute un état de processus à l'état global initial.
@@ -124,7 +125,7 @@ public class EtatGlobal {
 	 * @throws ProcessusDejaPresent           processus avec cet identifiant déjà
 	 *                                        présent.
 	 */
-	public void ajouteEtatProcessus(final Processus proc)
+	public void ajouterEtatProcessus(final Processus proc)
 			throws PasDAjoutHorsEtatGlobalInitial, ChaineDeCaracteresNullOuVide, ProcessusDejaPresent {
 		if (!estEtatGlobalInitial) {
 			throw new PasDAjoutHorsEtatGlobalInitial("ajout d'un processus non possible");
@@ -146,7 +147,7 @@ public class EtatGlobal {
 	 * @throws SemaphoreDejaPresent           semaphore avec cet identifiant déjà
 	 *                                        présent.
 	 */
-	public void ajouteEtatSemaphore(final Semaphore sem)
+	public void ajouterEtatSemaphore(final Semaphore sem)
 			throws PasDAjoutHorsEtatGlobalInitial, ChaineDeCaracteresNullOuVide, SemaphoreDejaPresent {
 		if (!estEtatGlobalInitial) {
 			throw new PasDAjoutHorsEtatGlobalInitial("ajout d'un processus non possible");
@@ -189,18 +190,12 @@ public class EtatGlobal {
 		}
 		throw new IllegalStateException("pas d'état pour le processus '" + nom + "'");
 	}
-
-	/**
-	 * obtenir la liste des états des processus.
-	 * 
-	 * @return la collection.
-	 */
-	public SortedSet<EtatProcessus> getProcessus() {
-		return etatsProcessus;
-	}
 	
-	public void avancerExecutionProcessus(final String nom) throws InstructionNonExistante {
-		EtatProcessus etatProc = chercherUnEtatProcessus(nom);
+	public void avancerExecution(final String nomProcessus) throws InstructionNonExistante, EtatNonVivant, ChaineDeCaracteresNullOuVide {
+		if(nomProcessus == null || nomProcessus.equals("")) {
+			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
+		}
+		EtatProcessus etatProc = chercherUnEtatProcessus(nomProcessus);
 		Instruction instruction = etatProc.chercherInstruction();
 		EtatSemaphore etatSem = chercherUnEtatSemaphore(instruction.getSemaphore().getNom());
 		boolean instructionExecutee = false;
@@ -215,18 +210,17 @@ public class EtatGlobal {
 				etatProc.setEtat(Etat.bloque);
 			}
 		} else {
-			System.out.println("else");
 			instructionExecutee = true;
 			etatSem.setValeurCompteur(valeurCompteur + 1);
-			Processus procRetire = etatSem.retirerProcessusEnAttente();
+			Processus procRetire = etatSem.libérerProcessus();
 			if(procRetire != null) {
 				this.chercherUnEtatProcessus(procRetire.getNom()).setEtat(Etat.vivant);
-				avancerExecutionProcessus(procRetire.getNom());
+				avancerExecution(procRetire.getNom());
 			}
 		}
 		
 		if(instructionExecutee) {
-			etatProc.avancerInstruction();
+			etatProc.avancerExécution();
 		}
 	}
 
@@ -264,5 +258,13 @@ public class EtatGlobal {
 
 	public boolean getSystemeInterbloquage() {
 		return this.situationInterbloquage;
+	}
+
+	public static int getCompteurInstanciation() {
+		return compteurInstanciation;
+	}
+
+	public int getCompteurInstance() {
+		return compteurInstance;
 	}
 }

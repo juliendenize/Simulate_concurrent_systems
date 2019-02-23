@@ -84,12 +84,12 @@ ajouterUneInstruction(typeInstruction, nom semaphore, nom programme)</panel_attr
     <coordinates>
       <x>60</x>
       <y>670</y>
-      <w>140</w>
+      <w>40</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 </panel_attributes>
-    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;20.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -105,14 +105,14 @@ ajouterUneInstruction(typeInstruction, nom semaphore, nom programme)</panel_attr
   <element>
     <id>UMLFrame</id>
     <coordinates>
-      <x>180</x>
+      <x>80</x>
       <y>280</y>
-      <w>1330</w>
+      <w>1530</w>
       <h>500</h>
     </coordinates>
     <panel_attributes>opt
 --
-[instruction bien formée (non null et non vide) &amp;&amp; type instruction P ou V &amp;&amp; nom semaphore bien formé (non null et non vide) &amp;&amp; nom programme bien formée (non et null et non vide)]</panel_attributes>
+[instruction bien formée (non null et non vide) &amp;&amp; type instruction P ou V &amp;&amp; nom semaphore bien formé (non null et non vide) &amp;&amp; nom programme bien formée (non et null et non vide &amp;&amp; execution non debutee)]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

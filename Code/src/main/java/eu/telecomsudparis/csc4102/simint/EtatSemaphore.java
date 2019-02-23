@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class EtatSemaphore implements Comparable<EtatSemaphore>{
-
+	
 	/**
 	 * Valeur du compteur du semaphore.
 	 */
@@ -85,12 +85,11 @@ public class EtatSemaphore implements Comparable<EtatSemaphore>{
 		assert invariant();
 	}
 	
-	public Processus retirerProcessusEnAttente() {
+	public Processus libérerProcessus() {
 		Processus proc = null;
 		if(!this.fileAttente.isEmpty()) {
 			proc = this.fileAttente.get(0);
 			this.fileAttente.remove(0);
-			return null;
 		}
 		assert invariant();
 		return proc;
@@ -134,6 +133,14 @@ public class EtatSemaphore implements Comparable<EtatSemaphore>{
 	@Override
 	public String toString() {
 		return "EtatSem [#=" + compteurInstance + ", nom=" + semaphore.getNom() + ", valeurCompteur=" + this.getValeurCompteur() + "]";
+	}
+
+	public static int getCompteurInstanciation() {
+		return compteurInstanciation;
+	}
+
+	public int getCompteurInstance() {
+		return compteurInstance;
 	}
 
 }

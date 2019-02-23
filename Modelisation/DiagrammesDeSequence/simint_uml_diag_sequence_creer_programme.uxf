@@ -13,17 +13,6 @@
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>770</x>
-      <y>150</y>
-      <w>130</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>_initial:ÉtatGlobal_</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
       <x>70</x>
@@ -91,29 +80,6 @@ créerProgramme(nom)</panel_attributes>
     <additional_attributes>350.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>820</x>
-      <y>600</y>
-      <w>20</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>440</x>
-      <y>580</y>
-      <w>400</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-
-ajouterProgramme(programme)</panel_attributes>
-    <additional_attributes>380.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
       <x>80</x>
@@ -135,17 +101,6 @@ ajouterProgramme(programme)</panel_attributes>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>820</x>
-      <y>710</y>
-      <w>30</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLFrame</id>
@@ -242,17 +197,6 @@ _:Programme_</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;240.0</additional_attributes>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>820</x>
-      <y>170</y>
-      <w>30</w>
-      <h>450</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;430.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLFrame</id>
     <coordinates>
       <x>390</x>
@@ -264,17 +208,5 @@ _:Programme_</panel_attributes>
 --
 [prog = null]</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>440</x>
-      <y>700</y>
-      <w>410</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>10.0;20.0;390.0;20.0</additional_attributes>
   </element>
 </diagram>

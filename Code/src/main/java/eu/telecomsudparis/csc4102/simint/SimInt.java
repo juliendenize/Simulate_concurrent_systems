@@ -2,8 +2,10 @@ package eu.telecomsudparis.csc4102.simint;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
+import eu.telecomsudparis.csc4102.simint.exception.EtatNonVivant;
 import eu.telecomsudparis.csc4102.simint.exception.ExecutionADejaDebute;
 import eu.telecomsudparis.csc4102.simint.exception.ExecutionNonDebutee;
 import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;
@@ -109,7 +111,7 @@ public class SimInt {
 		Programme prog = programmes.get(nomProg);
 		Processus proc = new Processus(nom, prog);
 		processus.put(nom, proc);
-		etatGlobalInitial.ajouteEtatProcessus(proc);
+		etatGlobalInitial.ajouterEtatProcessus(proc);
 		assert invariant();
 	}
 	
@@ -137,12 +139,15 @@ public class SimInt {
 		if (semaphores.containsKey(nom)) {
 			throw new SemaphoreDejaPresent("semaphore '" + nom + "' déjà présent dans le système");
 		}
+		if (valeurInitiale < 0) {
+			throw new ValeurInitialeHorsBorne("La valeur initiale d'un sémaphore doit être supérieure ou égale à 0");
+		}
 		Semaphore sem = new Semaphore(nom, valeurInitiale);
 		semaphores.put(nom, sem);
-		etatGlobalInitial.ajouteEtatSemaphore(sem);
+		etatGlobalInitial.ajouterEtatSemaphore(sem);
 	}
 	
-	public void avancerExecutionProcessus (String nom) throws ExecutionNonDebutee, ChaineDeCaracteresNullOuVide, ProcessusNonExistant, ProcessusDejaTermine, InstructionNonExistante{
+	public void avancerExecution (String nom) throws ExecutionNonDebutee, ChaineDeCaracteresNullOuVide, ProcessusNonExistant, ProcessusDejaTermine, InstructionNonExistante, EtatNonVivant{
 		if(nom == null || nom.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
 		}
@@ -157,21 +162,16 @@ public class SimInt {
 			throw new ProcessusDejaTermine("processus '" + nom + "' est déjà terminé");
 		}
 		this.dernierEtatGlobal = new EtatGlobal(this.dernierEtatGlobal);
-		this.dernierEtatGlobal.avancerExecutionProcessus(nom);
-		afficherEtatsSemaphores();
-		afficherEtatsProcessus();
+		this.dernierEtatGlobal.avancerExecution(nom);
 	}
 	
-	public void etablirSystemeEnInterbloquage() {
+	public boolean etablirSystemeEnInterbloquage() {
 		dernierEtatGlobal.etablirSystemeEnInterbloquage();
-		if(dernierEtatGlobal.getSystemeInterbloquage()) {
-			System.out.println("Système interbloqué");
-		} else {
-			System.out.println("Système non bloqué");
-		}
+		return dernierEtatGlobal.getSystemeInterbloquage();
 	}
 
 	public void ajouterInstruction(String nomProg, String nomSem, TypeInstruction type) throws ChaineDeCaracteresNullOuVide, ExecutionADejaDebute, ProgrammeNonExistant, SemaphoreNonExistant {
+		Objects.requireNonNull(type, "Le type d'instruction doit être différent de null");
 		if(nomProg == null || nomProg.equals("") || nomSem == null || nomSem.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
 		}
@@ -201,5 +201,18 @@ public class SimInt {
 
 	public Processus chercherProcessus(String nomProc) {
 		return processus.get(nomProc);
+	}
+
+	public Semaphore chercherSemaphore(String nomSem) {
+		return semaphores.get(nomSem);
+		
+	}
+
+	public Programme chercherProgramme(String nomProg) {
+		return programmes.get(nomProg);
+	}
+
+	public EtatGlobal getDernierEtatGlobal() {
+		return dernierEtatGlobal;
 	}
 }

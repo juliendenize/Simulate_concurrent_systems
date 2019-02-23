@@ -1,13 +1,10 @@
 package eu.telecomsudparis.csc4102.simint.tests.unitaires;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import eu.telecomsudparis.csc4102.simint.Processus;
 import eu.telecomsudparis.csc4102.simint.Programme;
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 
@@ -30,7 +27,7 @@ public class TestProgramme {
 	public void constructeurProgrammeTest1Jeu2() throws Exception {
 		new Programme("");
 	}
-
+	
 	@Test
 	public void constructeurProgrammeTest2() throws Exception {
 		Programme programme = new Programme("prog");

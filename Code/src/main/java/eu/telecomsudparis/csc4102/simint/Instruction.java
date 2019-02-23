@@ -1,5 +1,7 @@
 package eu.telecomsudparis.csc4102.simint;
 
+import java.util.Objects;
+
 public class Instruction {
 	
 	/**
@@ -13,6 +15,8 @@ public class Instruction {
 	private Semaphore semaphore;
 	
 	public Instruction(TypeInstruction typeInstruction, Semaphore semaphore) {
+		Objects.requireNonNull(typeInstruction);
+		Objects.requireNonNull(semaphore);
 		this.typeInstruction = typeInstruction;
 		this.semaphore = semaphore;
 		assert invariant();
