@@ -35,7 +35,7 @@ public class TestSimIntCreerProgramme {
 	}
 	
 	@Test(expected = ProgrammeDejaPresent.class)
-	public void creerUnProgrammeTest2 () throws Exception {
+	public void creerUnProgrammeTest2() throws Exception {
 		simInt.creerProgramme("prog");
 		simInt.creerProgramme("prog");
 	}

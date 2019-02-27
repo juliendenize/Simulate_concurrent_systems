@@ -17,7 +17,8 @@ public class PasDAjoutHorsEtatGlobalInitial extends OperationImpossible {
 	/**
 	 * construit une instance.
 	 * 
-	 * @param message le message de l'exception.
+	 * @param message
+	 *            le message de l'exception.
 	 */
 	public PasDAjoutHorsEtatGlobalInitial(final String message) {
 		super(message);

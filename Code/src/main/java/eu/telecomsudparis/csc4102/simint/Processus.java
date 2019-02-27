@@ -3,7 +3,6 @@ package eu.telecomsudparis.csc4102.simint;
 import java.util.Objects;
 
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
-import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;
 
 /**
  * Cette classe définit le concept de processus.
@@ -20,7 +19,7 @@ public class Processus implements Comparable<Processus> {
 	 * l'identifiant du processus.
 	 */
 	private final String nom;
-	
+
 	/**
 	 * programme exécuté par le processus.
 	 */
@@ -29,8 +28,12 @@ public class Processus implements Comparable<Processus> {
 	/**
 	 * construit un processus.
 	 * 
-	 * @param nom le nom du processus.
-	 * @throws ChaineDeCaracteresNullOuVide identifiant null ou vide.
+	 * @param nom
+	 *            le nom du processus.
+	 * @param programme
+	 *            le programme à exécuter par le processus
+	 * @throws ChaineDeCaracteresNullOuVide
+	 *             identifiant null ou vide.
 	 */
 	public Processus(final String nom, final Programme programme) throws ChaineDeCaracteresNullOuVide {
 		if (nom == null || nom.equals("")) {
@@ -62,11 +65,23 @@ public class Processus implements Comparable<Processus> {
 		return nom;
 	}
 	
-	public Programme getProgramme () {
+	/**
+	 * Retourne le programme.
+	 * 
+	 * @return le programme.
+	 */
+	public Programme getProgramme() {
 		return programme;
 	}
 	
-	public Instruction chercherInstruction(int numeroInstruction) throws InstructionNonExistante {
+	/**
+	 * Cherche l'instruction dans le programme par le numéro d'instruction.
+	 * 
+	 * @param numeroInstruction
+	 * 			le numéro de l'instruction à chercher
+	 * @return l'instruction trouvée.
+	 */
+	public Instruction chercherInstruction(final int numeroInstruction) {
 		return programme.chercherInstruction(numeroInstruction);
 	}
 
@@ -96,10 +111,10 @@ public class Processus implements Comparable<Processus> {
 		}
 		Processus other = (Processus) obj;
 		if (nom == null) {
-			if (other.getNom() != null) {
+			if (other.nom != null) {
 				return false;
 			}
-		} else if (!nom.equals(other.getNom())) {
+		} else if (!nom.equals(other.nom)) {
 			return false;
 		}
 		return true;
@@ -107,9 +122,14 @@ public class Processus implements Comparable<Processus> {
 
 	@Override
 	public String toString() {
-		return "Processus [nom=" + nom + "]";
-		}
-
+		return "Processus [nom=" + nom + ", programme=" + programme + "]";
+	}
+	
+	/**
+	 * Retourne le programme.
+	 * 
+	 * @return le programme.
+	 */
 	public Programme getProgram() {
 		return this.programme;
 	}

@@ -17,7 +17,8 @@ public class ChaineDeCaracteresNullOuVide extends OperationImpossible {
 	/**
 	 * construit une instance.
 	 * 
-	 * @param message le message de l'exception.
+	 * @param message
+	 *            le message de l'exception.
 	 */
 	public ChaineDeCaracteresNullOuVide(final String message) {
 		super(message);

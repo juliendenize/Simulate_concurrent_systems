@@ -15,7 +15,8 @@ public class SemaphoreDejaPresent extends OperationImpossible {
 	/**
 	 * construit une instance.
 	 * 
-	 * @param message le message de l'exception.
+	 * @param message
+	 *            le message de l'exception.
 	 */
 	public SemaphoreDejaPresent(final String message) {
 		super(message);

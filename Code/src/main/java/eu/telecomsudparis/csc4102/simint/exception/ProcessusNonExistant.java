@@ -3,7 +3,7 @@ package eu.telecomsudparis.csc4102.simint.exception;
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
 /**
- * Cette classe définit le type d'exception pour un processus n'existe pas
+ * Cette classe définit le type d'exception pour un processus n'existe pas.
  * 
  */
 public class ProcessusNonExistant extends OperationImpossible {
@@ -15,7 +15,8 @@ public class ProcessusNonExistant extends OperationImpossible {
 	/**
 	 * construit une instance.
 	 * 
-	 * @param message le message de l'exception.
+	 * @param message
+	 *            le message de l'exception.
 	 */
 	public ProcessusNonExistant(final String message) {
 		super(message);

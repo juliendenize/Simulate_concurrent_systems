@@ -7,8 +7,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
-import eu.telecomsudparis.csc4102.simint.exception.EtatNonVivant;
-import eu.telecomsudparis.csc4102.simint.exception.InstructionNonExistante;
 import eu.telecomsudparis.csc4102.simint.exception.PasDAjoutHorsEtatGlobalInitial;
 import eu.telecomsudparis.csc4102.simint.exception.ProcessusDejaPresent;
 import eu.telecomsudparis.csc4102.simint.exception.SemaphoreDejaPresent;
@@ -23,12 +21,12 @@ public class EtatGlobal {
 	 * l'ensemble des états des processus participant à la simulation.
 	 */
 	private SortedSet<EtatProcessus> etatsProcessus;
-	
+
 	/**
 	 * l'ensemble des états des semaphores participant à la simulation.
 	 */
 	private SortedSet<EtatSemaphore> etatsSemaphores;
-	
+
 	/**
 	 * true si c'est l'état initial.
 	 */
@@ -45,9 +43,9 @@ public class EtatGlobal {
 	 * compteur d'instance.
 	 */
 	private int compteurInstance;
-	
+
 	/**
-	 * true si système interbloqué
+	 * true si système interbloqué.
 	 */
 	private boolean situationInterbloquage;
 
@@ -74,7 +72,8 @@ public class EtatGlobal {
 	 * obtenus par copie légère des états des processus de l'état de départ. Par
 	 * copie légère, nous signifions que les programmes ne sont pas des copies.
 	 * 
-	 * @param origine l'état global de départ.
+	 * @param origine
+	 *            l'état global de départ.
 	 */
 	public EtatGlobal(final EtatGlobal origine) {
 		Objects.requireNonNull(origine, "fournir un état global origine");
@@ -94,14 +93,29 @@ public class EtatGlobal {
 		assert invariant();
 	}
 	
+	/**
+	 * retourne les états sémaphores de l'état global.
+	 * 
+	 * @return les états sémaphores de l'état global.
+	 */
 	public SortedSet<EtatSemaphore> getEtatsSemaphores() {
 		return this.etatsSemaphores;
 	}
-
+	
+	/**
+	 * retourne les états processus de l'état global.
+	 * 
+	 * @return les états processus de l'état global.
+	 */
 	public SortedSet<EtatProcessus> getEtatsProcessus() {
 		return this.etatsProcessus;
 	}
-
+	
+	/**
+	 * retourne true si l'état global est en situation d'interbloquage.
+	 * 
+	 * @return true si l'état global est en situation d'interbloquage
+	 */
 	public boolean getSituationInterbloquage() {
 		return situationInterbloquage;
 	}
@@ -112,18 +126,21 @@ public class EtatGlobal {
 	 * @return true si l'invariant est vérifié.
 	 */
 	public boolean invariant() {
-		return etatsProcessus != null && etatsSemaphores != null && etatsGlobauxAtteignables != null 
+		return etatsProcessus != null && etatsSemaphores != null && etatsGlobauxAtteignables != null
 				&& compteurInstanciation > 0 && compteurInstance > 0;
-		}
+	}
 
 	/**
 	 * ajoute un état de processus à l'état global initial.
 	 * 
-	 * @param proc le processus concerné.
-	 * @throws PasDAjoutHorsEtatGlobalInitial ajout non autorisé.
-	 * @throws ChaineDeCaracteresNullOuVide   identifiant null ou vide.
-	 * @throws ProcessusDejaPresent           processus avec cet identifiant déjà
-	 *                                        présent.
+	 * @param proc
+	 *            le processus concerné.
+	 * @throws PasDAjoutHorsEtatGlobalInitial
+	 *             ajout non autorisé.
+	 * @throws ChaineDeCaracteresNullOuVide
+	 *             identifiant null ou vide.
+	 * @throws ProcessusDejaPresent
+	 *             processus avec cet identifiant déjà présent.
 	 */
 	public void ajouterEtatProcessus(final Processus proc)
 			throws PasDAjoutHorsEtatGlobalInitial, ChaineDeCaracteresNullOuVide, ProcessusDejaPresent {
@@ -137,15 +154,18 @@ public class EtatGlobal {
 		}
 		assert invariant();
 	}
-	
+
 	/**
 	 * ajoute un état de semaphore à l'état global initial.
 	 * 
-	 * @param proc le processus concerné.
-	 * @throws PasDAjoutHorsEtatGlobalInitial ajout non autorisé.
-	 * @throws ChaineDeCaracteresNullOuVide   identifiant null ou vide.
-	 * @throws SemaphoreDejaPresent           semaphore avec cet identifiant déjà
-	 *                                        présent.
+	 * @param sem
+	 *            le semaphore concerné
+	 * @throws PasDAjoutHorsEtatGlobalInitial
+	 *             ajout non autorisé.
+	 * @throws ChaineDeCaracteresNullOuVide
+	 *             identifiant null ou vide.
+	 * @throws SemaphoreDejaPresent
+	 *             semaphore avec cet identifiant déjà présent.
 	 */
 	public void ajouterEtatSemaphore(final Semaphore sem)
 			throws PasDAjoutHorsEtatGlobalInitial, ChaineDeCaracteresNullOuVide, SemaphoreDejaPresent {
@@ -159,11 +179,12 @@ public class EtatGlobal {
 		}
 		assert invariant();
 	}
-	
+
 	/**
 	 * cherche l'état d'un semaphore de nom donné.
 	 * 
-	 * @param nom le nom du semaphore.
+	 * @param nom
+	 *            le nom du semaphore.
 	 * @return l'état du semaphore trouvé.
 	 */
 	public EtatSemaphore chercherUnEtatSemaphore(final String nom) {
@@ -175,11 +196,11 @@ public class EtatGlobal {
 		throw new IllegalStateException("pas d'état pour le semaphore '" + nom + "'");
 	}
 
-
 	/**
 	 * cherche l'état d'un processus de nom donné.
 	 * 
-	 * @param nom le nom du processus.
+	 * @param nom
+	 *            le nom du processus.
 	 * @return l'état du processus trouvé.
 	 */
 	public EtatProcessus chercherUnEtatProcessus(final String nom) {
@@ -191,8 +212,19 @@ public class EtatGlobal {
 		throw new IllegalStateException("pas d'état pour le processus '" + nom + "'");
 	}
 	
-	public void avancerExecution(final String nomProcessus) throws InstructionNonExistante, EtatNonVivant, ChaineDeCaracteresNullOuVide {
-		if(nomProcessus == null || nomProcessus.equals("")) {
+	
+	/**
+	 * Avance l'éxecution du processus dont le nom est donné en paramètre.
+	 * Cet avancement se fait dans une copie de cet état global et si cela débloque un processus, ce processus est
+	 * à son tour exécuter. 
+	 * @param nomProcessus
+	 * 			le nom du processus à exécuter.
+	 * @throws ChaineDeCaracteresNullOuVide
+	 * 			identifiant vide ou null.
+	 */
+	public void avancerExecution(final String nomProcessus)
+			throws ChaineDeCaracteresNullOuVide {
+		if (nomProcessus == null || nomProcessus.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
 		}
 		EtatProcessus etatProc = chercherUnEtatProcessus(nomProcessus);
@@ -200,7 +232,7 @@ public class EtatGlobal {
 		EtatSemaphore etatSem = chercherUnEtatSemaphore(instruction.getSemaphore().getNom());
 		boolean instructionExecutee = false;
 		int valeurCompteur = etatSem.getValeurCompteur();
-		
+
 		if (instruction.getTypeInstruction().equals(TypeInstruction.P)) {
 			if (valeurCompteur > 0) {
 				etatSem.setValeurCompteur(valeurCompteur - 1);
@@ -212,42 +244,52 @@ public class EtatGlobal {
 		} else {
 			instructionExecutee = true;
 			etatSem.setValeurCompteur(valeurCompteur + 1);
-			Processus procRetire = etatSem.libérerProcessus();
-			if(procRetire != null) {
+			Processus procRetire = etatSem.libererProcessus();
+			if (procRetire != null) {
 				this.chercherUnEtatProcessus(procRetire.getNom()).setEtat(Etat.vivant);
 				avancerExecution(procRetire.getNom());
 			}
 		}
-		
-		if(instructionExecutee) {
-			etatProc.avancerExécution();
+
+		if (instructionExecutee) {
+			etatProc.avancerExecution();
 		}
 	}
-
+	
+	/**
+	 * Affiche les états processus de l'état global.
+	 */
 	public void afficherEtatsProcessus() {
-		for(EtatProcessus etatProc: etatsProcessus) {
+		for (EtatProcessus etatProc : etatsProcessus) {
 			System.out.println(etatProc);
 		}
 	}
 	
+	/**
+	 * Affiche les états sémaphores de l'état global.
+	 */
 	public void afficherEtatsSemaphores() {
-		for(EtatSemaphore etatSem: etatsSemaphores) {
+		for (EtatSemaphore etatSem : etatsSemaphores) {
 			System.out.println(etatSem);
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return "EtatGlobal [#=" + compteurInstance + ", proc=" + etatsProcessus + ", estInitial=" + estEtatGlobalInitial
 				+ ", etatsAtteignables=" + etatsGlobauxAtteignables + "]";
 	}
-
+	
+	/**
+	 * Etablit si le système est en interbloquage en stockant dans le booléen situationInterbloquage le résultat.
+	 */
 	public void etablirSystemeEnInterbloquage() {
-		if(!this.situationInterbloquage) {
+		if (!this.situationInterbloquage) {
 			boolean existeProcBloque = false;
 			for (EtatProcessus etatProcessus : etatsProcessus) {
-				if(etatProcessus.getEtat().equals(Etat.vivant)) return;
-				else if (etatProcessus.getEtat().equals(Etat.bloque)) {
+				if (etatProcessus.getEtat().equals(Etat.vivant)) {
+					return;
+				} else if (etatProcessus.getEtat().equals(Etat.bloque)) {
 					existeProcBloque = true;
 				}
 			}
@@ -256,14 +298,21 @@ public class EtatGlobal {
 		assert invariant();
 	}
 
-	public boolean getSystemeInterbloquage() {
-		return this.situationInterbloquage;
-	}
-
+	
+	/**
+	 * retourne le compteur d'instanciation.
+	 * 
+	 * @return le compteur d'instanciation.
+	 */
 	public static int getCompteurInstanciation() {
 		return compteurInstanciation;
 	}
-
+	
+	/**
+	 * retourne le compteur d'instance.
+	 * 
+	 * @return le compteur d'instance.
+	 */
 	public int getCompteurInstance() {
 		return compteurInstance;
 	}

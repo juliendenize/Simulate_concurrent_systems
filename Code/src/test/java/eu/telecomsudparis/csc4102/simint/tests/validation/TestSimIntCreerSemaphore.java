@@ -36,13 +36,13 @@ public class TestSimIntCreerSemaphore {
 	}
 	
 	@Test(expected = SemaphoreDejaPresent.class)
-	public void creerUnSemaphoreTest2 () throws Exception {
+	public void creerUnSemaphoreTest2() throws Exception {
 		simInt.creerSemaphore("sem", 0);
 		simInt.creerSemaphore("sem", 0);
 	}
 	
 	@Test(expected = ValeurInitialeHorsBorne.class)
-	public void creerUnSemaphoreTest3 () throws Exception {
+	public void creerUnSemaphoreTest3() throws Exception {
 		simInt.creerSemaphore("sem", -1);
 	}
 	

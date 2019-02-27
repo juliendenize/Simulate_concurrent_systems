@@ -15,7 +15,8 @@ public class ProgrammeDejaPresent extends OperationImpossible {
 	/**
 	 * construit une instance.
 	 * 
-	 * @param message le message de l'exception.
+	 * @param message
+	 *            le message de l'exception.
 	 */
 	public ProgrammeDejaPresent(final String message) {
 		super(message);

@@ -9,7 +9,6 @@ import eu.telecomsudparis.csc4102.simint.Etat;
 import eu.telecomsudparis.csc4102.simint.EtatGlobal;
 import eu.telecomsudparis.csc4102.simint.EtatProcessus;
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
-import eu.telecomsudparis.csc4102.simint.exception.EtatNonVivant;
 
 public class TestEtatGlobal {
 	
@@ -29,8 +28,6 @@ public class TestEtatGlobal {
 	public void constructeurEtatGlobalTest1() throws Exception {
 		int compteurInstanciation = EtatGlobal.getCompteurInstanciation();
 		EtatGlobal etat = new EtatGlobal();
-		Assert.assertNotNull(etat.getEtatsProcessus());
-		Assert.assertNotNull(etat.getEtatsSemaphores());
 		Assert.assertFalse(etat.getSituationInterbloquage());
 		Assert.assertEquals(++compteurInstanciation, EtatGlobal.getCompteurInstanciation());
 		Assert.assertEquals(compteurInstanciation, etat.getCompteurInstance());
@@ -47,8 +44,6 @@ public class TestEtatGlobal {
 	public void constructeurParCopieEtatGlobalTest2() throws Exception {
 		int compteurInstanciation = EtatGlobal.getCompteurInstanciation();
 		EtatGlobal etat = new EtatGlobal();
-		Assert.assertNotNull(etat.getEtatsProcessus());
-		Assert.assertNotNull(etat.getEtatsSemaphores());
 		Assert.assertNotNull(etat.getSituationInterbloquage());
 		Assert.assertEquals(++compteurInstanciation, EtatGlobal.getCompteurInstanciation());
 		Assert.assertEquals(compteurInstanciation, etat.getCompteurInstance());

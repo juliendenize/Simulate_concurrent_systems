@@ -29,37 +29,37 @@ public class TestSimIntAjouterUneInstructionAUnProgramme {
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void ajouterUneInstructionTest1() throws Exception{
+	public void ajouterUneInstructionTest1() throws Exception {
 		simint.ajouterInstruction("prog", "sem", null);
 	}
 	
 	@Test(expected = ChaineDeCaracteresNullOuVide.class)
-	public void ajouterUneInstructionTest2Jeu1() throws Exception{
+	public void ajouterUneInstructionTest2Jeu1() throws Exception {
 		simint.ajouterInstruction("prog", null, TypeInstruction.P);
 	}
 	
 	@Test(expected = ChaineDeCaracteresNullOuVide.class)
-	public void ajouterUneInstructionTest2Jeu2() throws Exception{
+	public void ajouterUneInstructionTest2Jeu2() throws Exception {
 		simint.ajouterInstruction("prog", "", TypeInstruction.P);
 	}
 	
 	@Test(expected = SemaphoreNonExistant.class)
-	public void ajouterUneInstructionTest3() throws Exception{
+	public void ajouterUneInstructionTest3() throws Exception {
 		simint.ajouterInstruction("prog", "yolo", TypeInstruction.P);
 	}
 	
 	@Test(expected = ChaineDeCaracteresNullOuVide.class)
-	public void ajouterUneInstructionTest4Jeu1() throws Exception{
+	public void ajouterUneInstructionTest4Jeu1() throws Exception {
 		simint.ajouterInstruction(null, "sem", TypeInstruction.P);
 	}
 	
 	@Test(expected = ChaineDeCaracteresNullOuVide.class)
-	public void ajouterUneInstructionTest4Jeu2() throws Exception{
+	public void ajouterUneInstructionTest4Jeu2() throws Exception {
 		simint.ajouterInstruction("", "sem", TypeInstruction.P);
 	}
 	
 	@Test(expected = ProgrammeNonExistant.class)
-	public void ajouterUneInstructionTest5() throws Exception{
+	public void ajouterUneInstructionTest5() throws Exception {
 		simint.ajouterInstruction("yolo", "sem", TypeInstruction.P);
 	}
 	
@@ -70,7 +70,7 @@ public class TestSimIntAjouterUneInstructionAUnProgramme {
 	}
 	
 	@Test
-	public void ajouterUneInstructionTest7() throws Exception{
+	public void ajouterUneInstructionTest7() throws Exception {
 		simint.ajouterInstruction("prog", "sem", TypeInstruction.P);
 		Assert.assertNotNull(simint.chercherProgramme("prog").chercherInstruction(0));
 	}	

@@ -17,7 +17,8 @@ public class ExecutionADejaDebute extends OperationImpossible {
 	/**
 	 * construit une instance.
 	 * 
-	 * @param message le message de l'exception.
+	 * @param message
+	 *            le message de l'exception.
 	 */
 	public ExecutionADejaDebute(final String message) {
 		super(message);

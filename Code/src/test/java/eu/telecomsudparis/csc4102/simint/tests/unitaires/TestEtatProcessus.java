@@ -9,7 +9,6 @@ import eu.telecomsudparis.csc4102.simint.Etat;
 import eu.telecomsudparis.csc4102.simint.EtatProcessus;
 import eu.telecomsudparis.csc4102.simint.Processus;
 import eu.telecomsudparis.csc4102.simint.Programme;
-import eu.telecomsudparis.csc4102.simint.exception.EtatNonVivant;
 
 public class TestEtatProcessus {
 	
@@ -30,6 +29,7 @@ public class TestEtatProcessus {
 		proc = null;
 		origine = null;
 	}
+	
 
 	@Test(expected = NullPointerException.class)
 	public void constructeurEtatProcessusTest1() throws Exception {
@@ -63,17 +63,17 @@ public class TestEtatProcessus {
 		Assert.assertTrue(etatProc.invariant());
 	}
 	
-	@Test(expected= EtatNonVivant.class)
-	public void avancerExecutionTest1() throws Exception{
+	@Test(expected = IllegalStateException.class)
+	public void avancerExecutionTest1() throws Exception {
 		EtatProcessus etatProc = new EtatProcessus(proc);
 		etatProc.setEtat(Etat.termine);
-		etatProc.avancerExécution();
+		etatProc.avancerExecution();
 	}
 	
 	@Test
-	public void avancerExecutionTest2() throws Exception{
+	public void avancerExecutionTest2() throws Exception {
 		EtatProcessus etatProc = new EtatProcessus(proc);
-		etatProc.avancerExécution();
+		etatProc.avancerExecution();
 		Assert.assertTrue(etatProc.invariant());
 	}
 }

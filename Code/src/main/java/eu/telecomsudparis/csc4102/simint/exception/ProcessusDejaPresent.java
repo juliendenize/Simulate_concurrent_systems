@@ -17,7 +17,8 @@ public class ProcessusDejaPresent extends OperationImpossible {
 	/**
 	 * construit une instance.
 	 * 
-	 * @param message le message de l'exception.
+	 * @param message
+	 *            le message de l'exception.
 	 */
 	public ProcessusDejaPresent(final String message) {
 		super(message);
