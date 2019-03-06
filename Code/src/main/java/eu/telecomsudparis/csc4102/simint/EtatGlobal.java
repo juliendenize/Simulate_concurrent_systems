@@ -6,11 +6,6 @@ import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
-import eu.telecomsudparis.csc4102.simint.exception.PasDAjoutHorsEtatGlobalInitial;
-import eu.telecomsudparis.csc4102.simint.exception.ProcessusDejaPresent;
-import eu.telecomsudparis.csc4102.simint.exception.SemaphoreDejaPresent;
-
 /**
  * Cette classe définit le concept d'état global.
  * 
@@ -135,22 +130,15 @@ public class EtatGlobal {
 	 * 
 	 * @param proc
 	 *            le processus concerné.
-	 * @throws PasDAjoutHorsEtatGlobalInitial
-	 *             ajout non autorisé.
-	 * @throws ChaineDeCaracteresNullOuVide
-	 *             identifiant null ou vide.
-	 * @throws ProcessusDejaPresent
-	 *             processus avec cet identifiant déjà présent.
 	 */
-	public void ajouterEtatProcessus(final Processus proc)
-			throws PasDAjoutHorsEtatGlobalInitial, ChaineDeCaracteresNullOuVide, ProcessusDejaPresent {
+	public void ajouterEtatProcessus(final Processus proc) {
 		if (!estEtatGlobalInitial) {
-			throw new PasDAjoutHorsEtatGlobalInitial("ajout d'un processus non possible");
+			throw new IllegalStateException("ajout d'un processus non possible");
 		}
 		Objects.requireNonNull(proc, "proc ne peut pas être null");
 		EtatProcessus etat = new EtatProcessus(proc);
 		if (!etatsProcessus.add(etat)) {
-			throw new ProcessusDejaPresent("état de processus '" + proc.getNom() + "' déjà présent dans l'état global");
+			throw new IllegalStateException("état de processus '" + proc.getNom() + "' déjà présent dans l'état global");
 		}
 		assert invariant();
 	}
@@ -159,23 +147,16 @@ public class EtatGlobal {
 	 * ajoute un état de semaphore à l'état global initial.
 	 * 
 	 * @param sem
-	 *            le semaphore concerné
-	 * @throws PasDAjoutHorsEtatGlobalInitial
-	 *             ajout non autorisé.
-	 * @throws ChaineDeCaracteresNullOuVide
-	 *             identifiant null ou vide.
-	 * @throws SemaphoreDejaPresent
-	 *             semaphore avec cet identifiant déjà présent.
+	 * 			le semaphore
 	 */
-	public void ajouterEtatSemaphore(final Semaphore sem)
-			throws PasDAjoutHorsEtatGlobalInitial, ChaineDeCaracteresNullOuVide, SemaphoreDejaPresent {
+	public void ajouterEtatSemaphore(final Semaphore sem) {
 		if (!estEtatGlobalInitial) {
-			throw new PasDAjoutHorsEtatGlobalInitial("ajout d'un processus non possible");
+			throw new IllegalStateException("ajout d'un processus non possible");
 		}
 		Objects.requireNonNull(sem, "proc ne peut pas être null");
 		EtatSemaphore etat = new EtatSemaphore(sem);
 		if (!etatsSemaphores.add(etat)) {
-			throw new SemaphoreDejaPresent("état de semaphore '" + sem.getNom() + "' déjà présent dans l'état global");
+			throw new IllegalStateException("état de semaphore '" + sem.getNom() + "' déjà présent dans l'état global");
 		}
 		assert invariant();
 	}
@@ -219,13 +200,10 @@ public class EtatGlobal {
 	 * à son tour exécuter. 
 	 * @param nomProcessus
 	 * 			le nom du processus à exécuter.
-	 * @throws ChaineDeCaracteresNullOuVide
-	 * 			identifiant vide ou null.
 	 */
-	public void avancerExecution(final String nomProcessus)
-			throws ChaineDeCaracteresNullOuVide {
+	public void avancerExecution(final String nomProcessus) {
 		if (nomProcessus == null || nomProcessus.equals("")) {
-			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
+			throw new IllegalStateException("nom null ou vide non autorisé");
 		}
 		EtatProcessus etatProc = chercherUnEtatProcessus(nomProcessus);
 		Instruction instruction = etatProc.chercherInstruction();

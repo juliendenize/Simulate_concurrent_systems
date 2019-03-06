@@ -6,8 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import eu.telecomsudparis.csc4102.simint.Semaphore;
-import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
-import eu.telecomsudparis.csc4102.simint.exception.ValeurInitialeHorsBorne;
 
 public class TestSemaphore {
 
@@ -19,17 +17,17 @@ public class TestSemaphore {
 	public void tearDown() throws Exception {
 	}
 
-	@Test(expected = ChaineDeCaracteresNullOuVide.class)
+	@Test(expected = IllegalStateException.class)
 	public void constructeurSemaphoreTest1Jeu1() throws Exception {
 		new Semaphore(null, 0);
 	}
 	
-	@Test(expected = ChaineDeCaracteresNullOuVide.class)
+	@Test(expected = IllegalStateException.class)
 	public void constructeurSemaphoreTest1Jeu2() throws Exception {
 		new Semaphore("", 0);
 	}
 	
-	@Test(expected = ValeurInitialeHorsBorne.class)
+	@Test(expected = IllegalStateException.class)
 	public void constructeurSemaphoreTest2() throws Exception {
 		new Semaphore("sem", -1);
 	}

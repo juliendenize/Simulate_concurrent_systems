@@ -7,9 +7,8 @@ import java.util.Objects;
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 import eu.telecomsudparis.csc4102.simint.exception.ExecutionADejaDebute;
 import eu.telecomsudparis.csc4102.simint.exception.ExecutionNonDebutee;
-import eu.telecomsudparis.csc4102.simint.exception.PasDAjoutHorsEtatGlobalInitial;
 import eu.telecomsudparis.csc4102.simint.exception.ProcessusDejaPresent;
-import eu.telecomsudparis.csc4102.simint.exception.ProcessusDejaTermine;
+import eu.telecomsudparis.csc4102.simint.exception.ProcessusNonVivant;
 import eu.telecomsudparis.csc4102.simint.exception.ProcessusNonExistant;
 import eu.telecomsudparis.csc4102.simint.exception.ProgrammeDejaPresent;
 import eu.telecomsudparis.csc4102.simint.exception.ProgrammeNonExistant;
@@ -91,8 +90,6 @@ public class SimInt {
 	 *            le nom du programme
 	 * @throws ChaineDeCaracteresNullOuVide
 	 *             nom null ou vide.
-	 * @throws PasDAjoutHorsEtatGlobalInitial
-	 *             ajout non autorisé.
 	 * @throws ProcessusDejaPresent
 	 *             processus avec ce nom déjà présent.
 	 * @throws ExecutionADejaDebute
@@ -101,7 +98,7 @@ public class SimInt {
 	 *             le programme avec le nom nomProg n'existe pas.
 	 */
 	public void creerProcessus(final String nom, final String nomProg) throws ChaineDeCaracteresNullOuVide,
-			PasDAjoutHorsEtatGlobalInitial, ProcessusDejaPresent, ExecutionADejaDebute, ProgrammeNonExistant {
+		ProcessusDejaPresent, ExecutionADejaDebute, ProgrammeNonExistant {
 		if (nom == null || nom.equals("") || nomProg == null || nomProg.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
 		}
@@ -120,9 +117,20 @@ public class SimInt {
 		etatGlobalInitial.ajouterEtatProcessus(proc);
 		assert invariant();
 	}
-
-	public void creerProgramme(final String nom) throws ChaineDeCaracteresNullOuVide, PasDAjoutHorsEtatGlobalInitial,
-			ExecutionADejaDebute, ProgrammeDejaPresent {
+	
+	/**
+	 * créé un programme qui est ensuite ajouté à la collection des programmes.
+	 * @param nom
+	 * 			nom du programme.
+	 * @throws ChaineDeCaracteresNullOuVide
+	 * 			le nom du programme doit être non null et non vide.			
+	 * @throws ExecutionADejaDebute
+	 * 			l'exécution ne doit pas avoir débutée.
+	 * @throws ProgrammeDejaPresent
+	 * 			le programme existe déjà.
+	 */
+	public void creerProgramme(final String nom) throws ChaineDeCaracteresNullOuVide, ExecutionADejaDebute, 
+		ProgrammeDejaPresent {
 		if (nom == null || nom.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
 		}
@@ -135,9 +143,24 @@ public class SimInt {
 		Programme prog = new Programme(nom);
 		programmes.put(nom, prog);
 	}
-
+	
+	/**
+	 * créé un semaphore qui est ensuite ajouté à la collection des semaphore, et un état sémaphore ajouté à l'état global intitiale.
+	 * @param nom
+	 * 			nom du semaphore.
+	 * @param valeurInitiale
+	 * 			valeur initiale du semaphore.
+	 * @throws ChaineDeCaracteresNullOuVide
+	 * 			le nom doit être non null ou non vide.
+	 * @throws ExecutionADejaDebute
+	 * 			l'exécution ne doit pas avoir débutée.
+	 * @throws SemaphoreDejaPresent
+	 * 			le sémaphore avec ce nom existe déjà.
+	 * @throws ValeurInitialeHorsBorne
+	 * 			la valeur initiale doit être supérieure ou égale à 0.
+	 */
 	public void creerSemaphore(final String nom, final int valeurInitiale) throws ChaineDeCaracteresNullOuVide,
-			PasDAjoutHorsEtatGlobalInitial, ExecutionADejaDebute, SemaphoreDejaPresent, ValeurInitialeHorsBorne {
+			ExecutionADejaDebute, SemaphoreDejaPresent, ValeurInitialeHorsBorne {
 		if (nom == null || nom.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
 		}
@@ -154,9 +177,22 @@ public class SimInt {
 		semaphores.put(nom, sem);
 		etatGlobalInitial.ajouterEtatSemaphore(sem);
 	}
-
-	public void avancerExecution(String nom) throws ExecutionNonDebutee, ChaineDeCaracteresNullOuVide,
-			ProcessusNonExistant, ProcessusDejaTermine {
+	
+	/**
+	 * avance l'exécution du processus identifié par son nom.
+	 * @param nom
+	 * 			nom du processus
+	 * @throws ExecutionNonDebutee
+	 * 			l'exécution doit avoir débutée
+	 * @throws ChaineDeCaracteresNullOuVide
+	 * 			le nom doit être non null ou non vide
+	 * @throws ProcessusNonExistant
+	 * 			le processus doit exister
+	 * @throws ProcessusNonVivant
+	 * 			le processus doit être vivant.
+	 */
+	public void avancerExecution(final String nom) throws ExecutionNonDebutee, ChaineDeCaracteresNullOuVide,
+			ProcessusNonExistant, ProcessusNonVivant {
 		if (nom == null || nom.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
 		}
@@ -167,19 +203,40 @@ public class SimInt {
 			throw new ProcessusNonExistant("processus '" + nom + "' n'existe pas");
 		}
 		EtatProcessus etatProc = this.dernierEtatGlobal.chercherUnEtatProcessus(nom);
-		if (etatProc.getEtat() == Etat.termine) {
-			throw new ProcessusDejaTermine("processus '" + nom + "' est déjà terminé");
+		if (etatProc.getEtat() != Etat.vivant) {
+			throw new ProcessusNonVivant("processus '" + nom + "' est déjà terminé");
 		}
 		this.dernierEtatGlobal = new EtatGlobal(this.dernierEtatGlobal);
 		this.dernierEtatGlobal.avancerExecution(nom);
 	}
-
+	
+	/**
+	 * demande au dernier état global de regarder s'il est interbloqué et renvoie un booleen suivant si c'est le cas ou pas.
+	 * @return true si le dernier état global est interbloqué, false sinon.
+	 */
 	public boolean etablirSystemeEnInterbloquage() {
 		dernierEtatGlobal.etablirSystemeEnInterbloquage();
 		return dernierEtatGlobal.getSituationInterbloquage();
 	}
-
-	public void ajouterInstruction(String nomProg, String nomSem, TypeInstruction type)
+	
+	/**
+	 * ajouter une instruction à un programme.
+	 * @param nomProg
+	 * 			le nom du programme.
+	 * @param nomSem
+	 * 			le nom du semaphore manipulé par l'instruction.
+	 * @param type
+	 * 			le type d'instruction.
+	 * @throws ChaineDeCaracteresNullOuVide
+	 * 			les noms ne doivent pas être nul ou vide.
+	 * @throws ExecutionADejaDebute
+	 * 			l'exécution ne doit pas avoir commencé.
+	 * @throws ProgrammeNonExistant
+	 * 			le programme doit exister.
+	 * @throws SemaphoreNonExistant
+	 * 			le sémaphore doit exister.
+	 */
+	public void ajouterInstruction(final String nomProg, final String nomSem, final TypeInstruction type)
 			throws ChaineDeCaracteresNullOuVide, ExecutionADejaDebute, ProgrammeNonExistant, SemaphoreNonExistant {
 		Objects.requireNonNull(type, "Le type d'instruction doit être différent de null");
 		if (nomProg == null || nomProg.equals("") || nomSem == null || nomSem.equals("")) {
@@ -200,28 +257,56 @@ public class SimInt {
 		prog.ajouterInstruction(new Instruction(type, sem));
 
 	}
-
+	
+	/**
+	 * affiche les états processus du dernier état global.
+	 */
 	public void afficherEtatsProcessus() {
 		this.dernierEtatGlobal.afficherEtatsProcessus();
 	}
-
+	
+	/**
+	 * affiche les états sémaphores du dernier état global.
+	 */
 	public void afficherEtatsSemaphores() {
 		this.dernierEtatGlobal.afficherEtatsSemaphores();
 	}
-
-	public Processus chercherProcessus(String nomProc) {
+	
+	/**
+	 * renvoie le processus identifié par son nom s'il existe.
+	 * @param nomProc
+	 * 			le nom du processus
+	 * @return le processus s'il existe, null sinon.
+	 */
+	public Processus chercherProcessus(final String nomProc) {
 		return processus.get(nomProc);
 	}
-
-	public Semaphore chercherSemaphore(String nomSem) {
+	
+	/**
+	 * renvoie le semaphore identifié par son nom s'il existe.
+	 * @param nomSem
+	 * 			le nom du semaphore.
+	 * @return le semaphore s'il existe, null sinon.
+	 */
+	public Semaphore chercherSemaphore(final String nomSem) {
 		return semaphores.get(nomSem);
 
 	}
-
-	public Programme chercherProgramme(String nomProg) {
+	
+	/**
+	 * renvoie le programme identifié par son nom s'il existe.
+	 * @param nomProg
+	 * 			le nom du programme.
+	 * @return le programme s'il existe, null sinon.
+	 */
+	public Programme chercherProgramme(final String nomProg) {
 		return programmes.get(nomProg);
 	}
-
+	
+	/**
+	 * renvoie le dernier état global.
+	 * @return le dernier état global.
+	 */
 	public EtatGlobal getDernierEtatGlobal() {
 		return dernierEtatGlobal;
 	}

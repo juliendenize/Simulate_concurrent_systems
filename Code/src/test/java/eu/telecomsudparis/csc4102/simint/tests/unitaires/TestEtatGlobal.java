@@ -5,10 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import eu.telecomsudparis.csc4102.simint.Etat;
 import eu.telecomsudparis.csc4102.simint.EtatGlobal;
-import eu.telecomsudparis.csc4102.simint.EtatProcessus;
-import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
+
 
 public class TestEtatGlobal {
 	

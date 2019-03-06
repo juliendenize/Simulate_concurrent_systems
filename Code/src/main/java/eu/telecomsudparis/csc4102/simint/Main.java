@@ -16,7 +16,7 @@ public class Main {
 	 * @throws Exception
 	 *             tous les problèmes.
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(final String[] args) throws Exception {
 		SimInt simInt = new SimInt();
 		/*
 		 * simInt.creerProgramme("Programme1"); simInt.creerSemaphore("Sem1", 2);

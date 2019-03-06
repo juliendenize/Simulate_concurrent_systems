@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import eu.telecomsudparis.csc4102.simint.Programme;
-import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 
 public class TestProgramme {
 
@@ -18,12 +17,12 @@ public class TestProgramme {
 	public void tearDown() throws Exception {
 	}
 
-	@Test(expected = ChaineDeCaracteresNullOuVide.class)
+	@Test(expected = IllegalStateException.class)
 	public void constructeurProgrammeTest1Jeu1() throws Exception {
 		new Programme(null);
 	}
 
-	@Test(expected = ChaineDeCaracteresNullOuVide.class)
+	@Test(expected = IllegalStateException.class)
 	public void constructeurProgrammeTest1Jeu2() throws Exception {
 		new Programme("");
 	}

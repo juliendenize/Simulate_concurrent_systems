@@ -3,8 +3,6 @@ package eu.telecomsudparis.csc4102.simint;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
-
 /**
  * Cette classe définit le concept de programme.
  * 
@@ -32,12 +30,10 @@ public class Programme {
 	 * 
 	 * @param nom
 	 * 		Le nom du programme.
-	 * @throws ChaineDeCaracteresNullOuVide
-	 * 		nom vide ou null.
 	 */
-	public Programme(final String nom) throws ChaineDeCaracteresNullOuVide {
+	public Programme(final String nom) {
 		if (nom == null || nom.equals("")) {
-			throw new ChaineDeCaracteresNullOuVide("identifiant null ou vide non autorisé");
+			throw new IllegalStateException("identifiant null ou vide non autorisé");
 		}
 		this.nom = nom;
 		this.instructions = new ArrayList<Instruction>();

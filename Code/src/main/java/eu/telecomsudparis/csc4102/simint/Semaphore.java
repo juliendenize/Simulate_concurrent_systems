@@ -1,8 +1,5 @@
 package eu.telecomsudparis.csc4102.simint;
 
-import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
-import eu.telecomsudparis.csc4102.simint.exception.ValeurInitialeHorsBorne;
-
 /**
  * Cette classe définit le concept de semaphore.
  * 
@@ -28,17 +25,13 @@ public class Semaphore {
 	 * 		Le nom du semaphore.
 	 * @param valeurInitiale
 	 * 		La valeur initiale du semaphore.
-	 * @throws ChaineDeCaracteresNullOuVide
-	 * 		Le nom est null ou vide.
-	 * @throws ValeurInitialeHorsBorne
-	 * 		La valeur initiale est inférieure à 0.
 	 */
-	public Semaphore(final String nom, final int valeurInitiale) throws ChaineDeCaracteresNullOuVide, ValeurInitialeHorsBorne {
+	public Semaphore(final String nom, final int valeurInitiale) {
 		if (nom == null || nom.equals("")) {
-			throw new ChaineDeCaracteresNullOuVide("identifiant null ou vide non autorisé");
+			throw new IllegalStateException("identifiant null ou vide non autorisé");
 		}
 		if (valeurInitiale < 0) {
-			throw new ValeurInitialeHorsBorne("La valeur initiale d'un sémaphore doit être supérieure à 0");
+			throw new IllegalStateException("La valeur initiale d'un sémaphore doit être supérieure à 0");
 		}
 		this.nom = nom;
 		this.valeurInitiale = valeurInitiale;

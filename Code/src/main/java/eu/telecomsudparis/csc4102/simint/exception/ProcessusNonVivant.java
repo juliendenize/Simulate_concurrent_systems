@@ -3,12 +3,11 @@ package eu.telecomsudparis.csc4102.simint.exception;
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
 /**
- * Cette classe définit le type d'exception pour la tentative d'ajout d'état de
- * processus ou de sémaphore hors état global initial.
+ * Cette classe définit le type d'exception pour un processus déjà présent dans
+ * le système.
  * 
- * @author Denis Conan
  */
-public class PasDAjoutHorsEtatGlobalInitial extends OperationImpossible {
+public class ProcessusNonVivant extends OperationImpossible {
 	/**
 	 * numéro de version pour la sérialisation.
 	 */
@@ -20,7 +19,7 @@ public class PasDAjoutHorsEtatGlobalInitial extends OperationImpossible {
 	 * @param message
 	 *            le message de l'exception.
 	 */
-	public PasDAjoutHorsEtatGlobalInitial(final String message) {
+	public ProcessusNonVivant(final String message) {
 		super(message);
 	}
 }
