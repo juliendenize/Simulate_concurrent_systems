@@ -147,3 +147,52 @@ Denis Conan
 ------------------------------------
 lun. 11 mars 2019 13:55:18 CET
 Denis Conan
+
+------------------------------------
+lun. 11 mars 2019 14:15:14 CET
+Denis Conan
+# Évaluation du logiciel livré à la fin du Sprint 1
+## modélisation du logiciel = A
+- Spécification et préparation des tests de validation : 
+    - Diagrammes de cas d'utilisation = a
+    - 3 tables de décision des tests de validation = a
+      (avec les précondition et postcondition)
+        - cas d'utilisation « créer un sémaphore » : ok
+        - cas d'utilisation « ajouter une instruction à un programme » : ok
+        - cas d'utilisation « avancer l'exécution d'un processus d'un pas » :
+            - manque la condition « processus non terminé »
+- Conception préliminaire :
+    - Diagramme de classes = a
+    - 3 diagrammes de séquence = a
+        - cas d'utilisation « créer un sémaphore » : ok
+        - cas d'utilisation « ajouter une instruction à un programme » : ok
+            - ne mélanger pas les conditions des fragments avec les messages
+        - cas d'utilisation « avancer l'exécution d'un processus d'un pas » : ok
+- Conception détaillée et de la préparation des tests unitaires : 
+    - Raffinement du diagramme de classes = a
+      (avec la fiche de la classe ÉtatProcessus)
+    - Invariant de la classe ÉtatProcessus = a
+    - 2 tables de décision de tests unitaires = a
+## Programmation
+- Utilisation des outils de programmation = A
+    - Module Maven et tests avec JUnit = a
+- Programmation de la solution = A
+    - Classes du diagramme de classes avec leurs attributs = a
+    - Méthodes des cas d'utilisation de base = a
+        - cas d'utilisation « créer un sémaphore » : ok
+        - cas d'utilisation « ajouter une instruction à un programme » : ok
+        - cas d'utilisation « avancer l'exécution d'un processus d'un pas » : ok
+- Cohérence entre le code et le modèle = A
+    - Cohérences du code avec le diagramme de classes = a
+    - Cohérences du code avec les diagrammes de séquence de base = a
+- Programmation et exécution des tests de validation et unitaires = A
+    - Tests de validation de 3 cas d'utlisation = a
+        - cas d'utilisation « créer un sémaphore » : 
+        - cas d'utilisation « ajouter une instruction à un programme » : 
+        - cas d'utilisation « avance l'exécution d'un processus d'un pas » : 
+    - Tests unitaires de 2 méthodes d'une classe = a
+        - constructeur de la classe ÉtatProcessus : ok 
+        - méthode avanceDUnPas de la classe ÉtatProcessus :
+            - il y a plus d'un cas pour non vivant : terminé et bloqué (2
+              fois avancer sur le même sémaphore initialement à 1)
+
