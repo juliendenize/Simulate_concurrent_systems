@@ -144,3 +144,6 @@ Denis Conan
 - j'ai uniquement parcouru un peu votre code ; bonne continuation avec les
   tests qui permettront de valider la solution programmée
 ---
+------------------------------------
+lun. 11 mars 2019 13:55:18 CET
+Denis Conan
