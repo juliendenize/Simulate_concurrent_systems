@@ -196,3 +196,12 @@ Denis Conan
             - il y a plus d'un cas pour non vivant : terminé et bloqué (2
               fois avancer sur le même sémaphore initialement à 1)
 
+---
+
+Mar. 12 mars 2019
+Julien DENIZE, Pierre CHAFFARDON
+- Pour la modélisation des nouveaux cas d'utilisations, devons-nous intégrer cette modélisation dans le fichier que nous avions déjà ou devenons créer un nouveau odt ?
+  - Pour le moment nous avons juste écrit deux cas d'utilisation issus de l'énoncé du TP mais pas fait de travail dessus
+- Devons-nous aussi faire la doc pour les tests, sachant que nous trouvons qu'ils sont assez clairs ?
+  - Trouvez-vous que la doc que nous avons réalisé est assez claire ?
+- Nous avons changé quelques exceptions de telle sorte que les exceptions sont nommées uniquement lorsque c'est simint qui les produit (ex: ProgrammeExistant) et lorsque les exceptions sont levées dans les constructeurs, nous avons considérer que ce sont des IllegalStateException. Trouvez-vous cela satisfaisant ?
