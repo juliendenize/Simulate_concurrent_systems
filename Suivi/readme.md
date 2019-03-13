@@ -205,3 +205,25 @@ Julien DENIZE, Pierre CHAFFARDON
 - Devons-nous aussi faire la doc pour les tests, sachant que nous trouvons qu'ils sont assez clairs ?
   - Trouvez-vous que la doc que nous avons réalisé est assez claire ?
 - Nous avons changé quelques exceptions de telle sorte que les exceptions sont nommées uniquement lorsque c'est simint qui les produit (ex: ProgrammeExistant) et lorsque les exceptions sont levées dans les constructeurs, nous avons considérer que ce sont des IllegalStateException. Trouvez-vous cela satisfaisant ?
+
+---
+
+# Suivi du mer. 13 mars 2019 12:30:28 CET
+Denis Conan
+- question modélisation fichier: de quel fichier parlez-vous ? vous devez
+  soit mettre à jour votre diagramme de cas d'utilisation soit en créer un
+  nouveau pour les cas d'utilisation du sprint ; mettre à jour votre diagramme
+  de classes ; mettre à jour vos diagrammes de séquence en cas d'impact et
+  créer le/les diag. de séquence pour le/les nouveaux cas d'utilisation, etc.
+- doc pour les tests : parlez-vous de la documentation du code avec javadoc ?
+  seule la classe EtatGlobal est obligée de passer la vérification de code
+  Checkstyle ; la documentation javadoc des tests est sans doute la dernière
+  tâche car pas très utile (vous avez les tables de décision correspondantes
+  et vous nommez vos méthodes pour faire l'appariement)
+- IllegalStateException, comme IllegalArgumentException, sont des
+  RuntimeExceptions, donc hors contrôle ; en termes génie logiciel, on les
+  utilisent sur cas d'erreur de programmation (tel attribut ne devrait pas
+  avoir telle valeur => exception hors contrôle) ; par contre, les exceptions
+  sous-contrôle telles que ProgrammeExistant sont des exceptions
+  « fonctionnelles » : c'est l'acteur qui est en cause
+---
