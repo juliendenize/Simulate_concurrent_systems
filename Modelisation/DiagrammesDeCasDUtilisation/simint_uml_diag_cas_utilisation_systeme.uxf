@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>15</zoom_level>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>50</x>
-      <y>70</y>
-      <w>110</w>
-      <h>110</h>
+      <x>0</x>
+      <y>120</y>
+      <w>165</w>
+      <h>165</h>
     </coordinates>
     <panel_attributes>Programmeur</panel_attributes>
     <additional_attributes/>
@@ -15,43 +15,21 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>320</x>
-      <y>50</y>
-      <w>220</w>
-      <h>40</h>
+      <x>435</x>
+      <y>75</y>
+      <w>315</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>valider le système</panel_attributes>
+    <panel_attributes>Valider le système</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>120</x>
-      <y>60</y>
-      <w>220</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;50.0;200.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>120</x>
-      <y>100</y>
-      <w>220</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;30.0;200.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>300</x>
-      <y>20</y>
-      <w>540</w>
-      <h>140</h>
+      <x>375</x>
+      <y>30</y>
+      <w>855</w>
+      <h>360</h>
     </coordinates>
     <panel_attributes>SimInt
 halign=left</panel_attributes>
@@ -60,12 +38,78 @@ halign=left</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>320</x>
-      <y>100</y>
-      <w>510</w>
-      <h>40</h>
+      <x>435</x>
+      <y>150</y>
+      <w>765</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>Chercher le chemin entre l'état global initial et un état global donné</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>435</x>
+      <y>225</y>
+      <w>420</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Afficher l'état global du système</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>435</x>
+      <y>300</y>
+      <w>630</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Etablir si le système est en situation d'interblocage</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>105</x>
+      <y>165</y>
+      <w>360</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;220.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>105</x>
+      <y>165</y>
+      <w>360</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;220.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>105</x>
+      <y>150</y>
+      <w>360</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;220.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>105</x>
+      <y>90</y>
+      <w>360</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;60.0;220.0;10.0</additional_attributes>
   </element>
 </diagram>

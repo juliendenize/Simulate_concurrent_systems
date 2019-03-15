@@ -4,8 +4,8 @@
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>0</x>
-      <y>256</y>
+      <x>16</x>
+      <y>160</y>
       <w>192</w>
       <h>176</h>
     </coordinates>
@@ -15,13 +15,13 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>128</x>
-      <y>224</y>
-      <w>384</w>
-      <h>128</h>
+      <x>144</x>
+      <y>192</y>
+      <w>368</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;60.0;220.0;10.0</additional_attributes>
+    <additional_attributes>10.0;20.0;210.0;30.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
@@ -48,24 +48,24 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>128</x>
+      <x>144</x>
       <y>64</y>
-      <w>384</w>
-      <h>288</h>
+      <w>368</w>
+      <h>192</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;160.0;220.0;10.0</additional_attributes>
+    <additional_attributes>10.0;100.0;210.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>128</x>
+      <x>144</x>
       <y>144</y>
-      <w>384</w>
-      <h>208</h>
+      <w>368</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;110.0;220.0;10.0</additional_attributes>
+    <additional_attributes>10.0;50.0;210.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
@@ -84,7 +84,7 @@
       <x>448</x>
       <y>0</y>
       <w>736</w>
-      <h>608</h>
+      <h>464</h>
     </coordinates>
     <panel_attributes>SimInt
 halign=left</panel_attributes>
@@ -102,65 +102,21 @@ halign=left</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>480</x>
-      <y>368</y>
-      <w>656</w>
-      <h>64</h>
-    </coordinates>
-    <panel_attributes>Etablir si le système est en situation d'interbloquage</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>128</x>
-      <y>288</y>
-      <w>384</w>
-      <h>64</h>
+      <x>144</x>
+      <y>208</y>
+      <w>368</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;20.0;220.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>128</x>
-      <y>304</y>
-      <w>384</w>
-      <h>128</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;220.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;210.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
       <x>480</x>
-      <y>528</y>
-      <w>592</w>
-      <h>64</h>
-    </coordinates>
-    <panel_attributes>Afficher l'état global du système</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>128</x>
-      <y>304</y>
-      <w>384</w>
-      <h>288</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;220.0;160.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>480</x>
-      <y>448</y>
+      <y>368</y>
       <w>592</w>
       <h>64</h>
     </coordinates>
@@ -170,12 +126,12 @@ halign=left</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>128</x>
-      <y>304</y>
-      <w>384</w>
-      <h>208</h>
+      <x>144</x>
+      <y>208</y>
+      <w>368</w>
+      <h>224</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;10.0;220.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;210.0;120.0</additional_attributes>
   </element>
 </diagram>
