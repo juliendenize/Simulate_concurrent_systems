@@ -145,6 +145,15 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 	}
 	
 	/**
+	 * Encode l'état processus en chaine de caractères.
+	 * 
+	 * @return l'encodage
+	 */
+	public String chaineDeCaracteres() {
+		return processus.getNom() + " " + compteurInstance;
+	}
+	
+	/**
 	 * Retourne l'état de l'état processus.
 	 * 
 	 * @return l'état de l'état processus.

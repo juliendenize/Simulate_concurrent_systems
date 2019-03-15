@@ -7,7 +7,7 @@ package eu.telecomsudparis.csc4102.simint;
  * 
  * @author Denis Conan
  */
-public class Main {
+public final class Main {
 	/**
 	 * point d'entrée du scénario.
 	 * 
@@ -151,7 +151,8 @@ public class Main {
 		simInt.etablirSystemeEnInterbloquage();
 		simInt.avancerExecution("P5");
 		simInt.etablirSystemeEnInterbloquage();
-
+		
+		System.out.println("Main terminé.");
 	}
 
 }

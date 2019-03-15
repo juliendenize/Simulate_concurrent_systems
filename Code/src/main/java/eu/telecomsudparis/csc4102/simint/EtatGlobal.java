@@ -121,8 +121,8 @@ public class EtatGlobal {
 	 */
 	public boolean invariant() {
 		return etatsProcessus != null && etatsSemaphores != null && etatsGlobauxAtteignables != null
-				&& compteurInstanciation > 0 && compteurInstance > 0 &&
-				etatsSemaphores.stream()
+				&& compteurInstanciation > 0 && compteurInstance > 0 
+				&& etatsSemaphores.stream()
 							   .map(etatSemaphore -> etatSemaphore.getFileAttente())
 							   //.collect(Collectors.toList())
 							   .flatMap(List::stream)
@@ -134,13 +134,12 @@ public class EtatGlobal {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((etatsProcessus == null) ? 0 : etatsProcessus.hashCode());
-		result = prime * result + ((etatsSemaphores == null) ? 0 : etatsSemaphores.hashCode());
+		result = prime * result + this.chaineDeCaracteres().hashCode();
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj) {
 			return true;
 		}
@@ -151,19 +150,11 @@ public class EtatGlobal {
 			return false;
 		}
 		EtatGlobal other = (EtatGlobal) obj;
-		other.getEtatsProcessus()
 		if (etatsProcessus == null) {
 			if (other.etatsProcessus != null) {
 				return false;
 			}
-		} else if (!etatsProcessus.equals(other.etatsProcessus)) {
-			return false;
-		}
-		if (etatsSemaphores == null) {
-			if (other.etatsSemaphores != null) {
-				return false;
-			}
-		} else if (!etatsSemaphores.equals(other.etatsSemaphores)) {
+		} else if (!this.chaineDeCaracteres().equals(other.chaineDeCaracteres())) {
 			return false;
 		}
 		return true;
@@ -244,8 +235,9 @@ public class EtatGlobal {
 	 * à son tour exécuter. 
 	 * @param nomProcessus
 	 * 			le nom du processus à exécuter.
+	 * @return true si le processus a été avancé d'un pas, false sinon.
 	 */
-	public void avancerExecution(final String nomProcessus) {
+	public boolean avancerExecution(final String nomProcessus) {
 		if (nomProcessus == null || nomProcessus.equals("")) {
 			throw new IllegalArgumentException("nom null ou vide non autorisé");
 		}
@@ -276,6 +268,8 @@ public class EtatGlobal {
 		if (instructionExecutee) {
 			etatProc.avancerExecution();
 		}
+		
+		return instructionExecutee;
 	}
 	
 	/**
@@ -298,7 +292,7 @@ public class EtatGlobal {
 
 	@Override
 	public String toString() {
-		return "EtatGlobal [#=" + compteurInstance + ", proc=" + etatsProcessus + ", estInitial=" + estEtatGlobalInitial
+		return "EtatGlobal [#=" + compteurInstance + ", etatsProcessus=" + etatsProcessus + ", estInitial=" + estEtatGlobalInitial
 				+ ", etatsAtteignables=" + etatsGlobauxAtteignables + "]";
 	}
 	
@@ -307,9 +301,9 @@ public class EtatGlobal {
 	 */
 	public void etablirSystemeEnInterbloquage() {
 		if (!this.situationInterbloquage) {
-			if(etatsProcessus.stream().allMatch(etatProcessus -> 
-									  				etatProcessus.getEtat().equals(Etat.bloque) ||
-													etatProcessus.getEtat().equals(Etat.termine))) {
+			if (etatsProcessus.stream().allMatch(etatProcessus -> 
+									  				etatProcessus.getEtat().equals(Etat.bloque) 
+									  				|| etatProcessus.getEtat().equals(Etat.termine))) {
 				this.situationInterbloquage = etatsProcessus.stream()
 															.anyMatch(etatProcessus -> etatProcessus.getEtat().equals(Etat.bloque));
 			}
@@ -334,5 +328,16 @@ public class EtatGlobal {
 	 */
 	public int getCompteurInstance() {
 		return compteurInstance;
+	}
+	
+	/**
+	 * Encode l'état global en chaine de caractères.
+	 * 
+	 * @return l'encodage
+	 */
+	public String chaineDeCaracteres() {
+		return etatsProcessus.stream()
+					 .map(etatProcessus -> etatProcessus.chaineDeCaracteres())
+					 .collect(Collectors.joining(", "));
 	}
 }

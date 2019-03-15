@@ -259,6 +259,21 @@ public class SimInt {
 	}
 	
 	/**
+	 * valide le système.
+	 * @throws ExecutionADejaDebute
+	 * 			L'exécution ne doit pas avoir débutée.
+	 */
+	public void validerSysteme() throws ExecutionADejaDebute {
+		if (this.executionDebutee) {
+			throw new ExecutionADejaDebute("L'exécution a déjà débutée.");
+		}
+		if (this.processus.isEmpty()) {
+			System.out.println("Le système ne contient pas de processus et est donc par conséquent valide.");
+		}
+		
+	}
+	
+	/**
 	 * affiche les états processus du dernier état global.
 	 */
 	public void afficherEtatsProcessus() {
