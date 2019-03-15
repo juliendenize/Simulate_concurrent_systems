@@ -28,10 +28,10 @@ public class Semaphore {
 	 */
 	public Semaphore(final String nom, final int valeurInitiale) {
 		if (nom == null || nom.equals("")) {
-			throw new IllegalStateException("identifiant null ou vide non autorisé");
+			throw new IllegalArgumentException("identifiant null ou vide non autorisé");
 		}
 		if (valeurInitiale < 0) {
-			throw new IllegalStateException("La valeur initiale d'un sémaphore doit être supérieure à 0");
+			throw new IllegalArgumentException("La valeur initiale d'un sémaphore doit être supérieure à 0");
 		}
 		this.nom = nom;
 		this.valeurInitiale = valeurInitiale;

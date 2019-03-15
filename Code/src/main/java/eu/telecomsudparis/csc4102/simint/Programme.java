@@ -33,7 +33,7 @@ public class Programme {
 	 */
 	public Programme(final String nom) {
 		if (nom == null || nom.equals("")) {
-			throw new IllegalStateException("identifiant null ou vide non autorisé");
+			throw new IllegalArgumentException("identifiant null ou vide non autorisé");
 		}
 		this.nom = nom;
 		this.instructions = new ArrayList<Instruction>();
@@ -59,7 +59,7 @@ public class Programme {
 	 */
 	public Instruction chercherInstruction(final int numeroInstruction) {
 		if (this.instructions.size() <= numeroInstruction) {
-			throw new IllegalStateException("instruction numéro '" + numeroInstruction + "' n'existe pas");
+			throw new IllegalArgumentException("instruction numéro '" + numeroInstruction + "' n'existe pas");
 		}
 		return this.instructions.get(numeroInstruction);
 	}

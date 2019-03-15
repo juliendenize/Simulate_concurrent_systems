@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * Cette classe définit le concept d'état global.
@@ -73,14 +74,12 @@ public class EtatGlobal {
 	public EtatGlobal(final EtatGlobal origine) {
 		Objects.requireNonNull(origine, "fournir un état global origine");
 		estEtatGlobalInitial = false;
-		etatsProcessus = new TreeSet<>();
-		etatsSemaphores = new TreeSet<>();
-		for (EtatProcessus etatProcessus : origine.getEtatsProcessus()) {
-			etatsProcessus.add(new EtatProcessus(etatProcessus));
-		}
-		for (EtatSemaphore etatSemaphore : origine.getEtatsSemaphores()) {
-			etatsSemaphores.add(new EtatSemaphore(etatSemaphore));
-		}
+		this.etatsProcessus = origine.getEtatsProcessus().stream()
+								   .map(etatProcessus -> new EtatProcessus(etatProcessus))
+								   .collect(Collectors.toCollection(TreeSet::new));
+		this.etatsSemaphores = origine.getEtatsSemaphores().stream()
+				   .map(etatSemaphore -> new EtatSemaphore(etatSemaphore))
+				   .collect(Collectors.toCollection(TreeSet::new));
 		situationInterbloquage = origine.getSituationInterbloquage();
 		etatsGlobauxAtteignables = new ArrayList<>();
 		compteurInstanciation++;
@@ -122,7 +121,52 @@ public class EtatGlobal {
 	 */
 	public boolean invariant() {
 		return etatsProcessus != null && etatsSemaphores != null && etatsGlobauxAtteignables != null
-				&& compteurInstanciation > 0 && compteurInstance > 0;
+				&& compteurInstanciation > 0 && compteurInstance > 0 &&
+				etatsSemaphores.stream()
+							   .map(etatSemaphore -> etatSemaphore.getFileAttente())
+							   //.collect(Collectors.toList())
+							   .flatMap(List::stream)
+							   .distinct()
+							   .allMatch(processus -> this.chercherUnEtatProcessus(processus.getNom()) != null);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((etatsProcessus == null) ? 0 : etatsProcessus.hashCode());
+		result = prime * result + ((etatsSemaphores == null) ? 0 : etatsSemaphores.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof EtatGlobal)) {
+			return false;
+		}
+		EtatGlobal other = (EtatGlobal) obj;
+		other.getEtatsProcessus()
+		if (etatsProcessus == null) {
+			if (other.etatsProcessus != null) {
+				return false;
+			}
+		} else if (!etatsProcessus.equals(other.etatsProcessus)) {
+			return false;
+		}
+		if (etatsSemaphores == null) {
+			if (other.etatsSemaphores != null) {
+				return false;
+			}
+		} else if (!etatsSemaphores.equals(other.etatsSemaphores)) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -138,7 +182,7 @@ public class EtatGlobal {
 		Objects.requireNonNull(proc, "proc ne peut pas être null");
 		EtatProcessus etat = new EtatProcessus(proc);
 		if (!etatsProcessus.add(etat)) {
-			throw new IllegalStateException("état de processus '" + proc.getNom() + "' déjà présent dans l'état global");
+			throw new IllegalArgumentException("état de processus '" + proc.getNom() + "' déjà présent dans l'état global");
 		}
 		assert invariant();
 	}
@@ -156,7 +200,7 @@ public class EtatGlobal {
 		Objects.requireNonNull(sem, "proc ne peut pas être null");
 		EtatSemaphore etat = new EtatSemaphore(sem);
 		if (!etatsSemaphores.add(etat)) {
-			throw new IllegalStateException("état de semaphore '" + sem.getNom() + "' déjà présent dans l'état global");
+			throw new IllegalArgumentException("état de semaphore '" + sem.getNom() + "' déjà présent dans l'état global");
 		}
 		assert invariant();
 	}
@@ -174,7 +218,7 @@ public class EtatGlobal {
 				return etatSemaphore;
 			}
 		}
-		throw new IllegalStateException("pas d'état pour le semaphore '" + nom + "'");
+		throw new IllegalArgumentException("pas d'état pour le semaphore '" + nom + "'");
 	}
 
 	/**
@@ -190,7 +234,7 @@ public class EtatGlobal {
 				return etatProcessus;
 			}
 		}
-		throw new IllegalStateException("pas d'état pour le processus '" + nom + "'");
+		throw new IllegalArgumentException("pas d'état pour le processus '" + nom + "'");
 	}
 	
 	
@@ -203,7 +247,7 @@ public class EtatGlobal {
 	 */
 	public void avancerExecution(final String nomProcessus) {
 		if (nomProcessus == null || nomProcessus.equals("")) {
-			throw new IllegalStateException("nom null ou vide non autorisé");
+			throw new IllegalArgumentException("nom null ou vide non autorisé");
 		}
 		EtatProcessus etatProc = chercherUnEtatProcessus(nomProcessus);
 		Instruction instruction = etatProc.chercherInstruction();
@@ -263,15 +307,12 @@ public class EtatGlobal {
 	 */
 	public void etablirSystemeEnInterbloquage() {
 		if (!this.situationInterbloquage) {
-			boolean existeProcBloque = false;
-			for (EtatProcessus etatProcessus : etatsProcessus) {
-				if (etatProcessus.getEtat().equals(Etat.vivant)) {
-					return;
-				} else if (etatProcessus.getEtat().equals(Etat.bloque)) {
-					existeProcBloque = true;
-				}
+			if(etatsProcessus.stream().allMatch(etatProcessus -> 
+									  				etatProcessus.getEtat().equals(Etat.bloque) ||
+													etatProcessus.getEtat().equals(Etat.termine))) {
+				this.situationInterbloquage = etatsProcessus.stream()
+															.anyMatch(etatProcessus -> etatProcessus.getEtat().equals(Etat.bloque));
 			}
-			this.situationInterbloquage = existeProcBloque;
 		}
 		assert invariant();
 	}

@@ -75,7 +75,7 @@ public class EtatSemaphore implements Comparable<EtatSemaphore> {
 	 * 
 	 * @return la file d'attente.
 	 */
-	private List<Processus> getFileAttente() {
+	public List<Processus> getFileAttente() {
 		return fileAttente;
 	}
 

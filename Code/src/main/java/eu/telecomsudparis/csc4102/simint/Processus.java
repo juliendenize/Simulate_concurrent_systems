@@ -2,8 +2,6 @@ package eu.telecomsudparis.csc4102.simint;
 
 import java.util.Objects;
 
-import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
-
 /**
  * Cette classe définit le concept de processus.
  * 
@@ -32,12 +30,10 @@ public class Processus implements Comparable<Processus> {
 	 *            le nom du processus.
 	 * @param programme
 	 *            le programme à exécuter par le processus
-	 * @throws ChaineDeCaracteresNullOuVide
-	 *             identifiant null ou vide.
 	 */
-	public Processus(final String nom, final Programme programme) throws ChaineDeCaracteresNullOuVide {
+	public Processus(final String nom, final Programme programme) {
 		if (nom == null || nom.equals("")) {
-			throw new ChaineDeCaracteresNullOuVide("identifiant null ou vide non autorisé");
+			throw new IllegalArgumentException("identifiant null ou vide non autorisé");
 		}
 		Objects.requireNonNull(programme, "fournir un programme à Processus");
 		this.nom = nom;

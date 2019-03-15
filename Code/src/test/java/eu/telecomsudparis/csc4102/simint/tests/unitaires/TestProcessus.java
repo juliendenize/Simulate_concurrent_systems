@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import eu.telecomsudparis.csc4102.simint.Processus;
 import eu.telecomsudparis.csc4102.simint.Programme;
-import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 
 public class TestProcessus {
 	
@@ -24,12 +23,12 @@ public class TestProcessus {
 		prog = null;
 	}
 
-	@Test(expected = ChaineDeCaracteresNullOuVide.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void constructeurProcessusTest1Jeu1() throws Exception {
 		new Processus(null, prog);
 	}
 
-	@Test(expected = ChaineDeCaracteresNullOuVide.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void constructeurProcessusTest1Jeu2() throws Exception {
 		new Processus("", prog);
 	}
