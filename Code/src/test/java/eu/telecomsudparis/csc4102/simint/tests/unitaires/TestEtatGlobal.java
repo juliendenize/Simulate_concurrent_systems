@@ -26,7 +26,8 @@ public class TestEtatGlobal {
 	public void constructeurEtatGlobalTest1() throws Exception {
 		int compteurInstanciation = EtatGlobal.getCompteurInstanciation();
 		EtatGlobal etat = new EtatGlobal();
-		Assert.assertFalse(etat.getSituationInterbloquage());
+		Assert.assertNotNull(etat.getEtatExecution());
+		Assert.assertNull(etat.getEtatGlobalPrecedent());
 		Assert.assertEquals(++compteurInstanciation, EtatGlobal.getCompteurInstanciation());
 		Assert.assertEquals(compteurInstanciation, etat.getCompteurInstance());
 		Assert.assertTrue(etat.invariant());
@@ -41,8 +42,9 @@ public class TestEtatGlobal {
 	@Test
 	public void constructeurParCopieEtatGlobalTest2() throws Exception {
 		int compteurInstanciation = EtatGlobal.getCompteurInstanciation();
-		EtatGlobal etat = new EtatGlobal();
-		Assert.assertNotNull(etat.getSituationInterbloquage());
+		EtatGlobal etat = new EtatGlobal(origine);
+		Assert.assertNotNull(etat.getEtatExecution());
+		Assert.assertEquals(etat.getEtatGlobalPrecedent(), origine);
 		Assert.assertEquals(++compteurInstanciation, EtatGlobal.getCompteurInstanciation());
 		Assert.assertEquals(compteurInstanciation, etat.getCompteurInstance());
 		Assert.assertTrue(etat.invariant());

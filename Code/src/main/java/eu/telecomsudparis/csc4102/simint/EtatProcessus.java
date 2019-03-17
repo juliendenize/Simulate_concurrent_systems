@@ -150,7 +150,7 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 	 * @return l'encodage
 	 */
 	public String chaineDeCaracteres() {
-		return processus.getNom() + " " + compteurInstance;
+		return processus.getNom() + " " + instructionCourante;
 	}
 	
 	/**

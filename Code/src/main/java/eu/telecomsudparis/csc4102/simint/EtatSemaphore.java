@@ -3,6 +3,7 @@ package eu.telecomsudparis.csc4102.simint;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Cette classe définit le concept d'un état sémphore.
@@ -202,5 +203,13 @@ public class EtatSemaphore implements Comparable<EtatSemaphore> {
 	public int getCompteurInstance() {
 		return compteurInstance;
 	}
-
+	
+	/**
+	 * Encode l'état semaphore en chaine de caractères.
+	 * 
+	 * @return l'encodage
+	 */
+	public String chaineDeCaracteres() {
+		return semaphore.getNom() + " " + fileAttente.stream().map(Processus::getNom).collect(Collectors.joining(" "));
+	}
 }

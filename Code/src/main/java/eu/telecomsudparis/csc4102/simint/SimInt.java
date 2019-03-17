@@ -1,8 +1,10 @@
 package eu.telecomsudparis.csc4102.simint;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 import eu.telecomsudparis.csc4102.simint.exception.ExecutionADejaDebute;
@@ -204,19 +206,20 @@ public class SimInt {
 		}
 		EtatProcessus etatProc = this.dernierEtatGlobal.chercherUnEtatProcessus(nom);
 		if (etatProc.getEtat() != Etat.vivant) {
-			throw new ProcessusNonVivant("processus '" + nom + "' est déjà terminé");
+			throw new ProcessusNonVivant("processus '" + nom + "' est déjà terminé ou bloqué");
 		}
 		this.dernierEtatGlobal = new EtatGlobal(this.dernierEtatGlobal);
 		this.dernierEtatGlobal.avancerExecution(nom);
+		this.etablirSystemeEnInterbloquage();
 	}
 	
 	/**
 	 * demande au dernier état global de regarder s'il est interbloqué et renvoie un booleen suivant si c'est le cas ou pas.
 	 * @return true si le dernier état global est interbloqué, false sinon.
 	 */
-	public boolean etablirSystemeEnInterbloquage() {
+	public EtatExecution etablirSystemeEnInterbloquage() {
 		dernierEtatGlobal.etablirSystemeEnInterbloquage();
-		return dernierEtatGlobal.getSituationInterbloquage();
+		return dernierEtatGlobal.getEtatExecution();
 	}
 	
 	/**
@@ -259,9 +262,10 @@ public class SimInt {
 	}
 	
 	/**
-	 * valide le système.
+	 * Valide le système.
+	 *  
 	 * @throws ExecutionADejaDebute
-	 * 			L'exécution ne doit pas avoir débutée.
+	 * 			L'éxecution ne doit pas avoir débutée.
 	 */
 	public void validerSysteme() throws ExecutionADejaDebute {
 		if (this.executionDebutee) {
@@ -270,7 +274,64 @@ public class SimInt {
 		if (this.processus.isEmpty()) {
 			System.out.println("Le système ne contient pas de processus et est donc par conséquent valide.");
 		}
+		long startTime = System.nanoTime();
+		ArrayList<EtatGlobal> etatsGlobauxAtteignables = new ArrayList<>();
+		Optional<EtatGlobal> etatGlobalInterbloque;
+		this.debuterExecution();
+		etatsGlobauxAtteignables.add(etatGlobalInitial);
 		
+		for (int i = 0; i < etatsGlobauxAtteignables.size(); i++) {
+			this.dernierEtatGlobal = etatsGlobauxAtteignables.get(i);
+			if (this.dernierEtatGlobal.getEtatExecution().equals(EtatExecution.enCours)) {
+				for (EtatProcessus etatProc: this.dernierEtatGlobal.getEtatsProcessus()) {
+					if (etatProc.getEtat().equals(Etat.vivant)) {
+						try {
+							this.avancerExecution(etatProc.getProcessus().getNom());
+						} catch (ExecutionNonDebutee | ChaineDeCaracteresNullOuVide | ProcessusNonExistant
+								| ProcessusNonVivant e) {
+							e.printStackTrace();
+						}
+						this.dernierEtatGlobal = etatsGlobauxAtteignables.get(i);
+					}
+				}
+				for (EtatGlobal etatGlobal: this.dernierEtatGlobal.getEtatsGlobauxAtteignables()) {
+					if (!etatsGlobauxAtteignables.contains(etatGlobal)) {
+						etatsGlobauxAtteignables.add(etatGlobal);
+					}
+				}
+			}
+		}
+
+		etatGlobalInterbloque = etatsGlobauxAtteignables.stream()
+								.filter(etatGlobal -> etatGlobal.getEtatExecution().equals(EtatExecution.interbloque)).findAny();
+		final int oneMillion = 1000000;
+		long tempsExecution = (System.nanoTime() - startTime) / oneMillion;
+		if (!etatGlobalInterbloque.isPresent()) {
+			System.out.println("Validation du système = ok: " + EtatGlobal.getCompteurInstanciation() + " états globaux différents ont été générés en" + tempsExecution 
+								+ "ms. Pas d'interbloquage trouvé.");
+		} else {
+			System.out.println("Validation du système: " + etatsGlobauxAtteignables.size() + " états globaux différents ont été générés en " + tempsExecution 
+								+ "ms.");
+			System.out.println("interbloquage trouvé dans état: " + etatGlobalInterbloque.get());
+			this.chercherChemin(etatGlobalInterbloque.get());
+		}
+	}
+	
+	/**
+	 * Cherche le chemin entre l'état global donné et l'état global initial.
+	 * 
+	 * @param etatGlobal
+	 * 			L'état global dont on doit chercher le chemin.
+	 */
+	public void chercherChemin(final EtatGlobal etatGlobal) {
+		Objects.requireNonNull(etatGlobal, "L'état global ne doit pas être nul");
+		
+		EtatGlobal iterator = etatGlobal;
+		while (iterator != this.etatGlobalInitial) {
+			System.out.println(iterator.chaineDeCaracteres());
+			iterator = iterator.getEtatGlobalPrecedent();
+		}
+		System.out.println(iterator.chaineDeCaracteres());
 	}
 	
 	/**

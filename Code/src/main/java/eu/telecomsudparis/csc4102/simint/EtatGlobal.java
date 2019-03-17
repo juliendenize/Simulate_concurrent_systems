@@ -24,9 +24,10 @@ public class EtatGlobal {
 	private SortedSet<EtatSemaphore> etatsSemaphores;
 
 	/**
-	 * true si c'est l'état initial.
+	 * l'état global précédent.
 	 */
-	private boolean estEtatGlobalInitial;
+	private EtatGlobal etatGlobalPrecedent;
+	
 	/**
 	 * collection d'états atteignables à partir de cet état.
 	 */
@@ -43,7 +44,7 @@ public class EtatGlobal {
 	/**
 	 * true si système interbloqué.
 	 */
-	private boolean situationInterbloquage;
+	private EtatExecution etatExecution;
 
 	/**
 	 * construit l'état global initial.
@@ -51,8 +52,8 @@ public class EtatGlobal {
 	public EtatGlobal() {
 		etatsProcessus = new TreeSet<>();
 		etatsSemaphores = new TreeSet<>();
-		estEtatGlobalInitial = true;
-		situationInterbloquage = false;
+		etatGlobalPrecedent = null;
+		etatExecution = EtatExecution.enCours;
 		etatsGlobauxAtteignables = new ArrayList<>();
 		compteurInstanciation++;
 		compteurInstance = compteurInstanciation;
@@ -73,14 +74,15 @@ public class EtatGlobal {
 	 */
 	public EtatGlobal(final EtatGlobal origine) {
 		Objects.requireNonNull(origine, "fournir un état global origine");
-		estEtatGlobalInitial = false;
+		etatGlobalPrecedent = origine;
 		this.etatsProcessus = origine.getEtatsProcessus().stream()
 								   .map(etatProcessus -> new EtatProcessus(etatProcessus))
 								   .collect(Collectors.toCollection(TreeSet::new));
 		this.etatsSemaphores = origine.getEtatsSemaphores().stream()
 				   .map(etatSemaphore -> new EtatSemaphore(etatSemaphore))
 				   .collect(Collectors.toCollection(TreeSet::new));
-		situationInterbloquage = origine.getSituationInterbloquage();
+		etatExecution = origine.getEtatExecution();
+		origine.addEtatGlobalAtteignable(this);
 		etatsGlobauxAtteignables = new ArrayList<>();
 		compteurInstanciation++;
 		compteurInstance = compteurInstanciation;
@@ -106,12 +108,12 @@ public class EtatGlobal {
 	}
 	
 	/**
-	 * retourne true si l'état global est en situation d'interbloquage.
+	 * retourne l'état de l'état global.
 	 * 
-	 * @return true si l'état global est en situation d'interbloquage
+	 * @return l'état l'état global.
 	 */
-	public boolean getSituationInterbloquage() {
-		return situationInterbloquage;
+	public EtatExecution getEtatExecution() {
+		return etatExecution;
 	}
 
 	/**
@@ -167,7 +169,7 @@ public class EtatGlobal {
 	 *            le processus concerné.
 	 */
 	public void ajouterEtatProcessus(final Processus proc) {
-		if (!estEtatGlobalInitial) {
+		if (etatGlobalPrecedent != null) {
 			throw new IllegalStateException("ajout d'un processus non possible");
 		}
 		Objects.requireNonNull(proc, "proc ne peut pas être null");
@@ -185,7 +187,7 @@ public class EtatGlobal {
 	 * 			le semaphore
 	 */
 	public void ajouterEtatSemaphore(final Semaphore sem) {
-		if (!estEtatGlobalInitial) {
+		if (etatGlobalPrecedent != null) {
 			throw new IllegalStateException("ajout d'un processus non possible");
 		}
 		Objects.requireNonNull(sem, "proc ne peut pas être null");
@@ -292,20 +294,23 @@ public class EtatGlobal {
 
 	@Override
 	public String toString() {
-		return "EtatGlobal [#=" + compteurInstance + ", etatsProcessus=" + etatsProcessus + ", estInitial=" + estEtatGlobalInitial
-				+ ", etatsAtteignables=" + etatsGlobauxAtteignables + "]";
+		return "EtatGlobal [#=" + compteurInstance + ", etatsProcessus=" + etatsProcessus + "]"; //+ ", etatPrecedent=" + etatGlobalPrecedent + "]";
 	}
 	
 	/**
 	 * Etablit si le système est en interbloquage en stockant dans le booléen situationInterbloquage le résultat.
 	 */
 	public void etablirSystemeEnInterbloquage() {
-		if (!this.situationInterbloquage) {
+		if (this.etatExecution == EtatExecution.enCours) {
 			if (etatsProcessus.stream().allMatch(etatProcessus -> 
-									  				etatProcessus.getEtat().equals(Etat.bloque) 
-									  				|| etatProcessus.getEtat().equals(Etat.termine))) {
-				this.situationInterbloquage = etatsProcessus.stream()
-															.anyMatch(etatProcessus -> etatProcessus.getEtat().equals(Etat.bloque));
+												 etatProcessus.getEtat().equals(Etat.bloque)
+									  			 || etatProcessus.getEtat().equals(Etat.termine))) {
+				
+				if (etatsProcessus.stream().anyMatch(etatProcessus -> etatProcessus.getEtat().equals(Etat.bloque))) {
+					this.etatExecution = EtatExecution.interbloque;
+				} else {
+					this.etatExecution = EtatExecution.termine;
+				}
 			}
 		}
 		assert invariant();
@@ -336,8 +341,40 @@ public class EtatGlobal {
 	 * @return l'encodage
 	 */
 	public String chaineDeCaracteres() {
-		return etatsProcessus.stream()
+		return "EtatsProcessus: " 
+				+  etatsProcessus.stream()
 					 .map(etatProcessus -> etatProcessus.chaineDeCaracteres())
+					 .collect(Collectors.joining(", ")) 
+				+ "; EtatsSemaphores: " 
+				+ etatsSemaphores.stream()
+					 .map(etatSemaphore -> etatSemaphore.chaineDeCaracteres())
 					 .collect(Collectors.joining(", "));
+	}
+	
+	/**
+	 * Retourne les états globaux atteints.
+	 * 
+	 * @return les états globaux atteints.
+	 */
+	public List<EtatGlobal> getEtatsGlobauxAtteignables() {
+		return this.etatsGlobauxAtteignables;
+	}
+	
+	/**
+	 * Retourne l'état global précédent.
+	 * 
+	 * @return l'état global précédent.
+	 */
+	public EtatGlobal getEtatGlobalPrecedent() {
+		return etatGlobalPrecedent;
+	}
+	
+	/**
+	 * Ajoute un état global aux états globaux atteints.
+	 * 
+	 * @param etatGlobal à ajouter.
+	 */
+	public void addEtatGlobalAtteignable(final EtatGlobal etatGlobal) {
+		this.etatsGlobauxAtteignables.add(etatGlobal);		
 	}
 }
