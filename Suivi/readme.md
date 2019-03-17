@@ -227,3 +227,12 @@ Denis Conan
   sous-contrôle telles que ProgrammeExistant sont des exceptions
   « fonctionnelles » : c'est l'acteur qui est en cause
 ---
+
+dim. 17 mars 2019
+
+- On a codé les nouveaux cas d'utilisation, cela fonctionne pour le programme 1, 
+  cependant lorsque l'on test avec le programme 3, le temps d'exécution est bien trop long.
+  
+  On est d'abord parti sur une arraylist pour stocker les états globaux
+  sur la quelle on itère mais cela semble être mauvais en complexité.
+  On se demandait donc si vous aviez un conseil de stockage des états globaux, on a pensé à la Hashmap, est-ce que vous trouvez cela pertinent ?
