@@ -17,12 +17,12 @@ public class TestProgramme {
 	public void tearDown() throws Exception {
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void constructeurProgrammeTest1Jeu1() throws Exception {
 		new Programme(null);
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void constructeurProgrammeTest1Jeu2() throws Exception {
 		new Programme("");
 	}

@@ -17,17 +17,17 @@ public class TestSemaphore {
 	public void tearDown() throws Exception {
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void constructeurSemaphoreTest1Jeu1() throws Exception {
 		new Semaphore(null, 0);
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void constructeurSemaphoreTest1Jeu2() throws Exception {
 		new Semaphore("", 0);
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void constructeurSemaphoreTest2() throws Exception {
 		new Semaphore("sem", -1);
 	}
