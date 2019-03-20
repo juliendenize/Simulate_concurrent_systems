@@ -45,7 +45,6 @@ public final class Main {
 		simInt.creerProcessus("P5", "Programme3");
 		simInt.validerSysteme();
 
-
 /*		simInt.creerProgramme("Programme4");
 		simInt.creerSemaphore("Cabine", 2);
 		simInt.creerSemaphore("Panier", 2);

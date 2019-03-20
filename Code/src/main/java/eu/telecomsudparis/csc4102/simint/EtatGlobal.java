@@ -40,6 +40,8 @@ public class EtatGlobal {
 	 * compteur d'instance.
 	 */
 	private int compteurInstance;
+	
+	private String chaineDeCaracteres;
 
 	/**
 	 * true si système interbloqué.
@@ -57,6 +59,7 @@ public class EtatGlobal {
 		etatsGlobauxAtteignables = new ArrayList<>();
 		compteurInstanciation++;
 		compteurInstance = compteurInstanciation;
+		chaineDeCaracteres = computeChaineDeCaracteres();
 		assert invariant();
 	}
 
@@ -86,6 +89,7 @@ public class EtatGlobal {
 		etatsGlobauxAtteignables = new ArrayList<>();
 		compteurInstanciation++;
 		compteurInstance = compteurInstanciation;
+		chaineDeCaracteres = computeChaineDeCaracteres();
 		assert invariant();
 	}
 	
@@ -136,7 +140,7 @@ public class EtatGlobal {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + this.chaineDeCaracteres().hashCode();
+		result = prime * result + this.chaineDeCaracteres.hashCode();
 		return result;
 	}
 
@@ -156,7 +160,7 @@ public class EtatGlobal {
 			if (other.etatsProcessus != null) {
 				return false;
 			}
-		} else if (!this.chaineDeCaracteres().equals(other.chaineDeCaracteres())) {
+		} else if (!this.chaineDeCaracteres.equals(other.chaineDeCaracteres)) {
 			return false;
 		}
 		return true;
@@ -177,6 +181,7 @@ public class EtatGlobal {
 		if (!etatsProcessus.add(etat)) {
 			throw new IllegalArgumentException("état de processus '" + proc.getNom() + "' déjà présent dans l'état global");
 		}
+		chaineDeCaracteres = computeChaineDeCaracteres();
 		assert invariant();
 	}
 
@@ -195,6 +200,7 @@ public class EtatGlobal {
 		if (!etatsSemaphores.add(etat)) {
 			throw new IllegalArgumentException("état de semaphore '" + sem.getNom() + "' déjà présent dans l'état global");
 		}
+		chaineDeCaracteres = computeChaineDeCaracteres();
 		assert invariant();
 	}
 
@@ -270,7 +276,7 @@ public class EtatGlobal {
 		if (instructionExecutee) {
 			etatProc.avancerExecution();
 		}
-		
+		chaineDeCaracteres = computeChaineDeCaracteres();		
 		return instructionExecutee;
 	}
 	
@@ -340,7 +346,7 @@ public class EtatGlobal {
 	 * 
 	 * @return l'encodage
 	 */
-	public String chaineDeCaracteres() {
+	private String computeChaineDeCaracteres() {
 		return "EtatsProcessus: " 
 				+  etatsProcessus.stream()
 					 .map(etatProcessus -> etatProcessus.chaineDeCaracteres())
@@ -349,6 +355,15 @@ public class EtatGlobal {
 				+ etatsSemaphores.stream()
 					 .map(etatSemaphore -> etatSemaphore.chaineDeCaracteres())
 					 .collect(Collectors.joining(", "));
+	}
+	
+	/**
+	 * retourne l'état global en chaine de caractères.
+	 * 
+	 * @return l'encodage
+	 */
+	public String getChaineDeCaracteres() {
+		return this.chaineDeCaracteres;
 	}
 	
 	/**
@@ -376,5 +391,6 @@ public class EtatGlobal {
 	 */
 	public void addEtatGlobalAtteignable(final EtatGlobal etatGlobal) {
 		this.etatsGlobauxAtteignables.add(etatGlobal);		
+		chaineDeCaracteres = computeChaineDeCaracteres();
 	}
 }

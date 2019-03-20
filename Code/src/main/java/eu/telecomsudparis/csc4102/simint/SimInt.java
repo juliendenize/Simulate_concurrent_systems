@@ -193,7 +193,7 @@ public class SimInt {
 	 * @throws ProcessusNonVivant
 	 * 			le processus doit être vivant.
 	 */
-	public void avancerExecution(final String nom) throws ExecutionNonDebutee, ChaineDeCaracteresNullOuVide,
+	public EtatGlobal avancerExecution(final String nom) throws ExecutionNonDebutee, ChaineDeCaracteresNullOuVide,
 			ProcessusNonExistant, ProcessusNonVivant {
 		if (nom == null || nom.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
@@ -211,6 +211,7 @@ public class SimInt {
 		this.dernierEtatGlobal = new EtatGlobal(this.dernierEtatGlobal);
 		this.dernierEtatGlobal.avancerExecution(nom);
 		this.etablirSystemeEnInterbloquage();
+		return dernierEtatGlobal;
 	}
 	
 	/**
@@ -286,17 +287,15 @@ public class SimInt {
 				for (EtatProcessus etatProc: this.dernierEtatGlobal.getEtatsProcessus()) {
 					if (etatProc.getEtat().equals(Etat.vivant)) {
 						try {
-							this.avancerExecution(etatProc.getProcessus().getNom());
+							EtatGlobal nouveau = this.avancerExecution(etatProc.getProcessus().getNom());
+							if (!etatsGlobauxAtteignables.contains(nouveau)) {
+								etatsGlobauxAtteignables.add(nouveau);
+							}
 						} catch (ExecutionNonDebutee | ChaineDeCaracteresNullOuVide | ProcessusNonExistant
 								| ProcessusNonVivant e) {
 							e.printStackTrace();
 						}
 						this.dernierEtatGlobal = etatsGlobauxAtteignables.get(i);
-					}
-				}
-				for (EtatGlobal etatGlobal: this.dernierEtatGlobal.getEtatsGlobauxAtteignables()) {
-					if (!etatsGlobauxAtteignables.contains(etatGlobal)) {
-						etatsGlobauxAtteignables.add(etatGlobal);
 					}
 				}
 			}
@@ -328,10 +327,10 @@ public class SimInt {
 		
 		EtatGlobal iterator = etatGlobal;
 		while (iterator != this.etatGlobalInitial) {
-			System.out.println(iterator.chaineDeCaracteres());
+			System.out.println(iterator.getChaineDeCaracteres());
 			iterator = iterator.getEtatGlobalPrecedent();
 		}
-		System.out.println(iterator.chaineDeCaracteres());
+		System.out.println(iterator.getChaineDeCaracteres());
 	}
 	
 	/**
