@@ -236,3 +236,27 @@ dim. 17 mars 2019
   On est d'abord parti sur une arraylist pour stocker les états globaux
   sur la quelle on itère mais cela semble être mauvais en complexité.
   On se demandait donc si vous aviez un conseil de stockage des états globaux, on a pensé à la Hashmap, est-ce que vous trouvez cela pertinent ?
+
+---
+
+# Suivi du mer. 20 mars 2019 13:22:12 CET
+Denis Conan
+- temps d'exécution bien trop long => erreur ?
+    - [] EtatGlobal::etablirSystemeEnInterbloquage : à quoi sert terminé ?
+         pas sûr que ce soit utile
+    - [] SimInt::valider : pourquoi affectation ligne 284 + affectation ligne
+         294 ?
+         + pourquoi avancerExecution n'est pas modifiée pour retourner le nouvel
+         état global ? et où est ajouté le nouvel état global dans
+         etatsGlobauxAtteignables ?
+         + le foreach de la ligne 297 est-il utile ?
+         + je trouve l'utilisation de l'attribut dernierEtatGlobal très
+           dangereuse
+         + pourquoi pas addEtatGlobalAtteignable() qui re-calcule la chaîne
+         de caractères à chaque demande d'accès => en attribut recalculé
+         à chaque fois qu'il y a une modification
+         - c'est cela qui posait problème
+- en cherchant j'ai modifié votre code ; j'ai laissé ce que j'obtiens
+Validation du système: 22852 états globaux différents ont été générés en 15426ms.
+interbloquage trouvé dans état: EtatGlobal [#=28442
+---
