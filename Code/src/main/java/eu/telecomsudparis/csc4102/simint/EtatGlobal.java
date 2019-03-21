@@ -85,7 +85,7 @@ public class EtatGlobal {
 				   .map(etatSemaphore -> new EtatSemaphore(etatSemaphore))
 				   .collect(Collectors.toCollection(TreeSet::new));
 		etatExecution = origine.getEtatExecution();
-		origine.addEtatGlobalAtteignable(this);
+		origine.ajouterEtatGlobalAtteignable(this);
 		etatsGlobauxAtteignables = new ArrayList<>();
 		compteurInstanciation++;
 		compteurInstance = compteurInstanciation;
@@ -133,7 +133,7 @@ public class EtatGlobal {
 							   //.collect(Collectors.toList())
 							   .flatMap(List::stream)
 							   .distinct()
-							   .allMatch(processus -> this.chercherUnEtatProcessus(processus.getNom()) != null);
+							   .allMatch(processus -> this.chercherEtatProcessus(processus.getNom()) != null);
 	}
 
 	@Override
@@ -211,7 +211,7 @@ public class EtatGlobal {
 	 *            le nom du semaphore.
 	 * @return l'état du semaphore trouvé.
 	 */
-	public EtatSemaphore chercherUnEtatSemaphore(final String nom) {
+	public EtatSemaphore chercherEtatSemaphore(final String nom) {
 		for (EtatSemaphore etatSemaphore : etatsSemaphores) {
 			if (etatSemaphore.getSemaphore().getNom().equals(nom)) {
 				return etatSemaphore;
@@ -227,7 +227,7 @@ public class EtatGlobal {
 	 *            le nom du processus.
 	 * @return l'état du processus trouvé.
 	 */
-	public EtatProcessus chercherUnEtatProcessus(final String nom) {
+	public EtatProcessus chercherEtatProcessus(final String nom) {
 		for (EtatProcessus etatProcessus : etatsProcessus) {
 			if (etatProcessus.getProcessus().getNom().equals(nom)) {
 				return etatProcessus;
@@ -249,9 +249,9 @@ public class EtatGlobal {
 		if (nomProcessus == null || nomProcessus.equals("")) {
 			throw new IllegalArgumentException("nom null ou vide non autorisé");
 		}
-		EtatProcessus etatProc = chercherUnEtatProcessus(nomProcessus);
+		EtatProcessus etatProc = chercherEtatProcessus(nomProcessus);
 		Instruction instruction = etatProc.chercherInstruction();
-		EtatSemaphore etatSem = chercherUnEtatSemaphore(instruction.getSemaphore().getNom());
+		EtatSemaphore etatSem = chercherEtatSemaphore(instruction.getSemaphore().getNom());
 		boolean instructionExecutee = false;
 		int valeurCompteur = etatSem.getValeurCompteur();
 
@@ -268,7 +268,7 @@ public class EtatGlobal {
 			etatSem.setValeurCompteur(valeurCompteur + 1);
 			Processus procRetire = etatSem.libererProcessus();
 			if (procRetire != null) {
-				this.chercherUnEtatProcessus(procRetire.getNom()).setEtat(Etat.vivant);
+				this.chercherEtatProcessus(procRetire.getNom()).setEtat(Etat.vivant);
 				avancerExecution(procRetire.getNom());
 			}
 		}
@@ -389,7 +389,7 @@ public class EtatGlobal {
 	 * 
 	 * @param etatGlobal à ajouter.
 	 */
-	public void addEtatGlobalAtteignable(final EtatGlobal etatGlobal) {
+	public void ajouterEtatGlobalAtteignable(final EtatGlobal etatGlobal) {
 		this.etatsGlobauxAtteignables.add(etatGlobal);		
 		chaineDeCaracteres = computeChaineDeCaracteres();
 	}

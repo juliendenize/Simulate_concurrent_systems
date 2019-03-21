@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import eu.telecomsudparis.csc4102.simint.ModelCheckerForceBrute;
 import eu.telecomsudparis.csc4102.simint.SimInt;
 import eu.telecomsudparis.csc4102.simint.TypeInstruction;
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
@@ -18,7 +19,7 @@ public class TestSimIntAjouterUneInstructionAUnProgramme {
 	
 	@Before
 	public void setUp() throws Exception {
-		simint = new SimInt();	
+		simint = new SimInt(new ModelCheckerForceBrute());	
 		simint.creerProgramme("prog");
 		simint.creerSemaphore("sem", 0);
 	}

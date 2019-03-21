@@ -43,10 +43,13 @@ public class Programme {
 	/**
 	 * Ajoute une instruction à la collection des instructions.
 	 * 
-	 * @param instruction
-	 * 			l'instruction concernée.
+	 * @param type
+	 * 			le type d'instruction.
+	 * @param sem
+	 * 			le semaphore manipulé par l'instruction à créer
 	 */
-	public void ajouterInstruction(final Instruction instruction) {
+	public void ajouterInstruction(final TypeInstruction type, Semaphore sem) {
+		Instruction instruction = new Instruction(type, sem);
 		this.instructions.add(instruction);
 	}
 	

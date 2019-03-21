@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 
+import eu.telecomsudparis.csc4102.simint.ModelCheckerForceBrute;
 import eu.telecomsudparis.csc4102.simint.SimInt;
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
 import eu.telecomsudparis.csc4102.simint.exception.ExecutionADejaDebute;
@@ -18,7 +19,7 @@ public class TestSimIntCreerProcessus {
 
 	@Before
 	public void setUp() throws Exception {
-		simInt = new SimInt();
+		simInt = new SimInt(new ModelCheckerForceBrute());
 	}
 
 	@After

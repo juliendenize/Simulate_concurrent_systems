@@ -52,17 +52,20 @@ public class SimInt {
 	 * indique que l'exécution a débuté.
 	 */
 	private boolean executionDebutee;
-
+	
+	private ModelChecker modelChecker;
+	
 	/**
 	 * construit la façade.
 	 */
-	public SimInt() {
+	public SimInt(ModelChecker modelChecker) {
 		processus = new HashMap<>();
 		programmes = new HashMap<>();
 		semaphores = new HashMap<>();
 		etatGlobalInitial = new EtatGlobal();
 		dernierEtatGlobal = etatGlobalInitial;
 		executionDebutee = false;
+		this.modelChecker = modelChecker;
 		assert invariant();
 	}
 
@@ -107,10 +110,10 @@ public class SimInt {
 		if (executionDebutee) {
 			throw new ExecutionADejaDebute("pas d'ajout de processus après le début de l'exécution");
 		}
-		if (processus.containsKey(nom)) {
+		if (this.chercherProcessus(nom) != null) {
 			throw new ProcessusDejaPresent("processus '" + nom + "' déjà présent dans le système");
 		}
-		if (!programmes.containsKey(nomProg)) {
+		if (this.chercherProgramme(nomProg) == null) {
 			throw new ProgrammeNonExistant("programme '" + nomProg + "' non présent dans le système");
 		}
 		Programme prog = programmes.get(nomProg);
@@ -139,7 +142,7 @@ public class SimInt {
 		if (executionDebutee) {
 			throw new ExecutionADejaDebute("pas d'ajout de programme après le début de l'exécution");
 		}
-		if (programmes.containsKey(nom)) {
+		if (this.chercherProgramme(nom) != null) {
 			throw new ProgrammeDejaPresent("programme '" + nom + "' déjà présent dans le système");
 		}
 		Programme prog = new Programme(nom);
@@ -169,7 +172,7 @@ public class SimInt {
 		if (executionDebutee) {
 			throw new ExecutionADejaDebute("pas d'ajout de semaphore après le début de l'exécution");
 		}
-		if (semaphores.containsKey(nom)) {
+		if (this.chercherSemaphore(nom) != null) {
 			throw new SemaphoreDejaPresent("semaphore '" + nom + "' déjà présent dans le système");
 		}
 		if (valeurInitiale < 0) {
@@ -182,7 +185,7 @@ public class SimInt {
 	
 	/**
 	 * avance l'exécution du processus identifié par son nom.
-	 * @param nom
+	 * @param nomProcessus
 	 * 			nom du processus
 	 * @throws ExecutionNonDebutee
 	 * 			l'exécution doit avoir débutée
@@ -193,23 +196,23 @@ public class SimInt {
 	 * @throws ProcessusNonVivant
 	 * 			le processus doit être vivant.
 	 */
-	public EtatGlobal avancerExecution(final String nom) throws ExecutionNonDebutee, ChaineDeCaracteresNullOuVide,
+	public EtatGlobal avancerExecutionProcessus(final String nomProcessus) throws ExecutionNonDebutee, ChaineDeCaracteresNullOuVide,
 			ProcessusNonExistant, ProcessusNonVivant {
-		if (nom == null || nom.equals("")) {
+		if (nomProcessus == null || nomProcessus.equals("")) {
 			throw new ChaineDeCaracteresNullOuVide("nom null ou vide non autorisé");
 		}
 		if (!executionDebutee) {
 			throw new ExecutionNonDebutee("pas d'avancement de processus si l'exécution n'a pas débutée");
 		}
-		if (!processus.containsKey(nom)) {
-			throw new ProcessusNonExistant("processus '" + nom + "' n'existe pas");
+		if (this.chercherProcessus(nomProcessus) == null) {
+			throw new ProcessusNonExistant("processus '" + nomProcessus + "' n'existe pas");
 		}
-		EtatProcessus etatProc = this.dernierEtatGlobal.chercherUnEtatProcessus(nom);
+		EtatProcessus etatProc = this.dernierEtatGlobal.chercherEtatProcessus(nomProcessus);
 		if (etatProc.getEtat() != Etat.vivant) {
-			throw new ProcessusNonVivant("processus '" + nom + "' est déjà terminé ou bloqué");
+			throw new ProcessusNonVivant("processus '" + nomProcessus + "' est déjà terminé ou bloqué");
 		}
 		this.dernierEtatGlobal = new EtatGlobal(this.dernierEtatGlobal);
-		this.dernierEtatGlobal.avancerExecution(nom);
+		this.dernierEtatGlobal.avancerExecution(nomProcessus);
 		this.etablirSystemeEnInterbloquage();
 		return dernierEtatGlobal;
 	}
@@ -258,7 +261,7 @@ public class SimInt {
 		Programme prog = programmes.get(nomProg);
 		Semaphore sem = semaphores.get(nomSem);
 
-		prog.ajouterInstruction(new Instruction(type, sem));
+		prog.ajouterInstruction(type, sem);
 
 	}
 	
@@ -275,45 +278,7 @@ public class SimInt {
 		if (this.processus.isEmpty()) {
 			System.out.println("Le système ne contient pas de processus et est donc par conséquent valide.");
 		}
-		long startTime = System.nanoTime();
-		ArrayList<EtatGlobal> etatsGlobauxAtteignables = new ArrayList<>();
-		Optional<EtatGlobal> etatGlobalInterbloque;
-		this.debuterExecution();
-		etatsGlobauxAtteignables.add(etatGlobalInitial);
-		
-		for (int i = 0; i < etatsGlobauxAtteignables.size(); i++) {
-			this.dernierEtatGlobal = etatsGlobauxAtteignables.get(i);
-			if (this.dernierEtatGlobal.getEtatExecution().equals(EtatExecution.enCours)) {
-				for (EtatProcessus etatProc: this.dernierEtatGlobal.getEtatsProcessus()) {
-					if (etatProc.getEtat().equals(Etat.vivant)) {
-						try {
-							EtatGlobal nouveau = this.avancerExecution(etatProc.getProcessus().getNom());
-							if (!etatsGlobauxAtteignables.contains(nouveau)) {
-								etatsGlobauxAtteignables.add(nouveau);
-							}
-						} catch (ExecutionNonDebutee | ChaineDeCaracteresNullOuVide | ProcessusNonExistant
-								| ProcessusNonVivant e) {
-							e.printStackTrace();
-						}
-						this.dernierEtatGlobal = etatsGlobauxAtteignables.get(i);
-					}
-				}
-			}
-		}
-
-		etatGlobalInterbloque = etatsGlobauxAtteignables.stream()
-								.filter(etatGlobal -> etatGlobal.getEtatExecution().equals(EtatExecution.interbloque)).findAny();
-		final int oneMillion = 1000000;
-		long tempsExecution = (System.nanoTime() - startTime) / oneMillion;
-		if (!etatGlobalInterbloque.isPresent()) {
-			System.out.println("Validation du système = ok: " + EtatGlobal.getCompteurInstanciation() + " états globaux différents ont été générés en" + tempsExecution 
-								+ "ms. Pas d'interbloquage trouvé.");
-		} else {
-			System.out.println("Validation du système: " + etatsGlobauxAtteignables.size() + " états globaux différents ont été générés en " + tempsExecution 
-								+ "ms.");
-			System.out.println("interbloquage trouvé dans état: " + etatGlobalInterbloque.get());
-			this.chercherChemin(etatGlobalInterbloque.get());
-		}
+		modelChecker.validerSysteme(this);
 	}
 	
 	/**
@@ -384,5 +349,22 @@ public class SimInt {
 	 */
 	public EtatGlobal getDernierEtatGlobal() {
 		return dernierEtatGlobal;
+	}
+	
+	/**
+	 * retourne l'état global initial.
+	 * 
+	 * @return l'état global initial.
+	 */
+	public EtatGlobal getEtatGlobalInitial() {
+		return this.etatGlobalInitial;
+	}
+	
+	/**
+	 * Met à jour la valeur de dernierEtatGlobal
+	 * @param la nouvelle valeur de dernierEtatGlobal
+	 */
+	public void setDernierEtatGlobal(EtatGlobal etatGlobal) {
+		this.dernierEtatGlobal = etatGlobal;
 	}
 }
