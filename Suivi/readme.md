@@ -260,3 +260,20 @@ Denis Conan
 Validation du système: 22852 états globaux différents ont été générés en 15426ms.
 interbloquage trouvé dans état: EtatGlobal [#=28442
 ---
+
+# Suivi du sam. 23 mars 2019 07:29:23 CET
+Denis Conan
+- [] réponse question post-it transmise pas Chantal Taconet
+    - [] les fiches des classes servent à transmettre les informations aux
+         programmeurs ; dans le module, ces fiches permettent de faire
+         pédagogiquement la transition entre la conception et la programmation ;
+         aussi, une seule fiche est demandée pour vérifier cette transition, et
+         on y met ce qui vient de la conception : donc, pas besoin de mettre
+         les méthodes mises en exergue dans la suite du module
+    - [] les stratégies sont à mettre dans le diagramme de classes car il
+         faut montrer explicitement que le patron de conception est insérée
+         dans la solution
+    - [] modélisation des UC4 et 5 : cf. la liste des tâches ; dire si ce n'est
+         pas clair
+         http://www-inf.telecom-sudparis.eu/COURS/CSC4102/?page=liste_recapitulative_des_taches
+---
