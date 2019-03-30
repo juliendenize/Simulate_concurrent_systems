@@ -8,13 +8,17 @@ import eu.telecomsudparis.csc4102.simint.exception.ExecutionNonDebutee;
 import eu.telecomsudparis.csc4102.simint.exception.ProcessusNonExistant;
 import eu.telecomsudparis.csc4102.simint.exception.ProcessusNonVivant;
 
+/**
+ * Modèle checker brute.
+ * 
+ * @author julien
+ *
+ */
 public class ModelCheckerForceBrute implements ModelChecker {
 
 	@Override
-	public EtatGlobal validerSysteme(SimInt simint) {
-		long startTime = System.nanoTime();
+	public Optional<EtatGlobal> validerSysteme(final SimInt simint, final EtatGlobal etatGlobalInitial) {
 		ArrayList<EtatGlobal> etatsGlobauxAtteignables = new ArrayList<>();
-		Optional<EtatGlobal> etatGlobalInterbloque;
 		simint.debuterExecution();
 		etatsGlobauxAtteignables.add(simint.getEtatGlobalInitial());
 		for (int i = 0; i < etatsGlobauxAtteignables.size(); i++) {
@@ -29,7 +33,6 @@ public class ModelCheckerForceBrute implements ModelChecker {
 							}
 						} catch (ExecutionNonDebutee | ChaineDeCaracteresNullOuVide | ProcessusNonExistant
 								| ProcessusNonVivant e) {
-							System.out.print(etatProc);
 							System.out.println(etatProc.getEtat());
 							e.printStackTrace();
 						}
@@ -39,21 +42,8 @@ public class ModelCheckerForceBrute implements ModelChecker {
 			}
 		}
 
-		etatGlobalInterbloque = etatsGlobauxAtteignables.stream()
+		return etatsGlobauxAtteignables.stream()
 								.filter(etatGlobal -> etatGlobal.getEtatExecution().equals(EtatExecution.interbloque)).findAny();
-		final int oneMillion = 1000000;
-		long tempsExecution = (System.nanoTime() - startTime) / oneMillion;
-		if (!etatGlobalInterbloque.isPresent()) {
-			System.out.println("Validation du système = ok: " + EtatGlobal.getCompteurInstanciation() + " états globaux différents ont été générés en" + tempsExecution 
-								+ "ms. Pas d'interbloquage trouvé.");
-			return null;
-		} else {
-			System.out.println("Validation du système: " + etatsGlobauxAtteignables.size() + " états globaux différents ont été générés en " + tempsExecution 
-								+ "ms.");
-			System.out.println("interbloquage trouvé dans état: " + etatGlobalInterbloque.get());
-			simint.chercherChemin(etatGlobalInterbloque.get());
-			return etatGlobalInterbloque.get();
-		}
 	}
 
 }

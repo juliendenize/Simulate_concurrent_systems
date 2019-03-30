@@ -48,7 +48,7 @@ public class Programme {
 	 * @param sem
 	 * 			le semaphore manipulé par l'instruction à créer
 	 */
-	public void ajouterInstruction(final TypeInstruction type, Semaphore sem) {
+	public void ajouterInstruction(final TypeInstruction type, final Semaphore sem) {
 		Instruction instruction = new Instruction(type, sem);
 		this.instructions.add(instruction);
 	}

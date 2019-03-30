@@ -41,6 +41,9 @@ public class EtatGlobal {
 	 */
 	private int compteurInstance;
 	
+	/**
+	 * encodage de l'état global.
+	 */
 	private String chaineDeCaracteres;
 
 	/**

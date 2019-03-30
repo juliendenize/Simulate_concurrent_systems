@@ -1,6 +1,5 @@
 package eu.telecomsudparis.csc4102.simint;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -53,12 +52,18 @@ public class SimInt {
 	 */
 	private boolean executionDebutee;
 	
+	/**
+	 * model checker pour valider le système.
+	 */
 	private ModelChecker modelChecker;
 	
 	/**
 	 * construit la façade.
+	 * 
+	 * @param modelChecker
+	 * 			Le modelChecker utilisé pour valider le système.
 	 */
-	public SimInt(ModelChecker modelChecker) {
+	public SimInt(final ModelChecker modelChecker) {
 		processus = new HashMap<>();
 		programmes = new HashMap<>();
 		semaphores = new HashMap<>();
@@ -187,6 +192,8 @@ public class SimInt {
 	 * avance l'exécution du processus identifié par son nom.
 	 * @param nomProcessus
 	 * 			nom du processus
+	 * @return
+	 * 			L'état global après l'avancée de l'exécution.
 	 * @throws ExecutionNonDebutee
 	 * 			l'exécution doit avoir débutée
 	 * @throws ChaineDeCaracteresNullOuVide
@@ -278,7 +285,21 @@ public class SimInt {
 		if (this.processus.isEmpty()) {
 			System.out.println("Le système ne contient pas de processus et est donc par conséquent valide.");
 		}
-		modelChecker.validerSysteme(this);
+		long startTime = System.nanoTime();
+		Optional<EtatGlobal> etatGlobalInterbloque = modelChecker.validerSysteme(this, this.etatGlobalInitial);
+		final int oneMillion = 1000000;
+		long tempsExecution = (System.nanoTime() - startTime) / oneMillion;
+		if (!etatGlobalInterbloque.isPresent()) {
+			System.out.println("Validation du système = ok: " + EtatGlobal.getCompteurInstanciation() + " états globaux différents ont été générés en" + tempsExecution 
+								+ "ms. Pas d'interbloquage trouvé.");
+		} else {
+			System.out.println("Validation du système: " + EtatGlobal.getCompteurInstanciation() + " états globaux différents ont été générés en " + tempsExecution 
+								+ "ms.");
+			System.out.println("interbloquage trouvé dans état: " + etatGlobalInterbloque.get());
+			this.chercherChemin(etatGlobalInterbloque.get());
+		}
+		
+		
 	}
 	
 	/**
@@ -361,10 +382,29 @@ public class SimInt {
 	}
 	
 	/**
-	 * Met à jour la valeur de dernierEtatGlobal
-	 * @param la nouvelle valeur de dernierEtatGlobal
+	 * Met à jour le dernierEtatGlobal.
+	 * @param etatGlobal
+	 * 			le dernierEtatGlobal
 	 */
-	public void setDernierEtatGlobal(EtatGlobal etatGlobal) {
+	public void setDernierEtatGlobal(final EtatGlobal etatGlobal) {
 		this.dernierEtatGlobal = etatGlobal;
+	}
+	
+	/**
+	 * retourne le model checker.
+	 * 
+	 * @return le model checker.
+	 */
+	public ModelChecker getModelChecker() {
+		return this.modelChecker;
+	}
+	
+	/**
+	 * Met à jour le modelChecker.
+	 * @param modelChecker
+	 * 			le nouveau modelChecker
+	 */
+	public void setModelChecker(final ModelChecker modelChecker) {
+		this.modelChecker = modelChecker;
 	}
 }
