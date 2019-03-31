@@ -242,9 +242,9 @@ dim. 17 mars 2019
 # Suivi du mer. 20 mars 2019 13:22:12 CET
 Denis Conan
 - temps d'exécution bien trop long => erreur ?
-    - [] EtatGlobal::etablirSystemeEnInterbloquage : à quoi sert terminé ?
+    - [x] EtatGlobal::etablirSystemeEnInterbloquage : à quoi sert terminé ?
          pas sûr que ce soit utile
-    - [] SimInt::valider : pourquoi affectation ligne 284 + affectation ligne
+    - [x] SimInt::valider : pourquoi affectation ligne 284 + affectation ligne
          294 ?
          + pourquoi avancerExecution n'est pas modifiée pour retourner le nouvel
          état global ? et où est ajouté le nouvel état global dans
@@ -263,17 +263,17 @@ interbloquage trouvé dans état: EtatGlobal [#=28442
 
 # Suivi du sam. 23 mars 2019 07:29:23 CET
 Denis Conan
-- [] réponse question post-it transmise pas Chantal Taconet
-    - [] les fiches des classes servent à transmettre les informations aux
+- [x] réponse question post-it transmise pas Chantal Taconet
+    - [x] les fiches des classes servent à transmettre les informations aux
          programmeurs ; dans le module, ces fiches permettent de faire
          pédagogiquement la transition entre la conception et la programmation ;
          aussi, une seule fiche est demandée pour vérifier cette transition, et
          on y met ce qui vient de la conception : donc, pas besoin de mettre
          les méthodes mises en exergue dans la suite du module
-    - [] les stratégies sont à mettre dans le diagramme de classes car il
+    - [x] les stratégies sont à mettre dans le diagramme de classes car il
          faut montrer explicitement que le patron de conception est insérée
          dans la solution
-    - [] modélisation des UC4 et 5 : cf. la liste des tâches ; dire si ce n'est
+    - [x] modélisation des UC4 et 5 : cf. la liste des tâches ; dire si ce n'est
          pas clair
          http://www-inf.telecom-sudparis.eu/COURS/CSC4102/?page=liste_recapitulative_des_taches
 ---

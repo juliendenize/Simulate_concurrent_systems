@@ -29,6 +29,16 @@ public final class Main {
 		simInt.creerProcessus("P2", "Programme1");
 		simInt.validerSysteme();
 		
+		simInt = new SimInt(modelChecker);
+		simInt.creerSemaphore("cabines", 1);
+		simInt.creerSemaphore("paniers", 1);
+		simInt.creerProgramme("prog");
+		simInt.ajouterInstruction("prog", "cabines", TypeInstruction.P);
+		simInt.ajouterInstruction("prog", "paniers", TypeInstruction.P);
+		simInt.creerProcessus("p1", "prog");
+		simInt.creerProcessus("p2", "prog");
+		simInt.validerSysteme();
+		
 		simInt = new SimInt(modelChecker);		
 		simInt.creerProgramme("Programme3"); 
 		simInt.creerSemaphore("Cabine", 2);

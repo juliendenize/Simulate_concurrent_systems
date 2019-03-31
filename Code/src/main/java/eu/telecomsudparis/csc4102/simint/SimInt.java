@@ -278,7 +278,7 @@ public class SimInt {
 	 * @throws ExecutionADejaDebute
 	 * 			L'éxecution ne doit pas avoir débutée.
 	 */
-	public void validerSysteme() throws ExecutionADejaDebute {
+	public boolean validerSysteme() throws ExecutionADejaDebute {
 		if (this.executionDebutee) {
 			throw new ExecutionADejaDebute("L'exécution a déjà débutée.");
 		}
@@ -290,13 +290,15 @@ public class SimInt {
 		final int oneMillion = 1000000;
 		long tempsExecution = (System.nanoTime() - startTime) / oneMillion;
 		if (!etatGlobalInterbloque.isPresent()) {
-			System.out.println("Validation du système = ok: " + EtatGlobal.getCompteurInstanciation() + " états globaux différents ont été générés en" + tempsExecution 
+			System.out.println("Validation du système = ok: " + EtatGlobal.getCompteurInstanciation() + " états globaux différents ont été générés en " + tempsExecution 
 								+ "ms. Pas d'interbloquage trouvé.");
+			return true;
 		} else {
 			System.out.println("Validation du système: " + EtatGlobal.getCompteurInstanciation() + " états globaux différents ont été générés en " + tempsExecution 
 								+ "ms.");
 			System.out.println("interbloquage trouvé dans état: " + etatGlobalInterbloque.get());
 			this.chercherChemin(etatGlobalInterbloque.get());
+			return false;
 		}
 		
 		
