@@ -1,6 +1,7 @@
 package eu.telecomsudparis.csc4102.simint;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -210,6 +211,6 @@ public class EtatSemaphore implements Comparable<EtatSemaphore> {
 	 * @return l'encodage
 	 */
 	public String chaineDeCaracteres() {
-		return semaphore.getNom() + " " + fileAttente.stream().map(Processus::getNom).collect(Collectors.joining(" "));
+		return semaphore.getNom() + " valeur compteur: " + valeurCompteur + " file: " + fileAttente.stream().sorted(Comparator.comparing(Processus::getNom)).map(Processus::getNom).collect(Collectors.joining(" "));
 	}
 }

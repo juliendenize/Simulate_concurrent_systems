@@ -3,14 +3,10 @@ package eu.telecomsudparis.csc4102.simint.tests.validation;
 import static org.junit.Assert.*;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import eu.telecomsudparis.csc4102.simint.Etat;
-import eu.telecomsudparis.csc4102.simint.EtatExecution;
 import eu.telecomsudparis.csc4102.simint.ModelCheckerForceBrute;
 import eu.telecomsudparis.csc4102.simint.SimInt;
 import eu.telecomsudparis.csc4102.simint.TypeInstruction;
