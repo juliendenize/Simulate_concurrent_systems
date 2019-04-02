@@ -1,23 +1,24 @@
-package eu.telecomsudparis.csc4102.simint.tests.validation;
+// CHECKSTYLE:OFF
 
-import static org.junit.Assert.*;
+package eu.telecomsudparis.csc4102.simint.tests.validation;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import eu.telecomsudparis.csc4102.simint.ModelCheckerForceBrute;
+import eu.telecomsudparis.csc4102.simint.ModelCheckerAleatoire;
 import eu.telecomsudparis.csc4102.simint.SimInt;
 import eu.telecomsudparis.csc4102.simint.TypeInstruction;
 
-public class TestSimIntValiderLeSysteme {
+public class TestSimIntValiderLeSystemeBrute {
 	
 	private SimInt simint;
 	
 	@Before
 	public void setUp() throws Exception {
-		simint = new SimInt(new ModelCheckerForceBrute());
+		simint = new SimInt();
+		simint.setModelChecker(new ModelCheckerAleatoire());
 	}
 
 	@After

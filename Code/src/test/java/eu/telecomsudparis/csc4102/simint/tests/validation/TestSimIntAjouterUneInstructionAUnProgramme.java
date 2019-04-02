@@ -1,3 +1,5 @@
+// CHECKSTYLE:OFF
+
 package eu.telecomsudparis.csc4102.simint.tests.validation;
 
 import org.junit.After;
@@ -5,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import eu.telecomsudparis.csc4102.simint.ModelCheckerForceBrute;
 import eu.telecomsudparis.csc4102.simint.SimInt;
 import eu.telecomsudparis.csc4102.simint.TypeInstruction;
 import eu.telecomsudparis.csc4102.simint.exception.ChaineDeCaracteresNullOuVide;
@@ -19,7 +20,7 @@ public class TestSimIntAjouterUneInstructionAUnProgramme {
 	
 	@Before
 	public void setUp() throws Exception {
-		simint = new SimInt(new ModelCheckerForceBrute());	
+		simint = new SimInt();	
 		simint.creerProgramme("prog");
 		simint.creerSemaphore("sem", 0);
 	}

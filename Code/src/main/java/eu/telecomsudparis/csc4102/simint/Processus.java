@@ -10,7 +10,7 @@ import java.util.Objects;
  * La méthode {@link #compareTo(Processus)} permet de comparer deux processus
  * lors de la manipulation de collections triées.
  * 
- * @author Denis Conan
+ * @author Denis Conan - Julien Denize - Pierre Chaffardon
  */
 public class Processus implements Comparable<Processus> {
 	/**

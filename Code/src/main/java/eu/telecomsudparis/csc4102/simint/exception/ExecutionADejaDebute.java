@@ -6,7 +6,7 @@ import eu.telecomsudparis.csc4102.util.OperationImpossible;
  * Cette classe définit le type d'exception pour indiquer que l'exécution a déjà
  * débuté.
  * 
- * @author Denis Conan
+ * @author Denis Conan - Julien Denize - Pierre Chaffardon
  */
 public class ExecutionADejaDebute extends OperationImpossible {
 	/**

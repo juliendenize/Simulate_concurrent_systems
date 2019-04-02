@@ -6,7 +6,7 @@ import eu.telecomsudparis.csc4102.util.OperationImpossible;
  * Cette classe définit le type d'exception pour un processus déjà présent dans
  * le système.
  * 
- * @author Denis Conan
+ * @author Denis Conan - Julien Denize - Pierre Chaffardon
  */
 public class ProcessusDejaPresent extends OperationImpossible {
 	/**

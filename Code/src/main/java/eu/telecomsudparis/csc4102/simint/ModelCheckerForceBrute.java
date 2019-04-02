@@ -9,9 +9,10 @@ import eu.telecomsudparis.csc4102.simint.exception.ProcessusNonExistant;
 import eu.telecomsudparis.csc4102.simint.exception.ProcessusNonVivant;
 
 /**
- * Modèle checker brute.
+ * Model checker brute.
+ * Parcours en largeur des états globaux.
  * 
- * @author julien
+ * @author Julien Denize - Pierre Chaffardon
  *
  */
 public class ModelCheckerForceBrute implements ModelChecker {
@@ -19,9 +20,9 @@ public class ModelCheckerForceBrute implements ModelChecker {
 	@Override
 	public Optional<EtatGlobal> validerSysteme(final SimInt simint, final EtatGlobal etatGlobalInitial) {
 		ArrayList<EtatGlobal> etatsGlobauxAtteignables = new ArrayList<>();
-		simint.debuterExecution();
 		etatsGlobauxAtteignables.add(simint.getEtatGlobalInitial());
-		for (int i = 0; i < etatsGlobauxAtteignables.size(); i++) {
+		for (int i = 0; i < etatsGlobauxAtteignables.size() 
+						&& !simint.getDernierEtatGlobal().getEtatExecution().equals(EtatExecution.interbloque); i++) {
 			simint.setDernierEtatGlobal(etatsGlobauxAtteignables.get(i));
 			if (simint.getDernierEtatGlobal().getEtatExecution().equals(EtatExecution.enCours)) {
 				for (EtatProcessus etatProc: simint.getDernierEtatGlobal().getEtatsProcessus()) {
@@ -42,8 +43,10 @@ public class ModelCheckerForceBrute implements ModelChecker {
 			}
 		}
 
-		return etatsGlobauxAtteignables.stream()
-								.filter(etatGlobal -> etatGlobal.getEtatExecution().equals(EtatExecution.interbloque)).findAny();
+		if (simint.getDernierEtatGlobal().getEtatExecution() == EtatExecution.interbloque) {
+			return Optional.of(simint.getDernierEtatGlobal());
+		}
+		return Optional.empty();
 	}
 
 }

@@ -3,7 +3,7 @@ package eu.telecomsudparis.csc4102.simint;
 /**
  * Cette classe définit le concept de semaphore.
  * 
- * @author julien
+ * @author Julien Denize - Pierre Chaffardon
  *
  */
 public class Semaphore {

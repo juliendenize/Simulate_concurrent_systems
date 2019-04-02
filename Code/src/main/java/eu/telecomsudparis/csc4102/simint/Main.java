@@ -9,6 +9,13 @@ package eu.telecomsudparis.csc4102.simint;
  */
 public final class Main {
 	/**
+	 * Empêche la construction d'un objet main.
+	 */
+	private Main() {
+		
+	}
+	
+	/**
 	 * point d'entrée du scénario.
 	 * 
 	 * @param args
@@ -17,8 +24,7 @@ public final class Main {
 	 *             tous les problèmes.
 	 */
 	public static void main(final String[] args) throws Exception {
-		ModelChecker modelChecker = new ModelCheckerForceBrute();
-		SimInt simInt = new SimInt(modelChecker);
+		SimInt simInt = new SimInt();
 		
 		simInt.creerProgramme("Programme1"); simInt.creerSemaphore("Sem1", 2);
 		simInt.ajouterInstruction("Programme1", "Sem1", TypeInstruction.P);
@@ -29,7 +35,7 @@ public final class Main {
 		simInt.creerProcessus("P2", "Programme1");
 		simInt.validerSysteme();
 		
-		simInt = new SimInt(modelChecker);
+		simInt = new SimInt();
 		simInt.creerSemaphore("cabines", 1);
 		simInt.creerSemaphore("paniers", 1);
 		simInt.creerProgramme("prog");
@@ -39,7 +45,7 @@ public final class Main {
 		simInt.creerProcessus("p2", "prog");
 		simInt.validerSysteme();
 		
-		simInt = new SimInt(modelChecker);		
+		simInt = new SimInt();		
 		simInt.creerProgramme("Programme3"); 
 		simInt.creerSemaphore("Cabine", 2);
 		simInt.creerSemaphore("Panier", 2);

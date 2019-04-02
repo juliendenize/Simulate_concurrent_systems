@@ -20,7 +20,7 @@ import eu.telecomsudparis.csc4102.simint.exception.ValeurInitialeHorsBorne;
 /**
  * Cette classe définit la façade du système.
  * 
- * @author Denis Conan
+ * @author Denis Conan - Julien Denize - Pierre Chaffardon
  */
 public class SimInt {
 	/**
@@ -59,18 +59,16 @@ public class SimInt {
 	
 	/**
 	 * construit la façade.
-	 * 
-	 * @param modelChecker
-	 * 			Le modelChecker utilisé pour valider le système.
+	 *
 	 */
-	public SimInt(final ModelChecker modelChecker) {
+	public SimInt() {
 		processus = new HashMap<>();
 		programmes = new HashMap<>();
 		semaphores = new HashMap<>();
 		etatGlobalInitial = new EtatGlobal();
 		dernierEtatGlobal = etatGlobalInitial;
 		executionDebutee = false;
-		this.modelChecker = modelChecker;
+		this.modelChecker = new ModelCheckerForceBrute();
 		assert invariant();
 	}
 
@@ -155,7 +153,7 @@ public class SimInt {
 	}
 	
 	/**
-	 * créé un semaphore qui est ensuite ajouté à la collection des semaphore, et un état sémaphore ajouté à l'état global intitiale.
+	 * créé un semaphore qui est ensuite ajouté à la collection des semaphores, et un état sémaphore ajouté à l'état global intitiale.
 	 * @param nom
 	 * 			nom du semaphore.
 	 * @param valeurInitiale
@@ -220,16 +218,21 @@ public class SimInt {
 		}
 		this.dernierEtatGlobal = new EtatGlobal(this.dernierEtatGlobal);
 		this.dernierEtatGlobal.avancerExecution(nomProcessus);
-		this.etablirSystemeEnInterbloquage();
+		this.etablirSystemeEnInterblocage();
 		return dernierEtatGlobal;
 	}
 	
 	/**
-	 * demande au dernier état global de regarder s'il est interbloqué et renvoie un booleen suivant si c'est le cas ou pas.
-	 * @return true si le dernier état global est interbloqué, false sinon.
+	 * demande au dernier état global de regarder s'il est interbloqué et renvoie l'état d'exécution.
+	 * @return l'état d'exécution du dernier état global.
+	 * @throws ExecutionNonDebutee 
+	 * 			L'exécution doit avoir débuté.
 	 */
-	public EtatExecution etablirSystemeEnInterbloquage() {
-		dernierEtatGlobal.etablirSystemeEnInterbloquage();
+	public EtatExecution etablirSystemeEnInterblocage() throws ExecutionNonDebutee {
+		if (!this.executionDebutee) {
+			throw new ExecutionNonDebutee("L'exécution doit avoir débutée");
+		}
+		dernierEtatGlobal.etablirSystemeEnInterblocage();
 		return dernierEtatGlobal.getEtatExecution();
 	}
 	
@@ -277,6 +280,7 @@ public class SimInt {
 	 *  
 	 * @throws ExecutionADejaDebute
 	 * 			L'éxecution ne doit pas avoir débutée.
+	 * @return true si le système est validé, false sinon.
 	 */
 	public boolean validerSysteme() throws ExecutionADejaDebute {
 		if (this.executionDebutee) {
@@ -285,6 +289,7 @@ public class SimInt {
 		if (this.processus.isEmpty()) {
 			System.out.println("Le système ne contient pas de processus et est donc par conséquent valide.");
 		}
+		this.debuterExecution();
 		long startTime = System.nanoTime();
 		Optional<EtatGlobal> etatGlobalInterbloque = modelChecker.validerSysteme(this, this.etatGlobalInitial);
 		final int oneMillion = 1000000;
@@ -312,13 +317,19 @@ public class SimInt {
 	 */
 	public void chercherChemin(final EtatGlobal etatGlobal) {
 		Objects.requireNonNull(etatGlobal, "L'état global ne doit pas être nul");
-		
+		int longueurChemin = 1;
 		EtatGlobal iterator = etatGlobal;
 		while (iterator != this.etatGlobalInitial) {
-			System.out.println(iterator.getChaineDeCaracteres());
+			longueurChemin++;
 			iterator = iterator.getEtatGlobalPrecedent();
 		}
-		System.out.println(iterator.getChaineDeCaracteres());
+		iterator = etatGlobal;
+		System.out.println("Voici un chemin de longueur " + longueurChemin + " amenant à cet état global:");
+		while (iterator != this.etatGlobalInitial) {
+			System.out.println("Etat Global #" + iterator.getCompteurInstance() + ": " + iterator.getChaineDeCaracteres());
+			iterator = iterator.getEtatGlobalPrecedent();
+		}
+		System.out.println("Etat Global #" + iterator.getCompteurInstance() + ": " + iterator.getChaineDeCaracteres() + '\n');
 	}
 	
 	/**
@@ -390,15 +401,6 @@ public class SimInt {
 	 */
 	public void setDernierEtatGlobal(final EtatGlobal etatGlobal) {
 		this.dernierEtatGlobal = etatGlobal;
-	}
-	
-	/**
-	 * retourne le model checker.
-	 * 
-	 * @return le model checker.
-	 */
-	public ModelChecker getModelChecker() {
-		return this.modelChecker;
 	}
 	
 	/**

@@ -5,6 +5,7 @@ import eu.telecomsudparis.csc4102.util.OperationImpossible;
 /**
  * Cette classe définit le type d'exception pour indiquer que l'exécution n'a
  * pas débuté.
+ * @author Julien Denize - Pierre Chaffardon
  **/
 public class ExecutionNonDebutee extends OperationImpossible {
 	/**

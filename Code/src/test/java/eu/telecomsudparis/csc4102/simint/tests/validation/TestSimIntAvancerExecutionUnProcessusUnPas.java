@@ -1,3 +1,5 @@
+// CHECKSTYLE:OFF
+
 package eu.telecomsudparis.csc4102.simint.tests.validation;
 
 import org.junit.After;
@@ -7,7 +9,6 @@ import org.junit.Test;
 
 import eu.telecomsudparis.csc4102.simint.Etat;
 import eu.telecomsudparis.csc4102.simint.EtatExecution;
-import eu.telecomsudparis.csc4102.simint.ModelCheckerForceBrute;
 import eu.telecomsudparis.csc4102.simint.SimInt;
 import eu.telecomsudparis.csc4102.simint.TypeInstruction;
 
@@ -17,7 +18,7 @@ public class TestSimIntAvancerExecutionUnProcessusUnPas {
 	
 	@Before
 	public void setUp() throws Exception {
-		simint = new SimInt(new ModelCheckerForceBrute());
+		simint = new SimInt();
 	}
 
 	@After
@@ -38,18 +39,18 @@ public class TestSimIntAvancerExecutionUnProcessusUnPas {
 		simint.debuterExecution();
 		
 		simint.avancerExecutionProcessus("p1");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p1");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p1").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p2").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.interbloque);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.interbloque);
 	}
 	
 	@Test
@@ -64,15 +65,15 @@ public class TestSimIntAvancerExecutionUnProcessusUnPas {
 		simint.debuterExecution();
 		
 		simint.avancerExecutionProcessus("p1");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p2").getEtat());
 		
 		simint.avancerExecutionProcessus("p1");
 		Assert.assertEquals(Etat.termine, simint.getDernierEtatGlobal().chercherEtatProcessus("p1").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.interbloque);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.interbloque);
 	}
 	
 	@Test
@@ -94,52 +95,52 @@ public class TestSimIntAvancerExecutionUnProcessusUnPas {
 		simint.debuterExecution();
 		
 		simint.avancerExecutionProcessus("p1");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p3");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p3").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p4");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p4").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p5");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p5").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p1");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p1");
 		Assert.assertEquals(Etat.vivant, simint.getDernierEtatGlobal().chercherEtatProcessus("p3").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
 		Assert.assertEquals(Etat.vivant, simint.getDernierEtatGlobal().chercherEtatProcessus("p4").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p3");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p3").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p4");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p4").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p1");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p1").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p2").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.interbloque);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.interbloque);
 	}
 	
 	@Test
@@ -161,104 +162,104 @@ public class TestSimIntAvancerExecutionUnProcessusUnPas {
 		simint.debuterExecution();
 		
 		simint.avancerExecutionProcessus("p1");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p1");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p3");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p3").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p4");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p4").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p1");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p5");
 		Assert.assertEquals(Etat.bloque, simint.getDernierEtatGlobal().chercherEtatProcessus("p5").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p1");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p1");
 		Assert.assertEquals(Etat.vivant, simint.getDernierEtatGlobal().chercherEtatProcessus("p3").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p1");
 		Assert.assertEquals(Etat.termine, simint.getDernierEtatGlobal().chercherEtatProcessus("p1").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
 		Assert.assertEquals(Etat.vivant, simint.getDernierEtatGlobal().chercherEtatProcessus("p4").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p2");
 		Assert.assertEquals(Etat.termine, simint.getDernierEtatGlobal().chercherEtatProcessus("p2").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p3");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p4");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p3");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p4");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p3");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p4");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p3");
 		Assert.assertEquals(Etat.vivant, simint.getDernierEtatGlobal().chercherEtatProcessus("p5").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p4");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p3");
 		Assert.assertEquals(Etat.termine, simint.getDernierEtatGlobal().chercherEtatProcessus("p3").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p4");
 		Assert.assertEquals(Etat.termine, simint.getDernierEtatGlobal().chercherEtatProcessus("p4").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p5");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p5");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p5");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p5");
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.enCours);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.enCours);
 		
 		simint.avancerExecutionProcessus("p5");
 		Assert.assertEquals(Etat.termine, simint.getDernierEtatGlobal().chercherEtatProcessus("p5").getEtat());
-		Assert.assertEquals(simint.etablirSystemeEnInterbloquage(), EtatExecution.termine);
+		Assert.assertEquals(simint.etablirSystemeEnInterblocage(), EtatExecution.termine);
 	}
 }

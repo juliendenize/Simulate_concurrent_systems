@@ -5,6 +5,7 @@ import eu.telecomsudparis.csc4102.util.OperationImpossible;
 /**
  * Cette classe définit le type d'exception pour un processus n'existe pas.
  * 
+ * @author Julien Denize - Pierre Chaffardon
  */
 public class ProcessusNonExistant extends OperationImpossible {
 	/**

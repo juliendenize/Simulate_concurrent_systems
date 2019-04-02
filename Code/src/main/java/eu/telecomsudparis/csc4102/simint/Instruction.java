@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Cette classe définit le concept d'instruction.
  * 
- * @author julien
+ * @author Julien Denize - Pierre Chaffardon
  *
  */
 public class Instruction {

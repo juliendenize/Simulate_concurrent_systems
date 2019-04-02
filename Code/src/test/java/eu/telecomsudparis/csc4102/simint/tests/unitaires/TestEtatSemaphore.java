@@ -1,3 +1,5 @@
+// CHECKSTYLE:OFF
+
 package eu.telecomsudparis.csc4102.simint.tests.unitaires;
 
 import org.junit.After;

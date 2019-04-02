@@ -8,7 +8,7 @@ package eu.telecomsudparis.csc4102.simint;
  */
 public enum Etat {
 	/**
-	 * Les état possible de Etat: vivant, bloqué, terminé.
+	 * Les état possibles de Etat: vivant, bloqué, terminé.
 	 */
 	vivant, bloque, termine
 }

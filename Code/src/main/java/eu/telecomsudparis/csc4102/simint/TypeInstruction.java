@@ -3,7 +3,7 @@ package eu.telecomsudparis.csc4102.simint;
 /**
  * Cette classe définit le concept de type d'instruction.
  * 
- * @author julien
+ * @author Julien Denize - Pierre Chaffardon
  *
  */
 public enum TypeInstruction {

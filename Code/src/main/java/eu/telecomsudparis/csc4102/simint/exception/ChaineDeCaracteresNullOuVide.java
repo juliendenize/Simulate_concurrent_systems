@@ -6,7 +6,7 @@ import eu.telecomsudparis.csc4102.util.OperationImpossible;
  * Cette classe définit le type d'exception pour indiquer qu'une chaîne de
  * caractères est par erreur soit null soit vide.
  * 
- * @author Denis Conan
+ * @author Denis Conan - Julien Denize - Pierre Chaffardon
  */
 public class ChaineDeCaracteresNullOuVide extends OperationImpossible {
 	/**

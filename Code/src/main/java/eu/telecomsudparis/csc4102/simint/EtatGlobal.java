@@ -10,16 +10,16 @@ import java.util.stream.Collectors;
 /**
  * Cette classe définit le concept d'état global.
  * 
- * @author Denis Conan
+ * @author Denis Conan - Julien Denize - Pierre Chaffardon
  */
 public class EtatGlobal {
 	/**
-	 * l'ensemble des états des processus participant à la simulation.
+	 * l'ensemble des états des processus participants à la simulation.
 	 */
 	private SortedSet<EtatProcessus> etatsProcessus;
 
 	/**
-	 * l'ensemble des états des semaphores participant à la simulation.
+	 * l'ensemble des états des semaphores participants à la simulation.
 	 */
 	private SortedSet<EtatSemaphore> etatsSemaphores;
 
@@ -74,6 +74,7 @@ public class EtatGlobal {
 	 * L'ensemble des états des processus est une collection d'états de processus
 	 * obtenus par copie légère des états des processus de l'état de départ. Par
 	 * copie légère, nous signifions que les programmes ne sont pas des copies.
+	 * De même pour les états sémaphores.
 	 * 
 	 * @param origine
 	 *            l'état global de départ.
@@ -115,9 +116,9 @@ public class EtatGlobal {
 	}
 	
 	/**
-	 * retourne l'état de l'état global.
+	 * retourne l'état d'exécution de l'état global.
 	 * 
-	 * @return l'état l'état global.
+	 * @return l'état d'exécution de l'état global.
 	 */
 	public EtatExecution getEtatExecution() {
 		return etatExecution;
@@ -170,7 +171,7 @@ public class EtatGlobal {
 	}
 
 	/**
-	 * ajoute un état de processus à l'état global initial.
+	 * ajoute un état processus à l'état global initial.
 	 * 
 	 * @param proc
 	 *            le processus concerné.
@@ -189,7 +190,7 @@ public class EtatGlobal {
 	}
 
 	/**
-	 * ajoute un état de semaphore à l'état global initial.
+	 * ajoute un état semaphore à l'état global initial.
 	 * 
 	 * @param sem
 	 * 			le semaphore
@@ -307,9 +308,9 @@ public class EtatGlobal {
 	}
 	
 	/**
-	 * Etablit si le système est en interbloquage en stockant dans le booléen situationInterbloquage le résultat.
+	 * Etablit si le système est en interblocage en stockant dans etatExecution le résultat.
 	 */
-	public void etablirSystemeEnInterbloquage() {
+	public void etablirSystemeEnInterblocage() {
 		if (this.etatExecution == EtatExecution.enCours) {
 			if (etatsProcessus.stream().allMatch(etatProcessus -> 
 												 etatProcessus.getEtat().equals(Etat.bloque)

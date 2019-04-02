@@ -16,7 +16,7 @@ public interface ModelChecker {
 	 * @param simint
 	 * 			le système à valider.
 	 * @param etatGlobalInitial
-	 * 			l'état global initiale pour la génération des états globaux.
+	 * 			l'état global initial pour la génération des états globaux.
 	 * @return un état bloqué interbloqué s'il existe.
 	 */
 	Optional<EtatGlobal> validerSysteme(SimInt simint, EtatGlobal etatGlobalInitial);

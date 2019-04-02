@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Cette classe définit le concept d'état d'un processus.
  * 
- * @author Denis Conan
+ * @author Denis Conan - Julien Denize - Pierre Chaffardon
  */
 public class EtatProcessus implements Comparable<EtatProcessus> {
 	/**
@@ -86,7 +86,7 @@ public class EtatProcessus implements Comparable<EtatProcessus> {
 	}
 
 	/**
-	 * obtient le processus concerné par l'état.
+	 * renvoie le processus.
 	 * 
 	 * @return le processus.
 	 */

@@ -3,8 +3,9 @@ package eu.telecomsudparis.csc4102.simint.exception;
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
 /**
- * Cette classe définit le type d'exception pour un processus déjà présent dans
- * le système.
+ * Cette classe définit le type d'exception pour un processus non vivant exécuté dans le système.
+ * 
+ * @author Julien Denize - Pierre Chaffardon
  * 
  */
 public class ProcessusNonVivant extends OperationImpossible {

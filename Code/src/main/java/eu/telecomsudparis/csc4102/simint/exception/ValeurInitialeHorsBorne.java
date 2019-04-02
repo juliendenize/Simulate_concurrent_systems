@@ -6,6 +6,8 @@ import eu.telecomsudparis.csc4102.util.OperationImpossible;
  * Cette classe définit le type d'exception pour une valeur initiale inférieur à
  * 0 pour un sémaphore.
  * 
+ * @author Julien Denize - Pierre Chaffardon
+ * 
  */
 public class ValeurInitialeHorsBorne extends OperationImpossible {
 	/**

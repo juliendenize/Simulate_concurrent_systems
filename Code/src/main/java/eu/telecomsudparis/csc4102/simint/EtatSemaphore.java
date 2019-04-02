@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Cette classe définit le concept d'un état sémphore.
  * 
- * @author julien
+ * @author Julien Denize - Pierre Chaffardon
  */
 public class EtatSemaphore implements Comparable<EtatSemaphore> {
 
@@ -39,7 +39,7 @@ public class EtatSemaphore implements Comparable<EtatSemaphore> {
 	private List<Processus> fileAttente;
 
 	/**
-	 * Construcit un état sempahore.
+	 * Construit un état semaphore.
 	 * 
 	 * @param semaphore
 	 * 		le semaphore concerné.
@@ -211,6 +211,7 @@ public class EtatSemaphore implements Comparable<EtatSemaphore> {
 	 * @return l'encodage
 	 */
 	public String chaineDeCaracteres() {
-		return semaphore.getNom() + " valeur compteur: " + valeurCompteur + " file: " + fileAttente.stream().sorted(Comparator.comparing(Processus::getNom)).map(Processus::getNom).collect(Collectors.joining(" "));
+		return semaphore.getNom() + " valeur compteur: " + valeurCompteur + " file: " + fileAttente.stream()
+					.sorted(Comparator.comparing(Processus::getNom)).map(Processus::getNom).collect(Collectors.joining(" "));
 	}
 }
