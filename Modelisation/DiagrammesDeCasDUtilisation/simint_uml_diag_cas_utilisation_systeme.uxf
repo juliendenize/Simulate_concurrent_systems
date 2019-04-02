@@ -26,10 +26,10 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>375</x>
+      <x>345</x>
       <y>30</y>
       <w>855</w>
-      <h>360</h>
+      <h>435</h>
     </coordinates>
     <panel_attributes>SimInt
 halign=left</panel_attributes>
@@ -111,5 +111,27 @@ halign=left</panel_attributes>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;60.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>105</x>
+      <y>165</y>
+      <w>360</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;220.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>435</x>
+      <y>375</y>
+      <w>435</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Choisir une stratégie de validation</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
