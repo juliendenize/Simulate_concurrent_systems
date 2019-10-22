@@ -1,6 +1,6 @@
 Group:
-- Nom1 Prenom1 (to be adapted)
-- Nom2 Prenom2 (to be adapted)
+- DENIZE Julien
+- CHAFFARDON Pierre
 
 Copyright (C) 2016-2017
 Contact: Denis.Conan[at]telecom-sudparis.eu
@@ -9,48 +9,36 @@ License: See file LICENSE.txt
 
 ================================================================================
 
-Software prerequisites:
------------------------
-	1. Java Version >= 8.0
-	   (http://www.oracle.com/technetwork/java/javase/overview/index.html)
-	2. Maven Version >= 3.3.9
-	   (http://maven.apache.org/)
+## But du projet
+---
 
-Shell variables to set in your ~/.bashrc file:
-----------------------------------------------
-	1. JAVA_HOME to your Java SDK
-$
-export JAVA_HOME=<the root directory of your Java installation>
-echo $JAVA_HOME
+Il est récurrent en informatique que différents processus partagent des ressources. Cependant, ces ressources doivent être protégés pour que deux processus n'y accèdent pas en même temps. Il apparait des cas où ce blocage des ressources entrainent une situation d'interblocage qui empêche l'exécution des processus.
 
-Before using the Maven module:
-------------------------------
-Modify the line 
- <artifactId>login1-login2</artifactId>
-in the file Code/pom.xml
+Suivons cet exemple de programme qui bloque deux cabines puis les relache:
+1. Prendre une cabine
+2. Prendre une cabine
+3. Libérer une cabine
+4. Libérer une cabine
 
-Compilation and installation:
------------------------------
-	To compile and install the modules, execute the following command.
-	Use the options -Dmaven.test.skip=true and -Dmaven.javadoc.skip=true
-	if you do not want to execute the JUnit tests or to generate the
-	JavaDoc files, so that the compilation is much more rapid.
-$
-(cd Code; mvn install)
-$
+Maintenant prenons deux processus P1 et P2 qui exécutent ce programme comme ceci:
+1. P1 exécute la ligne 1 // 1 cabine
+2. P2 exécute la ligne 1 // 0 cabine
+3. P1 bloqué à la ligne 2 // 0 cabine
+4. P2 bloqué à la ligne 2 // 0 cabine
+=> Interbloquage
 
-Execution:
------------------------------
-	To launch main class, execute the following command.
-$
-(cd Code; mvn exec:java)
-$
+Il est donc utile de pouvoir modéliser des programmes et processus pour vérifier qu'il n'y est pas de solution d'interblocage. C'est ce que fait le programme finalement développé.
 
-In Eclipse:
------------
-	To load the project in Eclipse, either use the maven plugin (File >
-	Import > Maven > Existing maven project), or create the Eclipse project
-	using the following command and then create a Java project in Eclipse:
-$
-(cd Code; mvn eclipse:clean eclipse:eclipse)
-$
+## Architecture des fichiers
+---
+### Code
+
+Dans le dossier `Code/`, toutes les classes permettant de faire fonctionner le programme et de le tester sont présentes.
+
+### Modélisation
+
+Dans le dossier `Modelisation/`, il y a tous les diagrammes de cas d'utilisation, de séquence et de classes ainsi qu'un rapport détaillant la modélisation du projet.
+
+### Suivi
+
+Dans le dossier `Suivi/`, il y a tous les échanges entre le groupe faisant le projet et le professeur, client et expert pour ce projet agile.
